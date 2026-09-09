@@ -6,7 +6,7 @@ assert(artifactArgument && consumerArgument, 'Usage: create-consumer.mjs <artifa
 const artifacts = path.resolve(artifactArgument);
 const consumer = path.resolve(consumerArgument);
 assert(!fs.existsSync(consumer), 'Consumer must be new and isolated.');
-fs.cpSync('examples/developer-starter', consumer, { recursive: true, filter: (entry) => !/(^|\/)(node_modules|dist|vendor|\.ui-verification|playwright-report|test-results)(\/|$)/.test(entry) && !entry.endsWith('/.env') });
+fs.cpSync('examples/developer-starter', consumer, { recursive: true, filter: (entry) => !/(^|\/)(node_modules|dist|vendor|\.ui-verification|playwright-report|test-results|\.browser-evidence)(\/|$)/.test(entry) && !entry.endsWith('/.env') });
 const lock = { status: 'reviewed artifact consumer', artifacts: [] };
 for (const name of ['ui-primitives', 'ui-kit', 'invest-widgets']) {
   const descriptor = JSON.parse(fs.readFileSync(`packages/${name}/public-package.json`, 'utf8'));

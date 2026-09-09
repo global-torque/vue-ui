@@ -7,7 +7,15 @@ repositories, routes, stores or brand assets.
 
 ## Quick start
 
-Use Node 24.14+ and npm, or pnpm 10.34.5. From this directory:
+Use Node 24.14+ and npm, or pnpm 10.34.5. Start from the public repository's
+`main` branch (the package release tags precede the final starter lockfile):
+
+```sh
+git clone https://github.com/global-torque/vue-ui.git
+cd vue-ui/examples/developer-starter
+```
+
+From that directory:
 
 ```sh
 node scripts/bootstrap-ui.mjs
