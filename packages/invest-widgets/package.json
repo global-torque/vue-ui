@@ -1,6 +1,6 @@
 {
   "name": "@global-torque/invest-widgets",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Host-controlled offer presentation and profile selection for Vue.",
   "type": "module",
   "license": "MIT",
@@ -27,8 +27,8 @@
     "**/*.scss"
   ],
   "dependencies": {
-    "@global-torque/ui-primitives": "0.1.0",
-    "@global-torque/ui-kit": "0.1.0"
+    "@global-torque/ui-primitives": "0.1.1",
+    "@global-torque/ui-kit": "0.1.1"
   },
   "peerDependencies": {
     "vue": "^3.5.39",

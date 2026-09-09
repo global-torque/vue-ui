@@ -9,10 +9,11 @@ assert(!fs.existsSync(consumer), 'Consumer must be new and isolated.');
 fs.cpSync('examples/developer-starter', consumer, { recursive: true, filter: (entry) => !/(^|\/)(node_modules|dist|vendor|\.ui-verification|playwright-report|test-results)(\/|$)/.test(entry) && !entry.endsWith('/.env') });
 const lock = { status: 'reviewed artifact consumer', artifacts: [] };
 for (const name of ['ui-primitives', 'ui-kit', 'invest-widgets']) {
-  const file = `global-torque-${name}-0.1.0.tgz`;
+  const descriptor = JSON.parse(fs.readFileSync(`packages/${name}/public-package.json`, 'utf8'));
+  const file = `global-torque-${name}-${descriptor.manifest.version}.tgz`;
   const proof = JSON.parse(fs.readFileSync(path.join(artifacts, `${file}.manifest.json`), 'utf8'));
   assert.equal(proof.artifact, file);
-  lock.artifacts.push({ file, sha512: proof.sha512, url: `https://github.com/global-torque/vue-ui/releases/download/v0.1.0/${file}` });
+  lock.artifacts.push({ file, sha512: proof.sha512, url: `https://github.com/global-torque/vue-ui/releases/download/v${proof.version}/${file}` });
 }
 fs.writeFileSync(path.join(consumer, 'ui-artifacts.lock.json'), `${JSON.stringify(lock, null, 2)}\n`);
 // A release candidate needs its own consumer lock, never the previous release's tarball identity.
