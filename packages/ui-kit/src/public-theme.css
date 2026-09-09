@@ -1,0 +1,15 @@
+/* Public source scanning and neutral roles. Host theme variables supply values. */
+@source "./";
+:root {
+  --ui-color-border: var(--border);
+  --ui-color-border-subtle: var(--border);
+  --ui-color-canvas: var(--background);
+  --ui-color-negative: var(--destructive);
+  --ui-color-surface-inverse: var(--foreground);
+  --ui-color-text-inverse: var(--background);
+  --ui-color-text-muted: var(--muted-foreground);
+  --ui-color-text-secondary: var(--muted-foreground);
+  --ui-shadow-dialog: 0 1rem 3rem rgb(0 0 0 / 0.15);
+}
+.v-timeline .is--h6__title { font-size: 1rem; font-weight: 600; line-height: 1.5; }
+.v-uploader .is--small { font-size: 0.875rem; line-height: 1.5; }

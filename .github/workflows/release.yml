@@ -1,0 +1,70 @@
+name: Verified public UI artifacts
+on:
+  push:
+    tags: ['v*']
+permissions:
+  contents: write
+  attestations: write
+  id-token: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24.14.0'
+      - run: corepack enable && corepack prepare pnpm@10.34.5 --activate
+      - run: pnpm install --frozen-lockfile --ignore-scripts
+      - run: pnpm check
+      - run: pnpm audit --audit-level=high
+      - name: Verify tag and pack once
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import assert from 'node:assert/strict';
+          for (const name of ['ui-primitives', 'ui-kit', 'invest-widgets']) {
+            const config = JSON.parse(fs.readFileSync(`packages/${name}/public-package.json`, 'utf8'));
+            assert.equal(process.env.GITHUB_REF_NAME, `v${config.manifest.version}`);
+          }
+          JS
+          node scripts/public-ui/pack.mjs release
+      - name: Verify clean npm and pnpm consumers
+        run: |
+          for manager in npm pnpm; do
+            consumer="${RUNNER_TEMP}/consumer-${manager}"
+            node scripts/public-ui/create-consumer.mjs release "${consumer}"
+            node "${consumer}/scripts/bootstrap-ui.mjs" "${GITHUB_WORKSPACE}/release"
+            (
+              cd "${consumer}"
+              "${manager}" install --ignore-scripts
+              "${manager}" run check
+              node scripts/verify-ui.mjs
+              if [ "${manager}" = npm ]; then npm audit --omit=dev; else pnpm audit --prod; fi
+            )
+          done
+      - name: Browser checks on the exact npm consumer
+        run: |
+          cd "${RUNNER_TEMP}/consumer-npm"
+          npx playwright install --with-deps chromium
+          npm run demo > "${RUNNER_TEMP}/starter.log" 2>&1 &
+          starter_pid=$!
+          trap 'kill "${starter_pid}"' EXIT
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:4300/api/config > /dev/null; then break; fi
+            sleep 1
+          done
+          npm run test:browser
+      - name: Attest exact archives
+        uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6
+        with:
+          subject-path: release/*.tgz
+      - name: Retain ordinary release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" release/*.tgz release/*.json release/*.sha512 \
+            --verify-tag --title "Public Vue UI ${GITHUB_REF_NAME}" \
+            --notes "Verified source-SFC artifacts for UI Primitives, UI Kit and Invest Widgets. These GitHub artifacts are candidates for npm publication. The starter fixture flow is verified; live sandbox access is independently required."

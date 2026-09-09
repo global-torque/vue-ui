@@ -1,0 +1,63 @@
+{
+  "manifest": {
+    "name": "@global-torque/invest-widgets",
+    "version": "0.1.0",
+    "description": "Host-controlled offer presentation and profile selection for Vue.",
+    "type": "module",
+    "license": "MIT",
+    "engines": {
+      "node": ">=22.12.0"
+    },
+    "files": [
+      "src",
+      "README.md",
+      "LICENSE",
+      "NOTICE.md",
+      "CHANGELOG.md",
+      "SECURITY.md",
+      "SUPPORT.md"
+    ],
+    "exports": {
+      ".": "./src/public/index.ts",
+      "./offers": "./src/public/offers/index.ts",
+      "./profiles": "./src/public/profiles/index.ts"
+    },
+    "sideEffects": [
+      "**/*.vue",
+      "**/*.css",
+      "**/*.scss"
+    ],
+    "dependencies": {
+      "@global-torque/ui-primitives": "0.1.0",
+      "@global-torque/ui-kit": "0.1.0"
+    },
+    "peerDependencies": {
+      "vue": "^3.5.39",
+      "reka-ui": "^2.10.1"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/global-torque/vue-ui.git",
+      "directory": "packages/invest-widgets"
+    },
+    "homepage": "https://github.com/global-torque/vue-ui#readme",
+    "bugs": {
+      "url": "https://github.com/global-torque/vue-ui/issues"
+    },
+    "publishConfig": {
+      "access": "public",
+      "tag": "latest"
+    }
+  },
+  "sourceFiles": [
+    "./src/public"
+  ],
+  "documentationFiles": [
+    "LICENSE",
+    "NOTICE.md",
+    "CHANGELOG.md",
+    "SECURITY.md",
+    "SUPPORT.md"
+  ],
+  "readme": "PUBLIC_API.md"
+}

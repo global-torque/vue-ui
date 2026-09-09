@@ -1,0 +1,90 @@
+{
+  "manifest": {
+    "name": "@global-torque/ui-kit",
+    "version": "0.1.0",
+    "description": "Generic Vue forms, images, URL state and composed controls.",
+    "type": "module",
+    "license": "MIT",
+    "engines": {
+      "node": ">=22.12.0"
+    },
+    "files": [
+      "src",
+      "README.md",
+      "LICENSE",
+      "NOTICE.md",
+      "CHANGELOG.md",
+      "SECURITY.md",
+      "SUPPORT.md"
+    ],
+    "exports": {
+      "./badge-tone": "./src/badge-tone/index.ts",
+      "./breakpoints": "./src/breakpoints/index.ts",
+      "./file-uploader": "./src/file-uploader/index.ts",
+      "./filter": "./src/filter/index.ts",
+      "./form": "./src/form/index.ts",
+      "./image": "./src/image/index.ts",
+      "./pagination": "./src/pagination/index.ts",
+      "./query-dialog": "./src/query-dialog/index.ts",
+      "./styles/mixins": "./src/styles/mixins.scss",
+      "./timeline": "./src/timeline/index.ts",
+      "./url-sync": "./src/url-sync/index.ts",
+      "./url-synced-tabs": "./src/url-synced-tabs/index.ts",
+      "./styles": "./src/public-theme.css"
+    },
+    "sideEffects": [
+      "**/*.vue",
+      "**/*.css",
+      "**/*.scss"
+    ],
+    "dependencies": {
+      "@global-torque/ui-primitives": "0.1.0",
+      "@internationalized/date": "^3.12.3",
+      "@lucide/vue": "^1.23.0",
+      "@vueuse/core": "^14.2.1",
+      "maska": "^3.2.0",
+      "vue-input-otp": "^0.3.2"
+    },
+    "peerDependencies": {
+      "vue": "^3.5.39",
+      "reka-ui": "^2.10.1",
+      "sass": "^1.101.0"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/global-torque/vue-ui.git",
+      "directory": "packages/ui-kit"
+    },
+    "homepage": "https://github.com/global-torque/vue-ui#readme",
+    "bugs": {
+      "url": "https://github.com/global-torque/vue-ui/issues"
+    },
+    "publishConfig": {
+      "access": "public",
+      "tag": "latest"
+    }
+  },
+  "sourceFiles": [
+    "./src/badge-tone",
+    "./src/breakpoints",
+    "./src/file-uploader",
+    "./src/filter",
+    "./src/form",
+    "./src/image",
+    "./src/pagination",
+    "./src/query-dialog",
+    "./src/styles/mixins.scss",
+    "./src/timeline",
+    "./src/url-sync",
+    "./src/url-synced-tabs",
+    "./src/public-theme.css"
+  ],
+  "documentationFiles": [
+    "LICENSE",
+    "NOTICE.md",
+    "CHANGELOG.md",
+    "SECURITY.md",
+    "SUPPORT.md"
+  ],
+  "readme": "PUBLIC_API.md"
+}

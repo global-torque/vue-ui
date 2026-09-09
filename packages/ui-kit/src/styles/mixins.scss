@@ -1,0 +1,106 @@
+/**
+ * like https://git.io/JtYjk and https://git.io/JtYjT
+ *
+ *
+ * Usage:
+ *
+ * @mixin media(mobile, tablet) { ... }
+ * @mixin media(mobile, 500px) { ... }
+ */
+@use "sass:map";
+$breakpoints: (mobile: 320px, mobile-xs: 374px, tablet-xs: 575px, tablet: 768px, desktop: 980px, desktop-md: 1024px, desktop-lg: 1199px, wide: 1366px);
+
+
+@function get-breakpoint($key) {
+  @if map.has-key($breakpoints, $key) {
+    @return map.get($breakpoints, $key);
+  }
+
+  @return $key;
+}
+
+@mixin media-lt($to) {
+  $max-width: get-breakpoint($to) - 1px;
+
+  @media (max-width: $max-width) {
+    @content;
+  }
+}
+
+@mixin media-lte($to) {
+  $max-width: get-breakpoint($to);
+
+  @media (max-width: $max-width) {
+    @content;
+  }
+}
+
+@mixin media-gt($from) {
+  $min-width: get-breakpoint($from) + 1;
+
+  @media (min-width: $min-width) {
+    @content;
+  }
+}
+
+@mixin media-gte($from) {
+  $min-width: get-breakpoint($from);
+
+  @media (min-width: $min-width) {
+    @content;
+  }
+}
+
+@mixin media-between($from, $to) {
+  $min-width: get-breakpoint($from) + 1;
+  $max-width: get-breakpoint($to) - 1;
+
+  @media (min-width: $min-width) and (max-width: $max-width) {
+    @content;
+  }
+}
+
+@mixin media($from, $to: null) {
+  $min-width: get-breakpoint($from);
+  $max-width: $to and get-breakpoint($to) - 1;
+
+  @if ($from and $to) {
+    @media (min-width: $min-width) and (max-width: $max-width) {
+      @content;
+    }
+  }
+
+  @else if ($from) {
+    @include media-gte($from) {
+      @content;
+    }
+  }
+
+  @else {
+    @content;
+  }
+}
+
+@mixin mt($time){
+  transition: all $time ease-in-out;
+}
+
+//Function to convert px value into rem
+@function sizeInRem($target, $context: 16){
+  @return ($target / $context) * 1rem;
+}
+
+@function isImportant($important){
+  @if $important {
+    @return '!important';
+  }
+
+  @return '';
+}
+
+
+@mixin font($weight, $family: var(--font-sans), $important: false){
+  font-family: $family isImportant($important);
+  font-style: normal;
+  font-weight: $weight;
+}

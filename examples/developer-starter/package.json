@@ -1,0 +1,42 @@
+{
+  "name": "global-torque-developer-starter",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "bootstrap": "node scripts/bootstrap-ui.mjs",
+    "build": "vue-tsc --noEmit && vite build",
+    "demo": "node server/index.mjs --fixture",
+    "start": "node --env-file-if-exists=.env server/index.mjs",
+    "offers:demo": "node server/offers-example.mjs --fixture",
+    "offers:live": "node --env-file-if-exists=.env server/offers-example.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "check": "npm run test && npm run build",
+    "test:browser": "node tests/browser.spec.mjs",
+    "check:ui": "node scripts/verify-ui.mjs"
+  },
+  "dependencies": {
+    "@global-torque/sdk": "0.2.0",
+    "@global-torque/design-tokens": "0.2.0",
+    "@global-torque/ui-primitives": "file:vendor/global-torque-ui-primitives-0.1.0.tgz",
+    "@global-torque/ui-kit": "file:vendor/global-torque-ui-kit-0.1.0.tgz",
+    "@global-torque/invest-widgets": "file:vendor/global-torque-invest-widgets-0.1.0.tgz",
+    "reka-ui": "2.10.1",
+    "vue": "3.5.39"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "4.3.3",
+    "@types/node": "25.5.0",
+    "@vitejs/plugin-vue": "6.0.8",
+    "sass": "1.101.0",
+    "tailwindcss": "4.3.3",
+    "typescript": "6.0.3",
+    "vite": "8.1.3",
+    "vue-tsc": "3.3.6",
+    "@playwright/test": "1.61.1",
+    "@axe-core/playwright": "4.12.1"
+  }
+}

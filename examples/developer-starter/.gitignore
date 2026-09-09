@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.env
+vendor/*.tgz
+.ui-verification/
+playwright-report/
+test-results/
+
+.browser-evidence/
