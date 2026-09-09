@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.2 — prepared candidate
+## 0.1.3 — prepared candidate
 
 - pnpm consumers pin inter-package dependencies to the same reviewed archives.
 - Versions 0.1.0 and 0.1.1 were not released: bridge installation and

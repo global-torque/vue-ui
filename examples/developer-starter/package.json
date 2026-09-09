@@ -1,6 +1,6 @@
 {
   "name": "global-torque-developer-starter",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "private": true,
   "type": "module",
   "engines": {
@@ -21,9 +21,9 @@
   "dependencies": {
     "@global-torque/sdk": "0.2.0",
     "@global-torque/design-tokens": "0.2.0",
-    "@global-torque/ui-primitives": "file:vendor/global-torque-ui-primitives-0.1.2.tgz",
-    "@global-torque/ui-kit": "file:vendor/global-torque-ui-kit-0.1.2.tgz",
-    "@global-torque/invest-widgets": "file:vendor/global-torque-invest-widgets-0.1.2.tgz",
+    "@global-torque/ui-primitives": "file:vendor/global-torque-ui-primitives-0.1.3.tgz",
+    "@global-torque/ui-kit": "file:vendor/global-torque-ui-kit-0.1.3.tgz",
+    "@global-torque/invest-widgets": "file:vendor/global-torque-invest-widgets-0.1.3.tgz",
     "reka-ui": "2.10.1",
     "vue": "3.5.39"
   },

@@ -31,6 +31,15 @@ jobs:
           }
           JS
           node scripts/public-ui/pack.mjs release
+      - name: Retain the packed candidate before consumer checks
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        with:
+          name: public-ui-candidate
+          path: |
+            release/*.tgz
+            release/*.json
+            release/*.sha512
+          if-no-files-found: error
       - name: Verify clean npm and pnpm consumers
         run: |
           for manager in npm pnpm; do
@@ -48,7 +57,7 @@ jobs:
       - name: Browser checks on the exact npm consumer
         run: |
           cd "${RUNNER_TEMP}/consumer-npm"
-          npx playwright install --with-deps chromium
+          npx playwright install chromium
           npm run demo > "${RUNNER_TEMP}/starter.log" 2>&1 &
           starter_pid=$!
           trap 'kill "${starter_pid}"' EXIT
