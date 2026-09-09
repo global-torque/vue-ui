@@ -36,10 +36,10 @@ importers:
   packages/invest-widgets:
     dependencies:
       '@global-torque/ui-kit':
-        specifier: 0.1.1
+        specifier: 0.1.2
         version: link:../ui-kit
       '@global-torque/ui-primitives':
-        specifier: 0.1.1
+        specifier: 0.1.2
         version: link:../ui-primitives
     devDependencies:
       '@types/node':
@@ -85,7 +85,7 @@ importers:
   packages/ui-kit:
     dependencies:
       '@global-torque/ui-primitives':
-        specifier: 0.1.1
+        specifier: 0.1.2
         version: link:../ui-primitives
       '@internationalized/date':
         specifier: ^3.12.3

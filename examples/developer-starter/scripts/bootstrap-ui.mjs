@@ -7,7 +7,7 @@ const root = fileURLToPath(new URL('../', import.meta.url));
 const lock = JSON.parse(await fs.readFile(new URL('../ui-artifacts.lock.json', import.meta.url), 'utf8'));
 await fs.mkdir(path.join(root, 'vendor'), { recursive: true });
 for (const artifact of lock.artifacts) {
-  assert.match(artifact.file, /^global-torque-(ui-primitives|ui-kit|invest-widgets)-0\.1\.0\.tgz$/);
+  assert.match(artifact.file, /^global-torque-(ui-primitives|ui-kit|invest-widgets)-\d+\.\d+\.\d+\.tgz$/);
   const bytes = process.argv[2]
     ? await fs.readFile(path.join(path.resolve(process.argv[2]), artifact.file))
     : Buffer.from(await (async () => {

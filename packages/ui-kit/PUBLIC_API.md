@@ -2,7 +2,7 @@
 
 Generic Vue forms, images, URL state and composed controls.
 
-Prepared `0.1.1` source-SFC candidate. This version is not advertised as an npm
+Prepared `0.1.2` source-SFC candidate. This version is not advertised as an npm
 release until its release report records publication. Install the reviewed
 `.tgz` during candidate verification, with Vue 3.5 and Reka UI 2.10.
 

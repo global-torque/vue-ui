@@ -1,6 +1,6 @@
 {
   "name": "@global-torque/ui-primitives",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Accessible Vue primitives with host-owned Tailwind themes.",
   "type": "module",
   "license": "MIT",

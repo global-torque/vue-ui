@@ -1,5 +1,5 @@
 packages: []
 overrides:
-  "@global-torque/ui-primitives": "file:vendor/global-torque-ui-primitives-0.1.1.tgz"
-  "@global-torque/ui-kit": "file:vendor/global-torque-ui-kit-0.1.1.tgz"
-  "@global-torque/invest-widgets": "file:vendor/global-torque-invest-widgets-0.1.1.tgz"
+  "@global-torque/ui-primitives": "file:vendor/global-torque-ui-primitives-0.1.2.tgz"
+  "@global-torque/ui-kit": "file:vendor/global-torque-ui-kit-0.1.2.tgz"
+  "@global-torque/invest-widgets": "file:vendor/global-torque-invest-widgets-0.1.2.tgz"

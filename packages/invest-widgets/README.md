@@ -1,7 +1,7 @@
 # Public investment presentation
 
 `@global-torque/invest-widgets` provides controlled offer cards and profile
-selection for Vue applications. Prepared version `0.1.1` ships TypeScript and
+selection for Vue applications. Prepared version `0.1.2` ships TypeScript and
 Vue SFC source; install the reviewed artifact with Vue 3.5, Reka UI 2.10 and
 the matching public UI packages. It needs no application store, router or SDK
 inside the components. Host code supplies presentation data and handles intent.
