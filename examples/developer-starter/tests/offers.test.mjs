@@ -67,4 +67,8 @@ test('server keeps application credentials private and refuses upstream redirect
   assert.equal(calls, 1);
   assert.equal((await fetch(`${base}/api/offers/%2Fprivate`)).status, 400);
   assert.equal((await fetch(`${base}/api/offers/%ZZ`)).status, 400);
+  for (const slug of ['%20', '%20.', '%20..', '..%20', '%09..']) {
+    assert.equal((await fetch(`${base}/api/offers/${slug}`)).status, 400);
+  }
+  assert.equal(calls, 1, 'invalid identifiers never reach the upstream service');
 });

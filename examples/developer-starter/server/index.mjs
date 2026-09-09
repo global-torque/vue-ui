@@ -25,7 +25,7 @@ export function createStarterServer(config) {
       let slug;
       try {
         slug = detail ? decodeURIComponent(detail[1]) : undefined;
-        if (slug && (slug.includes('/') || slug.length > 200)) throw new Error('Invalid identifier');
+        if (slug !== undefined && (!slug.trim() || ['.', '..'].includes(slug.trim()) || slug.includes('/') || slug.length > 200)) throw new Error('Invalid identifier');
       } catch { send(400, { error: 'Invalid offer identifier.' }); return; }
       let client;
       const abort = new AbortController();
