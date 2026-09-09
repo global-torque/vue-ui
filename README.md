@@ -5,6 +5,11 @@ UI Kit compositions, and controlled investment presentation widgets. All use
 ordinary semantic versions and host-owned themes/state. No private backend or
 platform checkout is needed for the demonstrated fixture flow.
 
+The [0.1.3 GitHub release](https://github.com/global-torque/vue-ui/releases/tag/v0.1.3)
+contains immutable, attested package archives. Start with the developer starter
+on `main`, which pins those archives and includes its npm lockfile. These are
+GitHub candidates; the three UI packages have not been published to npm.
+
 See packages/*/README.md for API and styling contracts, and
 [the developer starter](examples/developer-starter/README.md) for setup, a
 framework-free SDK example and the Vue offer explorer. Live verification needs
