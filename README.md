@@ -11,7 +11,7 @@ on `master`, which installs the published npm versions with an integrity lockfil
 All three packages are available on npm at `0.1.3` with registry signatures and
 CI provenance. See the [release verification](docs/releases/0.1.3.md).
 
-See packages/*/README.md for API and styling contracts, and
+See the [package catalog](docs/packages.md), packages/*/README.md for API and styling contracts, and
 [the developer starter](examples/developer-starter/README.md) for setup, a
 framework-free SDK example and the Vue offer explorer. Live verification needs
 a separately provisioned sandbox; fixture evidence is not live-service proof.
