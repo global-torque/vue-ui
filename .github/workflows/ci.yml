@@ -1,7 +1,7 @@
 name: Public UI checks
 on:
   push:
-    branches: [main]
+    branches: [master, dev]
   pull_request:
 permissions:
   contents: read
