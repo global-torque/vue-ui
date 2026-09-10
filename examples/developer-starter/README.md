@@ -1,14 +1,14 @@
 # Global Torque developer starter
 
 A standalone, read-only offer explorer using the published `@global-torque/sdk`
-0.2.0 and the public UI candidate artifacts. Includes a framework-free SDK
+0.2.0, Design Tokens 0.2.1, and the published UI packages 0.1.3. Includes a framework-free SDK
 example and a Vue application. It does not import private platform runtime,
 repositories, routes, stores or brand assets.
 
 ## Quick start
 
 Use Node 24.14+ and npm, or pnpm 10.34.5. Start from the public repository's
-`master` branch (the package release tags precede the final starter lockfile):
+`master` branch:
 
 ```sh
 git clone https://github.com/global-torque/vue-ui.git
@@ -18,7 +18,6 @@ cd vue-ui/examples/developer-starter
 From that directory:
 
 ```sh
-node scripts/bootstrap-ui.mjs
 npm ci
 npm run check
 npm run demo
@@ -30,18 +29,14 @@ and rejected-access states. View an offer, return to the list, select a sample
 profile and switch themes. Profile selection is local presentation state, not
 an authentication or permission change.
 
-The UI packages are installed from exact retained archives pinned by SHA-512 in
-`ui-artifacts.lock.json`. Bootstrap rejects altered bytes. If using downloaded
-release assets, pass their directory explicitly:
+All runtime packages install from npm with exact versions and the committed
+integrity lockfile; no private repository or bootstrap download is needed.
+`npm run check:ui` independently downloads the published UI archives, checks their
+retained SHA-512 digests, compares every installed file, and tests every export.
 
-```sh
-node scripts/bootstrap-ui.mjs /absolute/path/to/release
-npm ci
-```
-
-For pnpm, bootstrap first, then `pnpm install` and `pnpm run check`. The supplied
-npm lock is the canonical starter lock; retain your generated pnpm lock when
-adopting the example. UI source files are editable TypeScript/Vue components,
+For pnpm, run `pnpm install` and `pnpm run check`. The supplied npm lock is the
+canonical starter lock; retain your generated pnpm lock when adopting the example.
+UI source files are editable TypeScript/Vue components,
 compiled by Vite and Tailwind with the host-owned theme in `src/theme.css`.
 
 ## Framework-free SDK example

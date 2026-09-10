@@ -18,7 +18,6 @@ jobs:
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
         with:
           node-version: '24.14.0'
-      - run: node scripts/bootstrap-ui.mjs
       - run: npm ci --ignore-scripts
       - run: npm run check && npm run check:ui && npm audit --omit=dev
       - name: Verify browser behavior
