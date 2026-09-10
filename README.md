@@ -7,7 +7,7 @@ platform checkout is needed for the demonstrated fixture flow.
 
 The [0.1.3 GitHub release](https://github.com/global-torque/vue-ui/releases/tag/v0.1.3)
 contains immutable, attested package archives. Start with the developer starter
-on `main`, which pins those archives and includes its npm lockfile. These are
+on `master`, which pins those archives and includes its npm lockfile. These are
 GitHub candidates; the three UI packages have not been published to npm.
 
 See packages/*/README.md for API and styling contracts, and
