@@ -13,8 +13,9 @@ for (const artifact of lock.artifacts) {
     : Buffer.from(await (async () => {
       const url = new URL(artifact.url);
       assert.equal(url.protocol, 'https:');
-      assert.equal(url.hostname, 'github.com');
-      assert(url.pathname.startsWith('/global-torque/vue-ui/releases/download/'));
+      assert.equal(url.hostname, 'registry.npmjs.org');
+      const [, name, version] = artifact.file.match(/^global-torque-(.+)-(\d+\.\d+\.\d+)\.tgz$/);
+      assert.equal(url.pathname, `/@global-torque/${name}/-/${name}-${version}.tgz`);
       const response = await fetch(url);
       if (!response.ok) throw new Error(`Artifact download failed (${response.status}); use the reviewed release directory as an explicit argument.`);
       return response.arrayBuffer();

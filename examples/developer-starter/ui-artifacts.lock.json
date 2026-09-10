@@ -4,17 +4,17 @@
     {
       "file": "global-torque-ui-primitives-0.1.3.tgz",
       "sha512": "5465054c67e7eef9fbc4850f9ed2353368cbd01f79821434613d5dde0d7f2671f8d22a0501cc9e37c9c7a256e0b2092690bfc1861fcfb2f1e94504f281899b75",
-      "url": "https://github.com/global-torque/vue-ui/releases/download/v0.1.3/global-torque-ui-primitives-0.1.3.tgz"
+      "url": "https://registry.npmjs.org/@global-torque/ui-primitives/-/ui-primitives-0.1.3.tgz"
     },
     {
       "file": "global-torque-ui-kit-0.1.3.tgz",
       "sha512": "c7bd284339a92dc0c51e80d0263746e163133c49a539d9be572620e96651e086a37bf27633eae76dc9afb73fff33f59c7913347bcc2da66027af4816046bd050",
-      "url": "https://github.com/global-torque/vue-ui/releases/download/v0.1.3/global-torque-ui-kit-0.1.3.tgz"
+      "url": "https://registry.npmjs.org/@global-torque/ui-kit/-/ui-kit-0.1.3.tgz"
     },
     {
       "file": "global-torque-invest-widgets-0.1.3.tgz",
       "sha512": "c2bc2fd539bf8214f90a8ba189c1a2bc32ad3cd7fe78bb3e349788f27eaafc9f82f67ad3b61114b0073539b6d3205dd81c3706c59ea6375bb712483bd646cb6a",
-      "url": "https://github.com/global-torque/vue-ui/releases/download/v0.1.3/global-torque-invest-widgets-0.1.3.tgz"
+      "url": "https://registry.npmjs.org/@global-torque/invest-widgets/-/invest-widgets-0.1.3.tgz"
     }
   ],
   "sourceCommit": "bc2539ef90c00ec0a6fe099eba15ee8485db8c2d",
