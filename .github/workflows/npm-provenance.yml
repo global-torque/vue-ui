@@ -1,0 +1,68 @@
+name: Verify immutable npm release provenance
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Immutable ordinary release tag
+        required: true
+        type: string
+        default: v0.1.3
+permissions:
+  contents: read
+jobs:
+  attest:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      attestations: write
+      artifact-metadata: write
+      id-token: write
+    strategy:
+      matrix:
+        package: [ui-primitives, ui-kit, invest-widgets]
+    steps:
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '24.18.0'
+      - name: Verify retained archive and original provenance
+        id: subject
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.tag }}
+          PACKAGE: ${{ matrix.package }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          gh release view "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --json isDraft,isImmutable,isPrerelease,tagName > release.json
+          jq -e --arg tag "$RELEASE_TAG" '.isDraft == false and .isImmutable == true and .isPrerelease == false and .tagName == $tag' release.json
+          mkdir release
+          archive="global-torque-${PACKAGE}-${RELEASE_TAG#v}.tgz"
+          gh release download "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --dir release --pattern "$archive" --pattern "$archive.manifest.json" --pattern "$archive.sha512"
+          (cd release && sha512sum --check "$archive.sha512")
+          source_commit=$(jq -er '.sourceCommit | select(test("^[a-f0-9]{40}$"))' "release/$archive.manifest.json")
+          jq -e --arg pkg "@global-torque/$PACKAGE" --arg version "${RELEASE_TAG#v}" --arg archive "$archive" '.sourceDirty == false and .package == $pkg and .version == $version and .artifact == $archive' "release/$archive.manifest.json"
+          actual_sha512=$(sha512sum "release/$archive" | cut -d ' ' -f 1)
+          test "$actual_sha512" = "$(jq -r .sha512 "release/$archive.manifest.json")"
+          tar -xOf "release/$archive" package/package.json > package.json
+          jq -e --arg pkg "@global-torque/$PACKAGE" --arg version "${RELEASE_TAG#v}" '.name == $pkg and .version == $version' package.json
+          gh attestation verify "release/$archive" --repo "$GITHUB_REPOSITORY" \
+            --signer-workflow "$GITHUB_REPOSITORY/.github/workflows/release.yml" \
+            --signer-digest "$source_commit" --source-digest "$source_commit" \
+            --source-ref "refs/tags/$RELEASE_TAG" --deny-self-hosted-runners --format json > original-provenance.json
+          printf 'digest=sha512:%s\n' "$actual_sha512" >> "$GITHUB_OUTPUT"
+          printf 'name=pkg:npm/%%40global-torque/%s@%s\n' "$PACKAGE" "${RELEASE_TAG#v}" >> "$GITHUB_OUTPUT"
+      - name: Sign exact npm identity
+        id: npm
+        uses: actions/attest@f7c74d28b9d84cb8768d0b8ca14a4bac6ef463e6 # v4.2.0
+        with:
+          subject-name: ${{ steps.subject.outputs.name }}
+          subject-digest: ${{ steps.subject.outputs.digest }}
+      - name: Retain signed identity
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: npm-provenance-${{ matrix.package }}-${{ inputs.tag }}
+          path: ${{ steps.npm.outputs.bundle-path }}
+          retention-days: 90
+          if-no-files-found: error
