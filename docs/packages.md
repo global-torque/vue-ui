@@ -38,6 +38,6 @@ version and commit your lockfile; update through a PR that runs the consuming
 product's types, build, behavior and applicable browser/SSR checks.
 
 These are ordinary semantic versions, with no alpha/beta suffix. They remain
-pre-1.0 APIs; review changelogs before minor updates. Do not infer a live backend
-capability or regulatory approval from successful fixture tests. Broader private
-investment runtime/features and compatibility UI remain outside this catalog.
+pre-1.0 APIs; review changelogs before minor updates. Fixture tests cover the example; verify live backend capabilities separately.
+Broader private investment runtime/features and compatibility UI remain outside
+this catalog.
