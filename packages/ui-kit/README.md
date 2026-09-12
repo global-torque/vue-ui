@@ -2,7 +2,7 @@
 
 Generic Vue forms, images, URL state and composed controls.
 
-Prepared `0.1.3` source-SFC candidate. This version is not advertised as an npm
+Prepared `0.1.4` source-SFC candidate. This version is not advertised as an npm
 release until its release report records publication. Install the reviewed
 `.tgz` during candidate verification, with Vue 3.5 and Reka UI 2.10.
 
@@ -36,6 +36,7 @@ package files as Tailwind sources; retain the imports during CSS compilation.
 - `@global-torque/ui-kit/file-uploader`
 - `@global-torque/ui-kit/filter`
 - `@global-torque/ui-kit/form`
+- `@global-torque/ui-kit/form-validation`
 - `@global-torque/ui-kit/image`
 - `@global-torque/ui-kit/pagination`
 - `@global-torque/ui-kit/query-dialog`
@@ -72,6 +73,21 @@ Private compliance validation rules, schema reference defaults, branding helpers
 and wildcard/deep imports are intentionally absent. Define product validation
 and eligibility in the consuming application. This release is not a migration
 facade for every historical internal UI export.
+
+### Neutral form validation
+
+`@global-torque/ui-kit/form-validation` exports `useFormValidation`, `useForm`,
+`useFormErrors` and `scrollToError`. The composable uses a new standard AJV
+instance per form and accepts optional `FormValidationOptions` hooks for a host
+validator, schema composition and model preparation. Frontend schema values take
+precedence over backend values during the default clone-and-compose operation;
+both inputs remain unchanged. Product keywords, eligibility rules and reference
+resolution belong in the consuming domain package and can be supplied through
+the explicit hooks.
+
+The validation helper is SSR-safe and clears both validation state and field
+errors on reset or schema replacement. A Vue-aware Vite SSR build is required
+for source-SFC consumers.
 
 ## Maintenance
 

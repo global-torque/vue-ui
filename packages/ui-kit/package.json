@@ -1,6 +1,6 @@
 {
   "name": "@global-torque/ui-kit",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Generic Vue forms, images, URL state and composed controls.",
   "type": "module",
   "license": "MIT",
@@ -22,6 +22,7 @@
     "./file-uploader": "./src/file-uploader/index.ts",
     "./filter": "./src/filter/index.ts",
     "./form": "./src/form/index.ts",
+    "./form-validation": "./src/form-validation/index.ts",
     "./image": "./src/image/index.ts",
     "./pagination": "./src/pagination/index.ts",
     "./query-dialog": "./src/query-dialog/index.ts",
@@ -39,6 +40,8 @@
   "dependencies": {
     "@global-torque/ui-primitives": "0.1.3",
     "@internationalized/date": "^3.12.3",
+    "ajv": "^8.18.0",
+    "ajv-formats": "^3.0.1",
     "@lucide/vue": "^1.23.0",
     "@vueuse/core": "^14.2.1",
     "maska": "^3.2.0",

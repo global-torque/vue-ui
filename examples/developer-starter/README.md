@@ -33,6 +33,12 @@ All runtime packages install from npm with exact versions and the committed
 integrity lockfile; no private repository or bootstrap download is needed.
 `npm run check:ui` independently downloads the published UI archives, checks their
 retained SHA-512 digests, compares every installed file, and tests every export.
+For a selected UI Kit candidate, create the consumer with
+`node scripts/public-ui/create-consumer.mjs <release-dir> <consumer-dir> --package ui-kit`;
+the generated lock overlays only that candidate and keeps the other packages on
+their frozen registry versions. Older locks without a `source` field infer the
+source from their validated URL, so an explicitly supplied archive directory
+also works for retained legacy registry bytes.
 
 For pnpm, run `pnpm install` and `pnpm run check`. The supplied npm lock is the
 canonical starter lock; retain your generated pnpm lock when adopting the example.

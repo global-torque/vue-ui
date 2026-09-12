@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.4 — neutral form validation candidate
+
+- Added the domain-neutral `form-validation` subpath with per-form standard AJV,
+  immutable schema composition, host preparation hooks, and SSR-safe scrolling.
+- Kept investment policy, custom keywords, reference defaults, and schema
+  projection helpers outside the public UI Kit API.
+- Updated the candidate pack and consumer machinery to select UI Kit 0.1.4
+  alongside frozen UI Primitives and Invest Widgets 0.1.3 artifacts.
+
 ## 0.1.3 — prepared candidate
 
 - pnpm consumers pin inter-package dependencies to the same reviewed archives.

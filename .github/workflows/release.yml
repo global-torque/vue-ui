@@ -1,7 +1,7 @@
 name: Verified public UI artifacts
 on:
   push:
-    tags: ['v*']
+    tags: ['v*', 'ui-kit-v*']
 permissions:
   contents: read
 jobs:
@@ -27,16 +27,31 @@ jobs:
           node --input-type=module <<'JS'
           import fs from 'node:fs';
           import assert from 'node:assert/strict';
-          for (const name of ['ui-primitives', 'ui-kit', 'invest-widgets']) {
+          const tag = process.env.GITHUB_REF_NAME;
+          const selected = tag.startsWith('ui-kit-v') ? ['ui-kit'] : ['ui-primitives', 'ui-kit', 'invest-widgets'];
+          const expectedTag = (version) => tag.startsWith('ui-kit-v') ? `ui-kit-v${version}` : `v${version}`;
+          for (const name of selected) {
             const config = JSON.parse(fs.readFileSync(`packages/${name}/public-package.json`, 'utf8'));
-            assert.equal(process.env.GITHUB_REF_NAME, `v${config.manifest.version}`);
+            assert.equal(tag, expectedTag(config.manifest.version));
           }
           JS
-          node scripts/public-ui/pack.mjs release
+          if [[ "${GITHUB_REF_NAME}" == ui-kit-v* ]]; then
+            node scripts/public-ui/pack.mjs release --package ui-kit
+          else
+            node scripts/public-ui/pack.mjs release
+          fi
+      - name: Name retained candidate
+        id: candidate-artifact
+        run: |
+          if [[ "${GITHUB_REF_NAME}" == ui-kit-v* ]]; then
+            printf 'name=torque-ui-kit-candidate-%s\n' "${GITHUB_REF_NAME#ui-kit-v}" >> "$GITHUB_OUTPUT"
+          else
+            printf 'name=public-ui-candidate\n' >> "$GITHUB_OUTPUT"
+          fi
       - name: Retain the packed candidate before consumer checks
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
         with:
-          name: public-ui-candidate
+          name: ${{ steps.candidate-artifact.outputs.name }}
           path: |
             release/*.tgz
             release/*.json
@@ -46,7 +61,11 @@ jobs:
         run: |
           for manager in npm pnpm; do
             consumer="${RUNNER_TEMP}/consumer-${manager}"
-            node scripts/public-ui/create-consumer.mjs release "${consumer}"
+            if [[ "${GITHUB_REF_NAME}" == ui-kit-v* ]]; then
+              node scripts/public-ui/create-consumer.mjs release "${consumer}" --package ui-kit
+            else
+              node scripts/public-ui/create-consumer.mjs release "${consumer}"
+            fi
             node "${consumer}/scripts/bootstrap-ui.mjs" "${GITHUB_WORKSPACE}/release"
             (
               cd "${consumer}"
@@ -72,10 +91,19 @@ jobs:
         uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6
         with:
           subject-path: release/*.tgz
-      - name: Retain ordinary release
+      - name: Retain candidate or promote legacy release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "${GITHUB_REF_NAME}" release/*.tgz release/*.json release/*.sha512 \
+          release_args=("${GITHUB_REF_NAME}" release/*.tgz release/*.json release/*.sha512 \
             --verify-tag --title "Public Vue UI ${GITHUB_REF_NAME}" \
-            --notes "Verified source-SFC artifacts for UI Primitives, UI Kit and Invest Widgets. These GitHub artifacts are candidates for npm publication. The starter fixture flow is verified; live sandbox access is independently required."
+            --notes "Verified source-SFC artifacts for UI Primitives, UI Kit and Invest Widgets. These GitHub artifacts are candidates for npm publication. The starter fixture flow is verified; live sandbox access is independently required.")
+          if [[ "${GITHUB_REF_NAME}" == ui-kit-v* ]]; then
+            # UI Kit candidates remain drafts until the primary records the G3
+            # paired-app receipt and promotes this exact retained candidate.
+            gh release create "${release_args[@]}" --draft
+          else
+            # Preserve the established all-package release behavior for the
+            # legacy v* path.
+            gh release create "${release_args[@]}"
+          fi

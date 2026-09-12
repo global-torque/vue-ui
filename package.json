@@ -4,7 +4,8 @@
   "type": "module",
   "packageManager": "pnpm@10.34.5",
   "scripts": {
-    "check": "pnpm -r --workspace-concurrency=1 run check",
+    "check": "pnpm test:public-ui && pnpm -r --workspace-concurrency=1 run check",
+    "test:public-ui": "node --test scripts/public-ui/pack.test.mjs scripts/public-ui/workflow.test.mjs",
     "pack": "node scripts/public-ui/pack.mjs release"
   },
   "devDependencies": {

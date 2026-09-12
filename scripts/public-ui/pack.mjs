@@ -6,7 +6,21 @@ import { execFileSync } from 'node:child_process';
 
 // Source-SFC packages: assembly preserves source bytes and changes only manifest metadata.
 const root = process.cwd();
-const output = path.resolve(process.argv[2] ?? 'artifacts/public-ui');
+const argumentsList = process.argv.slice(2);
+const packageNames = ['ui-primitives', 'ui-kit', 'invest-widgets'];
+const selectedIndex = argumentsList.findIndex((argument) => argument === '--package' || argument.startsWith('--package='));
+const hasSelection = selectedIndex !== -1;
+const selectedPackage = selectedIndex === -1
+  ? undefined
+  : argumentsList[selectedIndex] === '--package'
+    ? argumentsList[selectedIndex + 1]
+    : argumentsList[selectedIndex].slice('--package='.length);
+assert(!hasSelection || packageNames.includes(selectedPackage), `Unknown package selection: ${selectedPackage}`);
+const outputArgument = argumentsList.find((argument, index) => (
+  !argument.startsWith('-')
+  && !(selectedIndex !== -1 && index === selectedIndex + 1 && argumentsList[selectedIndex] === '--package')
+));
+const output = path.resolve(outputArgument ?? 'artifacts/public-ui');
 assert(!fs.existsSync(output), 'Use a new output directory; reviewed artifacts cannot be replaced.');
 const sourceCommit = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim();
 const sourceDirty = Boolean(execFileSync('git', ['status', '--porcelain'], { cwd: root, encoding: 'utf8' }).trim());
@@ -14,7 +28,8 @@ assert(!sourceDirty || process.argv.includes('--allow-dirty'), 'Freeze clean sou
 fs.mkdirSync(output, { recursive: true });
 const hash = (bytes) => crypto.createHash('sha512').update(bytes).digest('hex');
 const ignored = /(^|\/)(__tests__|node_modules|dist|coverage)(\/|$)|\.(test|spec)\.[cm]?[jt]s$/;
-for (const name of ['ui-primitives', 'ui-kit', 'invest-widgets']) {
+const names = selectedPackage ? [selectedPackage] : packageNames;
+for (const name of names) {
   const source = path.join(root, 'packages', name);
   const config = JSON.parse(fs.readFileSync(path.join(source, 'public-package.json'), 'utf8'));
   const { manifest } = config;
@@ -75,4 +90,29 @@ for (const name of ['ui-primitives', 'ui-kit', 'invest-widgets']) {
   fs.writeFileSync(`${archive}.manifest.json`, `${JSON.stringify(proof, null, 2)}\n`);
   fs.writeFileSync(`${archive}.sha512`, `${proof.sha512}  ${result.filename}\n`);
   console.log(`${manifest.name}@${manifest.version}: ${Object.keys(files).length} files; sourceDirty=${sourceDirty}`);
+}
+
+if (selectedPackage) {
+  const descriptor = JSON.parse(fs.readFileSync(path.join(root, 'packages', selectedPackage, 'public-package.json'), 'utf8'));
+  const proof = JSON.parse(fs.readFileSync(
+    path.join(output, `global-torque-${selectedPackage}-${descriptor.manifest.version}.tgz.manifest.json`),
+    'utf8',
+  ));
+  const receipt = {
+    schemaVersion: 1,
+    selection: 'single-package',
+    package: descriptor.manifest.name,
+    version: descriptor.manifest.version,
+    sourceCommit,
+    sourceDirty,
+    artifact: proof.artifact,
+    sha512: proof.sha512,
+    integrity: proof.integrity,
+    unchangedPackages: packageNames.filter((name) => name !== selectedPackage).map((name) => {
+      const unchanged = JSON.parse(fs.readFileSync(path.join(root, 'packages', name, 'public-package.json'), 'utf8'));
+      return { name: unchanged.manifest.name, version: unchanged.manifest.version, source: 'registry' };
+    }),
+  };
+  fs.writeFileSync(path.join(output, 'selected-release.json'), `${JSON.stringify(receipt, null, 2)}\n`);
+  console.log(`selected release: ${descriptor.manifest.name}@${descriptor.manifest.version}`);
 }
