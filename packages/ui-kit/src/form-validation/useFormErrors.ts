@@ -5,13 +5,32 @@ import type { ErrorSchema, ValidationError } from './types';
 const REQUIRED_ERROR_MESSAGE = 'Please complete';
 
 function pathSegments(path: string): string[] {
-  return path.replace(/\[([^\]]+)\]/g, '.$1').split('.').filter(Boolean);
+  const chunks: string[] = [];
+  let cursor = 0;
+  while (cursor < path.length) {
+    const opening = path.indexOf('[', cursor);
+    if (opening === -1) {
+      chunks.push(path.slice(cursor));
+      break;
+    }
+    chunks.push(path.slice(cursor, opening));
+    const closing = path.indexOf(']', opening + 1);
+    if (closing === -1) {
+      chunks.push(path.slice(opening));
+      break;
+    }
+    const contents = path.slice(opening + 1, closing);
+    chunks.push(contents ? `.${contents}` : '[]');
+    cursor = closing + 1;
+  }
+  return chunks.join('').split('.').filter(Boolean);
 }
 
 function getAtPath(value: unknown, path: string): unknown {
   if (!value || typeof value !== 'object') return undefined;
   return pathSegments(path).reduce<unknown>((current, segment) => (
     current && typeof current === 'object'
+      && Object.prototype.hasOwnProperty.call(current, segment)
       ? (current as Record<string, unknown>)[segment]
       : undefined
   ), value);
@@ -79,12 +98,12 @@ function transformValidationErrors(errors: ErrorObject[] = []): ValidationError[
 }
 
 function formatErrorSchema(schema: ErrorSchema): Record<string, unknown> | string | undefined {
-  if ('__errors' in schema) {
+  if (Object.prototype.hasOwnProperty.call(schema, '__errors')) {
     const list = schema.__errors ?? [];
     return list.length ? list.join(', ') : undefined;
   }
 
-  const formatted: Record<string, unknown> = {};
+  const formatted: Record<string, unknown> = Object.create(null);
   Object.keys(schema).forEach((key) => {
     const value = formatErrorSchema(schema[key]);
     if (value !== undefined) formatted[key] = value;
@@ -94,7 +113,7 @@ function formatErrorSchema(schema: ErrorSchema): Record<string, unknown> | strin
 
 function buildFieldErrors(rawErrors: ErrorObject[]): Record<string, unknown> {
   const errors = transformValidationErrors(rawErrors);
-  const schema: ErrorSchema = {};
+  const schema: ErrorSchema = Object.create(null);
 
   errors.forEach(({ property, message }) => {
     if (!message) return;
@@ -103,15 +122,16 @@ function buildFieldErrors(rawErrors: ErrorObject[]): Record<string, unknown> {
 
     let node: ErrorSchema = schema;
     segments.forEach((segment) => {
-      if (!node[segment] || typeof node[segment] !== 'object') node[segment] = {};
+      const child = Object.prototype.hasOwnProperty.call(node, segment) ? node[segment] : undefined;
+      if (!child || typeof child !== 'object') node[segment] = Object.create(null);
       node = node[segment];
     });
-    node.__errors ??= [];
+    if (!Object.prototype.hasOwnProperty.call(node, '__errors') || !node.__errors) node.__errors = [];
     node.__errors.push(message);
   });
 
   const formatted = formatErrorSchema(schema);
-  return formatted && typeof formatted === 'object' ? formatted : {};
+  return formatted && typeof formatted === 'object' ? formatted : Object.create(null);
 }
 
 function containsStringError(value: unknown): boolean {
