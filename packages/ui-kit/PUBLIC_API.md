@@ -2,7 +2,7 @@
 
 Generic Vue forms, images, URL state and composed controls.
 
-Prepared `0.1.3` source-SFC candidate. This version is not advertised as an npm
+Prepared `0.1.4` source-SFC candidate. This version is not advertised as an npm
 release until its release report records publication. Install the reviewed
 `.tgz` during candidate verification, with Vue 3.5 and Reka UI 2.10.
 
@@ -36,6 +36,7 @@ package files as Tailwind sources; retain the imports during CSS compilation.
 - `@global-torque/ui-kit/file-uploader`
 - `@global-torque/ui-kit/filter`
 - `@global-torque/ui-kit/form`
+- `@global-torque/ui-kit/form-validation`
 - `@global-torque/ui-kit/image`
 - `@global-torque/ui-kit/pagination`
 - `@global-torque/ui-kit/query-dialog`
@@ -72,6 +73,19 @@ Private compliance validation rules, schema reference defaults, branding helpers
 and wildcard/deep imports are intentionally absent. Define product validation
 and eligibility in the consuming application. This release is not a migration
 facade for every historical internal UI export.
+
+### Neutral form validation
+
+`@global-torque/ui-kit/form-validation` exports `useFormValidation`, `useForm`,
+`useFormErrors` and `scrollToError`. It creates one standard AJV validator per
+form. Hosts may provide `FormValidationOptions` hooks for an AJV instance,
+schema composition and model preparation. Default schema composition clones
+both inputs and gives frontend values precedence over backend values while
+preserving required fields and enums.
+
+Product keywords, eligibility rules, reference defaults and policy constants
+remain in the consuming domain package. Reset and schema replacement clear both
+validation state and field errors; `scrollToError` is safe during SSR.
 
 ## Maintenance
 
