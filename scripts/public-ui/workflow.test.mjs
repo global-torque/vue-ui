@@ -153,30 +153,27 @@ function disposeProvenance(result) {
   fs.rmSync(result.directory, { recursive: true, force: true });
 }
 
-test('selected UI Kit workflow retention is draft-only while legacy v tags remain ordinary', () => {
+test('selected UI Kit workflow retention is draft-only', () => {
   const workflow = fs.readFileSync(releaseWorkflowPath, 'utf8');
-  const body = workflowRunBody(workflow, 'Retain candidate or promote legacy release');
+  const body = workflowRunBody(workflow, 'Retain selected candidate');
   const selectedArgs = runReleaseRetention(body, 'ui-kit-v0.1.4');
   assert.equal(selectedArgs[0], 'release');
   assert.equal(selectedArgs[1], 'create');
   assert(selectedArgs.includes('--draft'), 'selected release must be retained as a draft');
-  const legacyArgs = runReleaseRetention(body, 'v0.1.3');
-  assert.equal(legacyArgs[0], 'release');
-  assert.equal(legacyArgs[1], 'create');
-  assert(!legacyArgs.includes('--draft'), 'legacy all-package release keeps ordinary promotion');
 });
 
 test('selected tag verification rejects a version or package descriptor mismatch', () => {
   const workflow = fs.readFileSync(releaseWorkflowPath, 'utf8');
   const body = workflowRunBody(workflow, 'Verify tag and pack once');
-  const tagVerification = body.split('\nif [[ "${GITHUB_REF_NAME}" == ui-kit-v* ]]')[0];
-  const pass = execFileSync('bash', ['-euo', 'pipefail', '-c', tagVerification], {
+  const tagVerification = body.match(/node --input-type=module <<'JS'\n([\s\S]*?)\nJS/)?.[1];
+  assert(tagVerification, 'tag verification script is missing');
+  const pass = execFileSync(process.execPath, ['--input-type=module', '--eval', tagVerification], {
     cwd: root,
     env: { ...process.env, GITHUB_REF_NAME: 'ui-kit-v0.1.4' },
     stdio: 'pipe',
   });
   assert.equal(pass.toString(), '');
-  assert.throws(() => execFileSync('bash', ['-euo', 'pipefail', '-c', tagVerification], {
+  assert.throws(() => execFileSync(process.execPath, ['--input-type=module', '--eval', tagVerification], {
     cwd: root,
     env: { ...process.env, GITHUB_REF_NAME: 'ui-kit-v0.1.3' },
     stdio: 'pipe',
@@ -190,6 +187,10 @@ test('npm provenance requires an immutable promoted release and exact selected r
   assert.match(release, /torque-ui-kit-candidate-%s/);
   assert.match(release, /name: \$\{\{ steps\.candidate-artifact\.outputs\.name \}\}/);
   assert.match(release, /gh release create "\$\{release_args\[@\]\}" --draft/);
+  assert.match(release, /tags: \['ui-kit-v\*'\]/);
+  assert(!release.includes('invest-widgets'), 'retired widget must not be an active release selection');
+  assert.match(provenance, /package: \[ui-kit\]/);
+  assert(!provenance.includes('invest-widgets'), 'retired widget must not be in the provenance matrix');
   assert.match(provenance, /\.isDraft == false and \.isImmutable == true and \.isPrerelease == false/);
   assert.match(provenance, /\.schemaVersion == 1 and \.sourceDirty == false/);
   assert.match(provenance, /\.selection == "single-package"/);

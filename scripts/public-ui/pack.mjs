@@ -7,7 +7,11 @@ import { execFileSync } from 'node:child_process';
 // Source-SFC packages: assembly preserves source bytes and changes only manifest metadata.
 const root = process.cwd();
 const argumentsList = process.argv.slice(2);
-const packageNames = ['ui-primitives', 'ui-kit', 'invest-widgets'];
+// Only these packages have an active source owner in vue-ui. The curated
+// invest-widgets package remains available as an immutable 0.1.3 registry
+// dependency for legacy consumers, but its source and descriptor are retired
+// from this repository and must never enter a new release selection.
+const packageNames = ['ui-primitives', 'ui-kit'];
 const selectedIndex = argumentsList.findIndex((argument) => argument === '--package' || argument.startsWith('--package='));
 const hasSelection = selectedIndex !== -1;
 const selectedPackage = selectedIndex === -1

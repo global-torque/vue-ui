@@ -8,8 +8,7 @@ deployment remain owned by the consuming product.
 | --- | --- | --- |
 | [SDK](https://github.com/global-torque/sdk) | `@global-torque/sdk@0.2.0` | Framework-free service clients and explicit wallet integrations. Supply transport/configuration and supported backend access. |
 | [UI Primitives](../packages/ui-primitives/README.md) | `@global-torque/ui-primitives@0.1.3` | Low-level Vue controls through explicit component subpaths. Requires the documented Vue/Reka UI peers and host theme; charts are excluded. |
-| [UI Kit](../packages/ui-kit/README.md) | `@global-torque/ui-kit@0.1.3` | Generic Vue forms, filters, pagination, upload and URL-state compositions. Compile source with the documented consumer toolchain. |
-| [Invest Widgets](../packages/invest-widgets/README.md) | `@global-torque/invest-widgets@0.1.3` | Controlled offer/profile presentation. Hosts provide state, data and navigation; private KYC/wallet runtime is excluded. |
+| [UI Kit](../packages/ui-kit/README.md) | `@global-torque/ui-kit@0.1.4` | Generic Vue forms, filters, pagination, upload and URL-state compositions. Compile source with the documented consumer toolchain. |
 | [Design Tokens](https://github.com/global-torque/design-tokens) | `@global-torque/design-tokens@0.2.1` | Neutral token source and generated styles/data. No runtime dependencies. |
 | [Content Toolkit](https://github.com/global-torque/content-toolkit) | `@global-torque/content-toolkit@0.2.0` | Content records, normalization, trees and host-defined path/image policies. |
 | [VitePress Toolkit](https://github.com/global-torque/vitepress-toolkit) | `@global-torque/vitepress-toolkit@0.2.0` | VitePress content/head/SEO/sitemap helpers. VitePress 1.6.4 consumers must apply and verify the documented root Vite 6.4.3 override. |
@@ -41,3 +40,10 @@ These are ordinary semantic versions, with no alpha/beta suffix. They remain
 pre-1.0 APIs; review changelogs before minor updates. Fixture tests cover the example; verify live backend capabilities separately.
 Broader private investment runtime/features and compatibility UI remain outside
 this catalog.
+
+## Historical widget release
+
+The curated `@global-torque/invest-widgets@0.1.3` package remains an immutable
+npm release for existing consumers and the developer starter. Its source tree
+and public descriptor are retired from `vue-ui`; future investment widget
+releases are owned by `torque-packages` and use that framework's API contract.

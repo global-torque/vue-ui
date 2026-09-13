@@ -2,7 +2,13 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 const argumentsList = process.argv.slice(2);
-const packageNames = ['ui-primitives', 'ui-kit', 'invest-widgets'];
+const packageNames = ['ui-primitives', 'ui-kit'];
+const legacyRegistryArtifacts = Object.freeze({
+  'invest-widgets': Object.freeze({
+    version: '0.1.3',
+    integrity: 'sha512-wrwv1Tm/ghT5CouhicGivDKtPNf+eLs+NJeI8n6q/J+C9nrTthEUsAc1ObbTIF3YHDcGxZ6mN1u3Ekg71kbLag==',
+  }),
+});
 const selectedIndex = argumentsList.findIndex((argument) => argument === '--package' || argument.startsWith('--package='));
 const hasSelection = selectedIndex !== -1;
 const selectedPackage = selectedIndex === -1
@@ -26,9 +32,11 @@ const registryArtifacts = {
     version: '0.1.3',
     integrity: 'sha512-VGUFTGfn7vn7xIUPntI1M2jL0B95ghQ0YT1d3g1/JnH40ioFAcyeN8nHolbgsgkmkL/Bhh/PsvHpRQTygYmbdQ==',
   },
-  'invest-widgets': {
-    version: '0.1.3',
-    integrity: 'sha512-wrwv1Tm/ghT5CouhicGivDKtPNf+eLs+NJeI8n6q/J+C9nrTthEUsAc1ObbTIF3YHDcGxZ6mN1u3Ekg71kbLag==',
+  // UI Kit 0.1.4 is already published by this repository and is an
+  // unchanged registry input when a local primitive candidate is inspected.
+  'ui-kit': {
+    version: '0.1.4',
+    integrity: 'sha512-4EDEOhrFR9EpxJiLpqn1yA5Qx2YCgE6lotZPeeNmYf1+zrw9GxsZW7gGKIrF4c7vAfbzEgsOr6hGON8P3t2Uiw==',
   },
 };
 const digestHex = (integrity) => Buffer.from(integrity.slice('sha512-'.length), 'base64').toString('hex');
@@ -97,10 +105,25 @@ for (const name of packageNames) {
     url: `https://registry.npmjs.org/@global-torque/${name}/-/${name}-${registry.version}.tgz`,
   });
 }
+// The starter still demonstrates the immutable curated widget release. Its
+// identity is intentionally frozen here instead of being read from the
+// retired package descriptor or source tree.
+for (const [name, registry] of Object.entries(legacyRegistryArtifacts)) {
+  const file = `global-torque-${name}-${registry.version}.tgz`;
+  lock.artifacts.push({
+    name: `@global-torque/${name}`,
+    version: registry.version,
+    source: 'registry',
+    file,
+    sha512: digestHex(registry.integrity),
+    integrity: registry.integrity,
+    url: `https://registry.npmjs.org/@global-torque/${name}/-/${name}-${registry.version}.tgz`,
+  });
+}
 const packageJsonPath = path.join(consumer, 'package.json');
 const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
-for (const artifact of lock.artifacts.filter(({ source }) => source === 'candidate')) {
-  assert(Object.hasOwn(packageJson.dependencies, artifact.name), `Candidate dependency is not declared: ${artifact.name}`);
+for (const artifact of lock.artifacts) {
+  assert(Object.hasOwn(packageJson.dependencies, artifact.name), `Receipt dependency is not declared: ${artifact.name}`);
   packageJson.dependencies[artifact.name] = artifact.version;
 }
 fs.writeFileSync(packageJsonPath, `${JSON.stringify(packageJson, null, 2)}\n`);
