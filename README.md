@@ -1,15 +1,21 @@
 # Global Torque Vue UI
 
-Three source-SFC packages for independent Vue products: UI Primitives, generic
-UI Kit compositions, and controlled investment presentation widgets. All use
-ordinary semantic versions and host-owned themes/state. No private backend or
-platform checkout is needed for the demonstrated fixture flow.
+Two active source-SFC packages for independent Vue products: UI Primitives and
+generic UI Kit compositions. Both use ordinary semantic versions and host-owned
+themes/state. No private backend or platform checkout is needed for the
+demonstrated fixture flow.
+
+The curated `@global-torque/invest-widgets@0.1.3` release is an immutable
+historical registry dependency used by the developer starter. Its source and
+release descriptor are retired from this repository; new investment widgets
+are owned and released by `torque-packages` under the framework contract.
 
 The [0.1.3 GitHub release](https://github.com/global-torque/vue-ui/releases/tag/v0.1.3)
-contains immutable, attested package archives. Start with the developer starter
-on `master`, which installs the published npm versions with an integrity lockfile.
-All three packages are available on npm at `0.1.3` with registry signatures and
-CI provenance. See the [release verification](docs/releases/0.1.3.md).
+contains immutable, attested archives for the historical three-package set.
+Start with the developer starter on `master`, which installs the published npm
+versions with an integrity lockfile. The active UI packages remain available on
+npm, while the curated widget pin is retained for legacy consumers. See the
+[release verification](docs/releases/0.1.3.md).
 
 See the [package catalog](docs/packages.md), packages/*/README.md for API and styling contracts, and
 [the developer starter](examples/developer-starter/README.md) for setup, a

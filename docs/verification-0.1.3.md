@@ -1,8 +1,10 @@
-# Public Vue UI 0.1.3 verification
+# Public Vue UI 0.1.3 historical verification
 
 The [immutable release](https://github.com/global-torque/vue-ui/releases/tag/v0.1.3)
 contains three npm-format archives, SHA-512 sidecars and per-file manifests from
 clean source `bc2539ef90c00ec0a6fe099eba15ee8485db8c2d`.
+These archives are retained historical evidence; `invest-widgets` is no longer
+an active source or release selection in `vue-ui`.
 The [release workflow](https://github.com/global-torque/vue-ui/actions/runs/34383451263)
 builds these archives once, verifies isolated consumers, and attests the same
 bytes. They are GitHub candidates for external evaluation, not npm releases.

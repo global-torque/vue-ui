@@ -11,7 +11,9 @@ const root = path.resolve(new URL('../..', import.meta.url).pathname);
 const packer = path.join(root, 'scripts/public-ui/pack.mjs');
 const consumerCreator = path.join(root, 'scripts/public-ui/create-consumer.mjs');
 const bootstrapScript = path.join(root, 'examples/developer-starter/scripts/bootstrap-ui.mjs');
-const packageNames = ['ui-primitives', 'ui-kit', 'invest-widgets'];
+const activePackageNames = ['ui-primitives', 'ui-kit'];
+const legacyPackageNames = ['invest-widgets'];
+const packageNames = [...activePackageNames, ...legacyPackageNames];
 
 function temporaryOutput(prefix) {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), prefix));
@@ -142,13 +144,26 @@ test('selected pack emits only UI Kit and its receipt', () => {
   }
 });
 
-test('legacy pack keeps the all-package path', () => {
+test('default pack includes only active UI packages', () => {
   const { directory, output } = temporaryOutput('vue-ui-pack-legacy-');
   try {
     execFileSync(process.execPath, [packer, output, '--allow-dirty'], { cwd: root, stdio: 'pipe' });
-    for (const name of ['ui-primitives-0.1.3', 'ui-kit-0.1.4', 'invest-widgets-0.1.3']) {
+    for (const name of ['ui-primitives-0.1.3', 'ui-kit-0.1.4']) {
       assert(fs.existsSync(path.join(output, `global-torque-${name}.tgz`)));
     }
+    assert(!fs.existsSync(path.join(output, 'global-torque-invest-widgets-0.1.3.tgz')));
+  } finally {
+    fs.rmSync(directory, { recursive: true, force: true });
+  }
+});
+
+test('invest-widgets cannot be selected for a new UI release', () => {
+  const { directory, output } = temporaryOutput('vue-ui-pack-retired-');
+  try {
+    assert.throws(
+      () => execFileSync(process.execPath, [packer, output, '--package', 'invest-widgets', '--allow-dirty'], { cwd: root, stdio: 'pipe' }),
+      /Unknown package selection/,
+    );
   } finally {
     fs.rmSync(directory, { recursive: true, force: true });
   }
@@ -167,6 +182,48 @@ test('selected consumer creation rejects a tampered selected receipt', () => {
       () => execFileSync(process.execPath, [consumerCreator, output, consumer, '--package', 'ui-kit'], { cwd: root, stdio: 'pipe' }),
       /AssertionError|ERR_ASSERTION/,
     );
+  } finally {
+    fs.rmSync(packDirectory, { recursive: true, force: true });
+  }
+});
+
+test('selected consumer keeps the retired widget on its frozen registry identity', () => {
+  const { directory: packDirectory, output } = temporaryOutput('vue-ui-pack-consumer-');
+  const consumer = path.join(packDirectory, 'consumer');
+  try {
+    execFileSync(process.execPath, [packer, output, '--package', 'ui-kit', '--allow-dirty'], { cwd: root, stdio: 'pipe' });
+    execFileSync(process.execPath, [consumerCreator, output, consumer, '--package', 'ui-kit'], { cwd: root, stdio: 'pipe' });
+    const lock = JSON.parse(fs.readFileSync(path.join(consumer, 'ui-artifacts.lock.json'), 'utf8'));
+    const widget = lock.artifacts.find(({ name }) => name === '@global-torque/invest-widgets');
+    assert.deepEqual(widget, {
+      name: '@global-torque/invest-widgets',
+      version: '0.1.3',
+      source: 'registry',
+      file: 'global-torque-invest-widgets-0.1.3.tgz',
+      sha512: 'c2bc2fd539bf8214f90a8ba189c1a2bc32ad3cd7fe78bb3e349788f27eaafc9f82f67ad3b61114b0073539b6d3205dd81c3706c59ea6375bb712483bd646cb6a',
+      integrity: 'sha512-wrwv1Tm/ghT5CouhicGivDKtPNf+eLs+NJeI8n6q/J+C9nrTthEUsAc1ObbTIF3YHDcGxZ6mN1u3Ekg71kbLag==',
+      url: 'https://registry.npmjs.org/@global-torque/invest-widgets/-/invest-widgets-0.1.3.tgz',
+    });
+    const packageJson = JSON.parse(fs.readFileSync(path.join(consumer, 'package.json'), 'utf8'));
+    assert.equal(packageJson.dependencies['@global-torque/invest-widgets'], '0.1.3');
+  } finally {
+    fs.rmSync(packDirectory, { recursive: true, force: true });
+  }
+});
+
+test('primitive selection keeps exact receipt versions in the generated manifest', () => {
+  const { directory: packDirectory, output } = temporaryOutput('vue-ui-pack-primitive-consumer-');
+  const consumer = path.join(packDirectory, 'consumer');
+  try {
+    execFileSync(process.execPath, [packer, output, '--package', 'ui-primitives', '--allow-dirty'], { cwd: root, stdio: 'pipe' });
+    execFileSync(process.execPath, [consumerCreator, output, consumer, '--package', 'ui-primitives'], { cwd: root, stdio: 'pipe' });
+    const lock = JSON.parse(fs.readFileSync(path.join(consumer, 'ui-artifacts.lock.json'), 'utf8'));
+    assert.equal(lock.selected.name, '@global-torque/ui-primitives');
+    assert.equal(lock.selected.version, '0.1.3');
+    const packageJson = JSON.parse(fs.readFileSync(path.join(consumer, 'package.json'), 'utf8'));
+    for (const artifact of lock.artifacts) {
+      assert.equal(packageJson.dependencies[artifact.name], artifact.version, `Generated manifest version mismatch for ${artifact.name}`);
+    }
   } finally {
     fs.rmSync(packDirectory, { recursive: true, force: true });
   }

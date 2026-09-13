@@ -1,7 +1,9 @@
 name: Verified public UI artifacts
 on:
   push:
-    tags: ['v*', 'ui-kit-v*']
+    # New releases are selected per package. The historical v0.1.3
+    # all-package release remains immutable and is never rebuilt here.
+    tags: ['ui-kit-v*']
 permissions:
   contents: read
 jobs:
@@ -28,26 +30,15 @@ jobs:
           import fs from 'node:fs';
           import assert from 'node:assert/strict';
           const tag = process.env.GITHUB_REF_NAME;
-          const selected = tag.startsWith('ui-kit-v') ? ['ui-kit'] : ['ui-primitives', 'ui-kit', 'invest-widgets'];
-          const expectedTag = (version) => tag.startsWith('ui-kit-v') ? `ui-kit-v${version}` : `v${version}`;
-          for (const name of selected) {
-            const config = JSON.parse(fs.readFileSync(`packages/${name}/public-package.json`, 'utf8'));
-            assert.equal(tag, expectedTag(config.manifest.version));
-          }
+          assert.match(tag, /^ui-kit-v\d+\.\d+\.\d+$/);
+          const config = JSON.parse(fs.readFileSync('packages/ui-kit/public-package.json', 'utf8'));
+          assert.equal(tag, `ui-kit-v${config.manifest.version}`);
           JS
-          if [[ "${GITHUB_REF_NAME}" == ui-kit-v* ]]; then
-            node scripts/public-ui/pack.mjs release --package ui-kit
-          else
-            node scripts/public-ui/pack.mjs release
-          fi
+          node scripts/public-ui/pack.mjs release --package ui-kit
       - name: Name retained candidate
         id: candidate-artifact
         run: |
-          if [[ "${GITHUB_REF_NAME}" == ui-kit-v* ]]; then
-            printf 'name=torque-ui-kit-candidate-%s\n' "${GITHUB_REF_NAME#ui-kit-v}" >> "$GITHUB_OUTPUT"
-          else
-            printf 'name=public-ui-candidate\n' >> "$GITHUB_OUTPUT"
-          fi
+          printf 'name=torque-ui-kit-candidate-%s\n' "${GITHUB_REF_NAME#ui-kit-v}" >> "$GITHUB_OUTPUT"
       - name: Retain the packed candidate before consumer checks
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
         with:
@@ -61,11 +52,7 @@ jobs:
         run: |
           for manager in npm pnpm; do
             consumer="${RUNNER_TEMP}/consumer-${manager}"
-            if [[ "${GITHUB_REF_NAME}" == ui-kit-v* ]]; then
-              node scripts/public-ui/create-consumer.mjs release "${consumer}" --package ui-kit
-            else
-              node scripts/public-ui/create-consumer.mjs release "${consumer}"
-            fi
+            node scripts/public-ui/create-consumer.mjs release "${consumer}" --package ui-kit
             node "${consumer}/scripts/bootstrap-ui.mjs" "${GITHUB_WORKSPACE}/release"
             (
               cd "${consumer}"
@@ -91,19 +78,13 @@ jobs:
         uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6
         with:
           subject-path: release/*.tgz
-      - name: Retain candidate or promote legacy release
+      - name: Retain selected candidate
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           release_args=("${GITHUB_REF_NAME}" release/*.tgz release/*.json release/*.sha512 \
             --verify-tag --title "Public Vue UI ${GITHUB_REF_NAME}" \
-            --notes "Verified source-SFC artifacts for UI Primitives, UI Kit and Invest Widgets. These GitHub artifacts are candidates for npm publication. The starter fixture flow is verified; live sandbox access is independently required.")
-          if [[ "${GITHUB_REF_NAME}" == ui-kit-v* ]]; then
-            # UI Kit candidates remain drafts until the primary records the G3
-            # paired-app receipt and promotes this exact retained candidate.
-            gh release create "${release_args[@]}" --draft
-          else
-            # Preserve the established all-package release behavior for the
-            # legacy v* path.
-            gh release create "${release_args[@]}"
-          fi
+            --notes "Verified source-SFC UI Kit artifacts. This GitHub artifact is a candidate for npm publication; UI Primitives and the curated 0.1.3 widget release remain unchanged registry inputs for the starter. The starter fixture flow is verified; live sandbox access is independently required.")
+          # UI Kit candidates remain drafts until the primary records the G3
+          # paired-app receipt and promotes this exact retained candidate.
+          gh release create "${release_args[@]}" --draft

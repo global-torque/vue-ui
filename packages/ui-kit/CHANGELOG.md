@@ -6,8 +6,10 @@
   immutable schema composition, host preparation hooks, and SSR-safe scrolling.
 - Kept investment policy, custom keywords, reference defaults, and schema
   projection helpers outside the public UI Kit API.
-- Updated the candidate pack and consumer machinery to select UI Kit 0.1.4
-  alongside frozen UI Primitives and Invest Widgets 0.1.3 artifacts.
+- Updated the release and consumer machinery to select UI Kit 0.1.4 alongside
+  frozen UI Primitives and historical Invest Widgets 0.1.3 registry inputs.
+  The curated widget source and release ownership moved to `torque-packages`;
+  it is never repacked from this repository.
 
 ## 0.1.3 — prepared candidate
 
