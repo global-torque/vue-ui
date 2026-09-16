@@ -27,7 +27,7 @@ defineProps<SlotProps>();
   min-width: 0;
   aspect-ratio: 1;
   background-color: var(--muted);
-  border: 1px solid #CED4DA;
+  border: 1px solid var(--color-border-strong, var(--input));
   border-radius: 2px;
   font-size: 20px;
   font-weight: 600;
@@ -44,7 +44,7 @@ defineProps<SlotProps>();
     display: block;
     width: 1px;
     height: 20px;
-    background-color: var(--ui-color-surface-inverse, #12161f);
+    background-color: var(--ui-color-surface-inverse, var(--foreground));
     animation: v-otp-caret-blink 1s step-start infinite;
   }
 }

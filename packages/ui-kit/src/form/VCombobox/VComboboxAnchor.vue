@@ -47,7 +47,7 @@ const delegatedProps = computed(() => {
   appearance: none;
   width: 100%;
   position: relative;
-  border: solid 1px var(--ui-color-border, #CED4DA);
+  border: solid 1px var(--ui-color-border, var(--color-border-strong, var(--input)));
   border-radius: 2px;
   height: 40px;
   display: inline-flex;
@@ -60,7 +60,7 @@ const delegatedProps = computed(() => {
   }
 
   &.is--error {
-    border-color: var(--ui-color-negative, #FF7070);
+    border-color: var(--ui-color-negative, var(--destructive));
   }
 
   &.is--size-large {

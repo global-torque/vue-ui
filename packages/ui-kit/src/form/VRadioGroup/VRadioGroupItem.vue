@@ -37,7 +37,7 @@ const forwardedProps = useForwardProps(delegatedProps);
   &__circle {
     width: 8px;
     height: 8px;
-    background-color: red;
+    background-color: var(--primary);
   }
 }
 </style>

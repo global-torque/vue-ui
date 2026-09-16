@@ -50,7 +50,7 @@ const forwardedProps = useForwardProps(delegatedProps);
   font-weight: 400;
   background: var(--muted);
   position: relative;
-  border: solid 1px #ADB5BD;
+  border: solid 1px var(--color-text-disabled, var(--input));
   border-radius: 2px;
   height: 40px;
   padding: 12.5px 12px;
@@ -69,7 +69,7 @@ const forwardedProps = useForwardProps(delegatedProps);
   }
 
   &.is--error {
-    border-color: #FF7070;
+    border-color: var(--destructive);
   }
 
   &.is--readonly {
@@ -95,7 +95,7 @@ const forwardedProps = useForwardProps(delegatedProps);
   &__icon {
     width: 14px;
     flex-shrink: 0;
-    color: #495057;
+    color: var(--color-text-meta, var(--muted-foreground));
     transition: all 0.3s;
     transform-origin: center;
     transform: rotate(0);

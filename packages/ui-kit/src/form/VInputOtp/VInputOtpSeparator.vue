@@ -12,7 +12,7 @@
 
 <style lang="scss">
 .v-input-otp-separator {
-  color: #ADB5BD;
+  color: var(--color-text-disabled, var(--muted-foreground));
   font-size: 16px;
   line-height: 1;
   user-select: none;
