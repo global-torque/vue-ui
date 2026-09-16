@@ -245,7 +245,7 @@ watch(appliedItems, (items) => {
     align-items: flex-start;
     background-color: var(--ui-color-canvas, var(--muted));
     border: 1px solid var(--ui-color-border-subtle, var(--border));
-    box-shadow: var(--ui-shadow-dialog, 0 4px 5px -2px rgb(18 22 31 / 5%), 0 6px 25px 2px rgb(18 22 31 / 6%));
+    box-shadow: var(--ui-shadow-dialog, var(--shadow-dialog, 0 4px 5px -2px color-mix(in srgb, var(--foreground) 5%, transparent), 0 6px 25px 2px color-mix(in srgb, var(--foreground) 6%, transparent)));
     z-index: 2;
   }
 
@@ -259,7 +259,7 @@ watch(appliedItems, (items) => {
   }
 
   &__title{
-    color: var(--ui-color-text-muted, #495057);
+    color: var(--ui-color-text-muted, var(--color-text-meta, var(--muted-foreground)));
     padding: 12px 12px 2px;
     text-transform: capitalize;
   }

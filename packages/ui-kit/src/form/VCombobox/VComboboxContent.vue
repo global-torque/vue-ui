@@ -51,7 +51,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
     list-style-type: none;
     background-color: var(--muted);
     border: solid 1px var(--border);
-    box-shadow: 0 4px 5px -2px rgb(18 22 31 / 5%), 0 6px 25px 2px rgb(18 22 31 / 6%);
+    box-shadow: var(--shadow-dialog, 0 4px 5px -2px color-mix(in srgb, var(--foreground) 5%, transparent), 0 6px 25px 2px color-mix(in srgb, var(--foreground) 6%, transparent));
     border-radius: 2px;
     max-height: 222px;
     overflow: auto;

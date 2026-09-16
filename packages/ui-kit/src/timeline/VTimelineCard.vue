@@ -63,7 +63,7 @@ const btnClasses = computed(() => {
   flex-direction: column;
   padding: 40px !important;
   position: relative;
-  color: var(--ui-color-text-secondary, #343A40);
+  color: var(--ui-color-text-secondary, var(--color-text-strong, var(--muted-foreground)));
 
   &__duration-title{
     color: var(--foreground);
@@ -110,7 +110,7 @@ const btnClasses = computed(() => {
 
   &.is--variant-inner{
     margin-bottom: 32px;
-    color: var(--ui-color-text-secondary, #343A40);
+    color: var(--ui-color-text-secondary, var(--color-text-strong, var(--muted-foreground)));
 
     &::before {// inner lines between cards
       content: "";
@@ -136,7 +136,7 @@ const btnClasses = computed(() => {
   }
 
   &.is--variant-inner-highlight{
-    background-color: #0042D4;
+    background-color: var(--color-accent-strong, var(--primary));
     color: var(--muted);
 
     &::before {// inner lines between cards
@@ -154,16 +154,16 @@ const btnClasses = computed(() => {
     }
 
     #{$root}__title{
-      color: var(--ui-color-text-inverse, #fff);
+      color: var(--ui-color-text-inverse, var(--primary-foreground));
     }
 
     p{
-      color: var(--ui-color-text-inverse, #fff);
+      color: var(--ui-color-text-inverse, var(--primary-foreground));
     }
 
     #{$root}__duration-title,
     #{$root}__duration-text{
-      color: var(--ui-color-text-inverse, #fff);
+      color: var(--ui-color-text-inverse, var(--primary-foreground));
     }
 
     #{$root}__header{
@@ -180,7 +180,7 @@ const btnClasses = computed(() => {
   }
 
   &.is--variant-highlight{
-    background-color: #0042D4;
+    background-color: var(--color-accent-strong, var(--primary));
     color: var(--muted);
 
     #{$root}__title{
@@ -188,12 +188,12 @@ const btnClasses = computed(() => {
     }
 
     p{
-      color: var(--ui-color-text-inverse, #fff);
+      color: var(--ui-color-text-inverse, var(--primary-foreground));
     }
 
     #{$root}__duration-title,
     #{$root}__duration-text{
-      color: var(--ui-color-text-inverse, #fff);
+      color: var(--ui-color-text-inverse, var(--primary-foreground));
     }
 
     #{$root}__header{
@@ -209,7 +209,7 @@ const btnClasses = computed(() => {
   &.is--type-complete{
     background-color: var(--muted);
     border: 1px solid var(--border);
-    box-shadow: 0 2px 5px 1px rgb(18 22 31 / 3%), 0 2px 3px -2px rgb(18 22 31 / 15%);
+    box-shadow: var(--shadow-control, 0 2px 5px 1px color-mix(in srgb, var(--foreground) 3%, transparent), 0 2px 3px -2px color-mix(in srgb, var(--foreground) 15%, transparent));
   }
 }
 </style>

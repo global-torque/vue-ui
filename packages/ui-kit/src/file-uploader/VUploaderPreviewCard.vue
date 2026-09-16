@@ -212,7 +212,7 @@ onUnmounted(() => {
     display: flex;
     align-items: center;
     gap: 12px;
-    color: #343A40;
+    color: var(--color-text-strong, var(--muted-foreground));
   }
 
   /* Remove button */

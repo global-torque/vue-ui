@@ -46,7 +46,7 @@ const attrs = useAttrs();
   width: 100%;
 
   &.is--error .v-input-otp-slot {
-    border-color: #FF7070;
+    border-color: var(--destructive);
   }
 
   &__content {

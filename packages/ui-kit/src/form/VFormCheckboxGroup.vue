@@ -51,7 +51,7 @@ watch(() => props.modelValue, () => {
   width: 100%;
 
   --v-form-checkbox-group-item--padding-default: var(--v-form-checkbox-group-item--padding, 15px 12px);
-  --v-form-checkbox-group-item--background-color: var(--ui-color-border-subtle, #E9ECEF);
+  --v-form-checkbox-group-item--background-color: var(--ui-color-border-subtle, var(--border));
 
   display: flex;
   flex-direction: column;

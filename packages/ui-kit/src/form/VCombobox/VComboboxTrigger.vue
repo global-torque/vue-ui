@@ -42,7 +42,7 @@ const forwardedProps = useForwardProps(delegatedProps);
 
   &__icon {
     width: 14px;
-    color: var(--ui-color-text-muted, #495057);
+    color: var(--ui-color-text-muted, var(--color-text-meta, var(--muted-foreground)));
     transition: all 0.3s;
     transform-origin: center;
     transform: rotate(0);

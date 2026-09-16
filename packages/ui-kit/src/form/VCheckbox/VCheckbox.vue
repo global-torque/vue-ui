@@ -66,7 +66,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
   }
 
   &__icon {
-    color: var(--ui-color-text-inverse, #fff);
+    color: var(--ui-color-text-inverse, var(--background));
     width: 14px;
     height: 14px;
     position: absolute;
@@ -92,7 +92,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
 
   &.is--error {
     #{$root}__icon-wrap {
-      border-color: #FF7070;
+      border-color: var(--destructive);
     }
   }
 }
