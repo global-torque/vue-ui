@@ -100,8 +100,8 @@ importers:
         specifier: ^3.2.0
         version: 3.2.1
       vue-input-otp:
-        specifier: ^0.3.2
-        version: 0.3.2(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3))
+        specifier: ^0.4.0
+        version: 0.4.0(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3))
     devDependencies:
       '@types/node':
         specifier: 25.5.0
@@ -173,8 +173,8 @@ importers:
         specifier: ^1.4.0
         version: 1.4.0
       vue-input-otp:
-        specifier: ^0.3.2
-        version: 0.3.2(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3))
+        specifier: ^0.4.0
+        version: 0.4.0(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3))
       vue-sonner:
         specifier: ^2.0.9
         version: 2.0.9
@@ -2324,8 +2324,8 @@ packages:
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
 
-  vue-input-otp@0.3.2:
-    resolution: {integrity: sha512-QMl1842WB6uNAsK4+mZXIskb00TOfahH3AQt8rpRecbtQnOp+oHSUbL/Z3wekfy6pAl+hyN3e1rCUSkCMzbDLQ==}
+  vue-input-otp@0.4.0:
+    resolution: {integrity: sha512-LW+nsZmeXFVdfmPPtoGAXd3vd3T8UBjvwqs6ER4NB7TIoxTuj/reT61HNGe0NyvYDtAHZwjcTmOIX/99f4gpvA==}
     peerDependencies:
       vue: ^3.2.0
 
@@ -4681,7 +4681,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  vue-input-otp@0.3.2(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3)):
+  vue-input-otp@0.4.0(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3)):
     dependencies:
       '@vueuse/core': 12.8.2(typescript@6.0.3)
       reka-ui: 2.10.1(vue@3.5.39(typescript@6.0.3))
