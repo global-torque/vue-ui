@@ -106,7 +106,7 @@
     "check": "pnpm run lint && pnpm run typecheck && pnpm run test:run"
   },
   "devDependencies": {
-    "@types/node": "25.5.0",
+    "@types/node": "26.5.1",
     "@vitejs/plugin-vue": "6.0.8",
     "@vue/test-utils": "2.4.11",
     "@vitest/coverage-v8": "4.1.11",
