@@ -29,8 +29,8 @@ assert(!fs.existsSync(consumer), 'Consumer must be new and isolated.');
 fs.cpSync('examples/developer-starter', consumer, { recursive: true, filter: (entry) => !/(^|\/)(node_modules|dist|vendor|\.ui-verification|playwright-report|test-results|\.browser-evidence)(\/|$)/.test(entry) && !entry.endsWith('/.env') });
 const registryArtifacts = {
   'ui-primitives': {
-    version: '0.1.3',
-    integrity: 'sha512-VGUFTGfn7vn7xIUPntI1M2jL0B95ghQ0YT1d3g1/JnH40ioFAcyeN8nHolbgsgkmkL/Bhh/PsvHpRQTygYmbdQ==',
+    version: '0.1.4',
+    integrity: 'sha512-WTIPcXSMT6heb2rzJRzM06FuIXMIywiVJ10jpx9BFC087ZPdvipET7VlXyUT2nPIgVZURVb199a+TDREL8M56Q==',
   },
   // UI Kit 0.1.4 is already published by this repository and is an
   // unchanged registry input when a local primitive candidate is inspected.
