@@ -1,8 +1,8 @@
 /* Tailwind mapping for the shadcn-vue variable contract.
    Host theme variables supply colours. Import after Tailwind and design tokens,
-   then provide a complete host theme. The workspace keeps its own value files
-   for this contract, one design-token-backed and one holding fixed literals;
-   neither is public. */
+   then provide a complete host theme. The package ships one value file for this
+   contract, `styles/contract`, which binds every name to a design token. A host
+   recolours it by overriding the --brand-* seeds. */
 @import 'tw-animate-css';
 @import 'vue-sonner/style.css';
 

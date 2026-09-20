@@ -1,0 +1,58 @@
+/* The shadcn-vue variable contract, bound to the design-tokens vocabulary.
+   Every value is a var(--gt-*) from @global-torque/design-tokens/css, so a host
+   that overrides the --brand-* seeds recolours the components with no
+   rebuild. No dark block: the --gt-* tokens already switch under
+   :is(.dark, [data-theme='dark']).
+   Values only: this file never imports anything. Import it after
+   @global-torque/design-tokens/css, or every value here is empty.
+   Constraint: a var() inside a custom property is substituted on the element
+   that declares it, so these resolve against the --gt-* computed on <html>.
+   Keep the light/dark toggle on the root element; a nested .dark subtree gets
+   dark --gt-* but inherits these already-substituted light values. */
+
+:root {
+  --radius: var(--gt-primitive-radius-md);
+  --font-sans: var(--gt-primitive-font-family-sans);
+
+  --background: var(--gt-color-background-canvas);
+  --foreground: var(--gt-color-foreground-default);
+  --card: var(--gt-color-background-surface);
+  --card-foreground: var(--gt-color-foreground-default);
+  --popover: var(--gt-color-background-elevated);
+  --popover-foreground: var(--gt-color-foreground-default);
+
+  --primary: var(--gt-color-accent-background);
+  --primary-foreground: var(--gt-color-accent-foreground);
+  --secondary: var(--gt-color-accent-secondary-background);
+  --secondary-foreground: var(--gt-color-accent-secondary-foreground);
+  --muted: var(--gt-color-background-subtle);
+  --muted-foreground: var(--gt-color-foreground-muted);
+  --accent: var(--gt-color-accent-subtle);
+  --accent-foreground: var(--gt-color-accent-subtle-foreground);
+  --destructive: var(--gt-color-negative-solid);
+  --destructive-foreground: var(--gt-color-negative-solid-foreground);
+
+  --border: var(--gt-color-border-default);
+  /* --input is a fill as well as a control border: bg-input paints the neutral
+     badge tone, the unchecked switch track, the progress and stepper rules and
+     the line-tabs underline.
+     It binds the input border token, whose webdevelop values keep the badge
+     label readable. */
+  --input: var(--gt-component-input-border);
+  --ring: var(--gt-color-border-focus);
+
+  --chart-1: var(--gt-color-chart-1);
+  --chart-2: var(--gt-color-chart-2);
+  --chart-3: var(--gt-color-chart-3);
+  --chart-4: var(--gt-color-chart-4);
+  --chart-5: var(--gt-color-chart-5);
+
+  --sidebar: var(--gt-color-background-sidebar);
+  --sidebar-foreground: var(--gt-color-foreground-default);
+  --sidebar-primary: var(--gt-color-accent-background);
+  --sidebar-primary-foreground: var(--gt-color-accent-foreground);
+  --sidebar-accent: var(--gt-color-accent-subtle);
+  --sidebar-accent-foreground: var(--gt-color-accent-subtle-foreground);
+  --sidebar-border: var(--gt-color-border-default);
+  --sidebar-ring: var(--gt-color-border-focus);
+}
