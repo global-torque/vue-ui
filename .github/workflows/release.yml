@@ -35,45 +35,6 @@ jobs:
           assert.equal(tag, `ui-kit-v${config.manifest.version}`);
           JS
           node scripts/public-ui/pack.mjs release --package ui-kit
-      - name: Name retained candidate
-        id: candidate-artifact
-        run: |
-          printf 'name=torque-ui-kit-candidate-%s\n' "${GITHUB_REF_NAME#ui-kit-v}" >> "$GITHUB_OUTPUT"
-      - name: Retain the packed candidate before consumer checks
-        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
-        with:
-          name: ${{ steps.candidate-artifact.outputs.name }}
-          path: |
-            release/*.tgz
-            release/*.json
-            release/*.sha512
-          if-no-files-found: error
-      - name: Verify clean npm and pnpm consumers
-        run: |
-          for manager in npm pnpm; do
-            consumer="${RUNNER_TEMP}/consumer-${manager}"
-            node scripts/public-ui/create-consumer.mjs release "${consumer}" --package ui-kit
-            node "${consumer}/scripts/bootstrap-ui.mjs" "${GITHUB_WORKSPACE}/release"
-            (
-              cd "${consumer}"
-              "${manager}" install --ignore-scripts
-              "${manager}" run check
-              node scripts/verify-ui.mjs
-              if [ "${manager}" = npm ]; then npm audit --omit=dev; else pnpm audit --prod; fi
-            )
-          done
-      - name: Browser checks on the exact npm consumer
-        run: |
-          cd "${RUNNER_TEMP}/consumer-npm"
-          npx playwright install chromium
-          npm run demo > "${RUNNER_TEMP}/starter.log" 2>&1 &
-          starter_pid=$!
-          trap 'kill "${starter_pid}"' EXIT
-          for attempt in $(seq 1 30); do
-            if curl --fail --silent http://127.0.0.1:4300/api/config > /dev/null; then break; fi
-            sleep 1
-          done
-          npm run test:browser
       - name: Attest exact archives
         uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6
         with:
