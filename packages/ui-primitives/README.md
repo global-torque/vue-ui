@@ -17,13 +17,18 @@ Components ship as editable TypeScript and Vue source. A raw Node import of a
 @import 'tailwindcss';
 @import '@global-torque/design-tokens/css';
 @import '@global-torque/ui-primitives/styles/theme';
+@import '@global-torque/ui-primitives/styles/contract';
 ```
 
-The host supplies shadcn theme roles (`--background`, `--foreground`, `--primary`,
-`--primary-foreground`, `--secondary`, `--secondary-foreground`, `--muted`,
-`--muted-foreground`, `--accent`, `--accent-foreground`, `--destructive`,
-`--border`, `--input`, `--ring`, `--radius`) and a font. Use a class or
-`data-theme="dark"` for dark mode. No product preset, font or logo is installed.
+`styles/contract` binds every shadcn theme role (`--background`, `--foreground`,
+`--primary`, `--primary-foreground`, `--secondary`, `--secondary-foreground`,
+`--muted`, `--muted-foreground`, `--accent`, `--accent-foreground`,
+`--destructive`, `--border`, `--input`, `--ring`, `--radius`, the five chart
+roles and the sidebar roles) to a design token, and the font to
+`--gt-primitive-font-family-sans`. A host recolours all of them by overriding
+the `--brand-*` seeds the tokens derive from; it may instead declare the roles
+itself and skip this import. Use a class or `data-theme="dark"` for dark mode.
+No product preset, font or logo is installed.
 The starter includes a complete neutral example theme. Theme styles register
 package files as Tailwind sources; retain the imports during CSS compilation.
 
@@ -64,6 +69,7 @@ package files as Tailwind sources; retain the imports during CSS compilation.
 - `@global-torque/ui-primitives/sonner`
 - `@global-torque/ui-primitives/spinner`
 - `@global-torque/ui-primitives/stepper`
+- `@global-torque/ui-primitives/styles/contract`
 - `@global-torque/ui-primitives/styles/theme`
 - `@global-torque/ui-primitives/switch`
 - `@global-torque/ui-primitives/table`

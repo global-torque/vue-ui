@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Publish the shadcn contract value file as `styles/contract`. It binds every
+  contract name to a `--gt-*` design token and holds no brand literal, so a
+  host recolours the components by overriding the `--brand-*` seeds instead of
+  declaring the roles itself. Declaring them stays supported.
+
 ## 0.1.3 — prepared candidate
 
 - pnpm consumers pin inter-package dependencies to the same reviewed archives.
