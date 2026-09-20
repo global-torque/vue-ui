@@ -7,7 +7,7 @@ deployment remain owned by the consuming product.
 | Package | Version | Use and compatibility |
 | --- | --- | --- |
 | [SDK](https://github.com/global-torque/sdk) | `@global-torque/sdk@0.2.0` | Framework-free service clients and explicit wallet integrations. Supply transport/configuration and supported backend access. |
-| [UI Primitives](../packages/ui-primitives/README.md) | `@global-torque/ui-primitives@0.1.3` | Low-level Vue controls through explicit component subpaths. Requires the documented Vue/Reka UI peers and host theme; charts are excluded. |
+| [UI Primitives](../packages/ui-primitives/README.md) | `@global-torque/ui-primitives@0.1.4` | Low-level Vue controls through explicit component subpaths. Requires the documented Vue/Reka UI peers and host theme; charts are excluded. |
 | [UI Kit](../packages/ui-kit/README.md) | `@global-torque/ui-kit@0.1.4` | Generic Vue forms, filters, pagination, upload and URL-state compositions. Compile source with the documented consumer toolchain. |
 | [Design Tokens](https://github.com/global-torque/design-tokens) | `@global-torque/design-tokens@0.2.1` | Neutral token source and generated styles/data. No runtime dependencies. |
 | [Content Toolkit](https://github.com/global-torque/content-toolkit) | `@global-torque/content-toolkit@0.2.0` | Content records, normalization, trees and host-defined path/image policies. |

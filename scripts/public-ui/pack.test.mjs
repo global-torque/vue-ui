@@ -138,7 +138,7 @@ test('selected pack emits only UI Kit and its receipt', () => {
     execFileSync(process.execPath, [packer, output, '--package', 'ui-kit', '--allow-dirty'], { cwd: root, stdio: 'pipe' });
     assert(fs.existsSync(path.join(output, 'global-torque-ui-kit-0.1.4.tgz')));
     assert(fs.existsSync(path.join(output, 'selected-release.json')));
-    assert(!fs.existsSync(path.join(output, 'global-torque-ui-primitives-0.1.3.tgz')));
+    assert(!fs.existsSync(path.join(output, 'global-torque-ui-primitives-0.1.4.tgz')));
   } finally {
     fs.rmSync(directory, { recursive: true, force: true });
   }
@@ -148,7 +148,7 @@ test('default pack includes only active UI packages', () => {
   const { directory, output } = temporaryOutput('vue-ui-pack-legacy-');
   try {
     execFileSync(process.execPath, [packer, output, '--allow-dirty'], { cwd: root, stdio: 'pipe' });
-    for (const name of ['ui-primitives-0.1.3', 'ui-kit-0.1.4']) {
+    for (const name of ['ui-primitives-0.1.4', 'ui-kit-0.1.4']) {
       assert(fs.existsSync(path.join(output, `global-torque-${name}.tgz`)));
     }
     assert(!fs.existsSync(path.join(output, 'global-torque-invest-widgets-0.1.3.tgz')));
@@ -219,7 +219,7 @@ test('primitive selection keeps exact receipt versions in the generated manifest
     execFileSync(process.execPath, [consumerCreator, output, consumer, '--package', 'ui-primitives'], { cwd: root, stdio: 'pipe' });
     const lock = JSON.parse(fs.readFileSync(path.join(consumer, 'ui-artifacts.lock.json'), 'utf8'));
     assert.equal(lock.selected.name, '@global-torque/ui-primitives');
-    assert.equal(lock.selected.version, '0.1.3');
+    assert.equal(lock.selected.version, '0.1.4');
     const packageJson = JSON.parse(fs.readFileSync(path.join(consumer, 'package.json'), 'utf8'));
     for (const artifact of lock.artifacts) {
       assert.equal(packageJson.dependencies[artifact.name], artifact.version, `Generated manifest version mismatch for ${artifact.name}`);

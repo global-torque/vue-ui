@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.4
 
 - Publish the shadcn contract value file as `styles/contract`. It binds every
   contract name to a `--gt-*` design token and holds no brand literal, so a
