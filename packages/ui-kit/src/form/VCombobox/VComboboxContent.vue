@@ -7,6 +7,7 @@ import {
   ComboboxViewport,
   useForwardPropsEmits,
 } from 'reka-ui';
+import { cn } from '@global-torque/ui-primitives/lib/utils';
 import { computed, type HTMLAttributes } from 'vue';
 
 defineOptions({
@@ -35,8 +36,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
   <ComboboxPortal>
     <ComboboxContent
       v-bind="{ ...forwarded, ...$attrs }"
-      :class="props.class"
-      class="VComboboxContent v-combobox-content"
+      :class="cn('VComboboxContent v-combobox-content z-[var(--ui-dialog-z-index,1100)]', props.class)"
     >
       <ComboboxViewport class="v-combobox-viewport">
         <slot />
@@ -57,7 +57,6 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
     overflow: auto;
     -webkit-overflow-scrolling: touch;
     width: var(--reka-combobox-trigger-width);
-    z-index: 10;
     display: flex;
     touch-action: pan-y;
   // flex-direction: column;

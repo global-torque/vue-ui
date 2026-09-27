@@ -53,6 +53,8 @@ describe('form selector artwork', () => {
       await trigger.trigger('keydown', { key: 'ArrowDown' });
       await flushPromises();
       expect(trigger.attributes('aria-expanded')).toBe('true');
+      const content = document.querySelector('[role="listbox"]');
+      expect(content?.className).toContain('z-[var(--ui-select-popup-z-index,var(--ui-dialog-z-index,1100))]');
       const option = [...document.querySelectorAll<HTMLElement>('[role="option"]')]
         .find(element => element.textContent?.trim() === 'CAD');
       expect(option).toBeDefined();

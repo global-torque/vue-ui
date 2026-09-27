@@ -7,6 +7,7 @@ import {
   SelectViewport,
   useForwardPropsEmits,
 } from 'reka-ui';
+import { cn } from '@global-torque/ui-primitives/lib/utils';
 import { computed, type HTMLAttributes } from 'vue';
 
 defineOptions({
@@ -39,8 +40,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
   <SelectPortal>
     <SelectContent
       v-bind="{ ...forwarded, ...$attrs }"
-      :class="props.class"
-      class="VSelectContent v-select-content"
+      :class="cn('VSelectContent v-select-content z-[var(--ui-select-popup-z-index,var(--ui-dialog-z-index,1100))]', props.class)"
     >
       <SelectViewport class="v-select-viewport">
         <slot />
@@ -60,7 +60,6 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
     max-height: 222px;
     overflow: scroll;
     width: var(--reka-select-trigger-width);
-    z-index: 1101;
     display: flex;
   // flex-direction: column;
   // position: fixed;

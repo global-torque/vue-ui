@@ -36,7 +36,7 @@ function singletonFixture(localDependency) {
     })}\n`);
     fs.writeFileSync(path.join(dependencyRoot, 'index.mjs'), `export const packageName = ${JSON.stringify(dependency)};\n`);
   }
-  fs.writeFileSync(path.join(storePackage, 'package.json'), '{"name":"@global-torque/ui-kit","version":"0.1.4"}\n');
+  fs.writeFileSync(path.join(storePackage, 'package.json'), '{"name":"@global-torque/ui-kit","version":"0.1.5"}\n');
   if (localDependency) {
     const localRoot = path.join(storePackage, 'node_modules', localDependency);
     fs.mkdirSync(localRoot, { recursive: true });
@@ -78,9 +78,9 @@ test('selected pack emits only UI Kit and its receipt', () => {
   const { directory, output } = temporaryOutput('vue-ui-pack-selected-');
   try {
     execFileSync(process.execPath, [packer, output, '--package', 'ui-kit', '--allow-dirty'], { cwd: root, stdio: 'pipe' });
-    assert(fs.existsSync(path.join(output, 'global-torque-ui-kit-0.1.4.tgz')));
+    assert(fs.existsSync(path.join(output, 'global-torque-ui-kit-0.1.5.tgz')));
     assert(fs.existsSync(path.join(output, 'selected-release.json')));
-    assert(!fs.existsSync(path.join(output, 'global-torque-ui-primitives-0.1.3.tgz')));
+    assert(!fs.existsSync(path.join(output, 'global-torque-ui-primitives-0.1.4.tgz')));
   } finally {
     fs.rmSync(directory, { recursive: true, force: true });
   }
@@ -90,7 +90,7 @@ test('default pack includes only active UI packages', () => {
   const { directory, output } = temporaryOutput('vue-ui-pack-legacy-');
   try {
     execFileSync(process.execPath, [packer, output, '--allow-dirty'], { cwd: root, stdio: 'pipe' });
-    for (const name of ['ui-primitives-0.1.3', 'ui-kit-0.1.4']) {
+    for (const name of ['ui-primitives-0.1.4', 'ui-kit-0.1.5']) {
       assert(fs.existsSync(path.join(output, `global-torque-${name}.tgz`)));
     }
     assert(!fs.existsSync(path.join(output, 'global-torque-invest-widgets-0.1.3.tgz')));

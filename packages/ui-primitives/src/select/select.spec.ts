@@ -58,4 +58,26 @@ describe('Select', () => {
       wrapper.unmount();
     }
   });
+
+  it('uses the shared popup layer and allows a host override', async () => {
+    const wrapper = mount(Select, {
+      attachTo: document.body,
+      slots: {
+        default: () => [
+          h(SelectTrigger, { 'aria-label': 'Currency' }, () => h(SelectValue, { placeholder: 'Pick one' })),
+          h(SelectContent, { class: 'z-[1101]' }, () => h(SelectItem, { value: 'usd' }, () => 'USD')),
+        ],
+      },
+    });
+    try {
+      const trigger = wrapper.get('[data-slot="select-trigger"]');
+      await trigger.trigger('keydown', { key: 'ArrowDown' });
+      await flushPromises();
+      const content = document.querySelector('[data-slot="select-content"]');
+      expect(content?.className).toContain('z-[1101]');
+      expect(content?.className).not.toContain('z-[var(--ui-select-popup-z-index,var(--ui-dialog-z-index,1100))]');
+    } finally {
+      wrapper.unmount();
+    }
+  });
 });
