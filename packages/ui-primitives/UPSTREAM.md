@@ -31,7 +31,7 @@ file matches the CLI output after the rewrites above.
 |---|---|---|
 | `./button` | button | no local edits |
 | `./badge` | badge | no local edits |
-| `./tooltip` | tooltip | no local edits |
+| `./tooltip` | tooltip | Tooltip content shares the `--ui-dialog-z-index` layer with a `1100` fallback; its arrow remains in the content stacking context. |
 | `./accordion` | accordion | no local edits |
 | `./carousel` | carousel | no local edits |
 | `./card` | card | no local edits |
@@ -42,7 +42,7 @@ file matches the CLI output after the rewrites above.
 | `./avatar` | avatar | no local edits |
 | `./alert` | alert | no local edits |
 | `./empty` | empty | no local edits |
-| `./dialog` | dialog | no local edits |
+| `./dialog` | dialog | Shared dialog layer uses `--ui-dialog-z-index` with a `1100` fallback across dialog content, overlay and scroll content; dialog and scroll content expose stable `data-slot` attributes for host contracts. |
 | `./sheet` | sheet | Optional `SheetContent.showCloseButton` (default `true`) lets a consumer compose its own accessible `SheetClose`; dialog dismissal and focus behavior remain unchanged. |
 | `./tabs` | tabs | no local edits |
 | `./field` | field | no local edits |
@@ -50,18 +50,18 @@ file matches the CLI output after the rewrites above.
 | `./input-group` | input-group | no local edits |
 | `./label` | label | no local edits |
 | `./textarea` | textarea (registry dependency of input-group) | no local edits |
-| `./select` | select | Optional `SelectTrigger` icon slot inside the existing Reka `SelectIcon`; standard chevron fallback and trigger behavior unchanged. |
+| `./select` | select | Optional `SelectTrigger` icon slot inside the existing Reka `SelectIcon`; standard chevron fallback and trigger behavior unchanged. Select content uses `--ui-select-popup-z-index` with `--ui-dialog-z-index` and `1100` fallbacks. |
 | `./checkbox` | checkbox | no local edits |
 | `./radio-group` | radio-group | no local edits |
 | `./switch` | switch | no local edits |
 | `./toggle` | toggle | no local edits |
 | `./toggle-group` | toggle-group | no local edits |
-| `./combobox` | combobox | no local edits |
+| `./combobox` | combobox | Combobox lists share the `--ui-dialog-z-index` layer with a `1100` fallback. |
 | `./input-otp` | input-otp | no local edits |
 | `./calendar` | calendar | no local edits |
 | `./native-select` | native-select (registry dependency of select) | no local edits |
-| `./popover` | popover | no local edits |
-| `./dropdown-menu` | dropdown-menu | no local edits |
+| `./popover` | popover | Popover content shares the `--ui-dialog-z-index` layer with a `1100` fallback. |
+| `./dropdown-menu` | dropdown-menu | Dropdown content and subcontent share the `--ui-dialog-z-index` layer with a `1100` fallback. |
 | `./command` | command | no local edits; give `CommandList` an `aria-label` (axe `aria-input-field-name`), and `CommandSeparator` inside the list fails axe `aria-required-children` (`[role=separator]` in a listbox, upstream) |
 | `./navigation-menu` | navigation-menu | no local edits |
 | `./table` | table | no local edits |

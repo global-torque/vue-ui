@@ -7,6 +7,14 @@
   host recolours the components by overriding the `--brand-*` seeds instead of
   declaring the roles itself. Declaring them stays supported.
 
+## 0.1.4 — shared portal layer candidate
+
+- Portaled dialog, select, popover, menu, tooltip and combobox surfaces now use
+  the host-controlled `--ui-dialog-z-index` layer, defaulting to `1100`, while
+  select supports the more specific `--ui-select-popup-z-index` override.
+- Caller `z-*` classes continue to replace the shared defaults through the
+  public `cn` merge helper; Sheet and NavigationMenu layers remain unchanged.
+
 ## 0.1.3 — prepared candidate
 
 - pnpm consumers pin inter-package dependencies to the same reviewed archives.

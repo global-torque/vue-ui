@@ -43,6 +43,14 @@
   guaranteed to contrast with `--primary`. Reconciling the hook API is a
   separate step.
 
+## 0.1.5 — shared portal layer candidate
+
+- VSelectContent and VComboboxContent now use the host-controlled shared portal
+  layer, defaulting to `--ui-dialog-z-index: 1100`; select supports the more
+  specific `--ui-select-popup-z-index` override.
+- Caller `z-*` classes continue to replace the shared defaults through the
+  public `cn` merge helper.
+
 ## 0.1.4 — neutral form validation candidate
 
 - Added the domain-neutral `form-validation` subpath with per-form standard AJV,
