@@ -1,25 +1,21 @@
 <script setup lang="ts">
-import type { SidebarProps } from "."
-import { cn } from "../lib/utils"
+import type { SidebarProps } from '.'
+import { cn } from '../lib/utils'
 import { Sheet, SheetContent } from '../sheet'
 import SheetDescription from '../sheet/SheetDescription.vue'
 import SheetHeader from '../sheet/SheetHeader.vue'
 import SheetTitle from '../sheet/SheetTitle.vue'
-import { SIDEBAR_WIDTH_MOBILE, useSidebar } from "./utils"
+import { SIDEBAR_WIDTH_MOBILE, useSidebar } from './utils'
 
 defineOptions({
   inheritAttrs: false,
 })
 
 const props = withDefaults(defineProps<SidebarProps>(), {
-  side: "left",
-  variant: "sidebar",
-  collapsible: "offcanvas",
+  side: 'left',
+  variant: 'sidebar',
+  collapsible: 'offcanvas',
 })
-
-const emit = defineEmits<{
-  openAutoFocus: [event: Event]
-}>()
 
 const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
 </script>
@@ -40,12 +36,10 @@ const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
       data-slot="sidebar"
       data-mobile="true"
       :side="side"
-      :class="cn('bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden', props.class)"
-      :data-side="side"
+      class="bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden"
       :style="{
         '--sidebar-width': SIDEBAR_WIDTH_MOBILE,
       }"
-      @open-auto-focus="emit('openAutoFocus', $event)"
     >
       <SheetHeader class="sr-only">
         <SheetTitle>Sidebar</SheetTitle>
@@ -70,7 +64,7 @@ const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
     <div
       data-slot="sidebar-gap"
       :class="cn(
-        'relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear',
+        'transition-[width] duration-200 ease-linear relative w-(--sidebar-width) bg-transparent',
         'group-data-[collapsible=offcanvas]:w-0',
         'group-data-[side=right]:rotate-180',
         variant === 'floating' || variant === 'inset'
@@ -80,6 +74,7 @@ const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
     />
     <div
       data-slot="sidebar-container"
+      :data-side="side"
       :class="cn(
         'fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear md:flex',
         side === 'left'
@@ -95,7 +90,8 @@ const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
     >
       <div
         data-sidebar="sidebar"
-        class="bg-sidebar group-data-[variant=floating]:border-sidebar-border flex h-full w-full flex-col group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:shadow-sm"
+        data-slot="sidebar-inner"
+        class="bg-sidebar group-data-[variant=floating]:ring-sidebar-border group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:shadow-sm group-data-[variant=floating]:ring-1 flex size-full flex-col"
       >
         <slot />
       </div>
