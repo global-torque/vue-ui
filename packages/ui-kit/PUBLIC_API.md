@@ -2,7 +2,7 @@
 
 Generic Vue forms, images, URL state and composed controls.
 
-Prepared `0.1.5` source-SFC candidate. This version is not advertised as an npm
+Prepared `0.2.0` source-SFC candidate. This version is not advertised as an npm
 release until its release report records publication. Install the exact version with Vue
 3.5 and Reka UI 2.10. The release selection is owned by this UI Kit package;
 the historical curated `@global-torque/invest-widgets@0.1.3` registry release
@@ -18,16 +18,15 @@ Components ship as editable TypeScript and Vue source. A raw Node import of a
 
 ```css
 @import 'tailwindcss';
-@import '@global-torque/design-tokens/css';
 @import '@global-torque/ui-primitives/styles/theme';
 @import '@global-torque/ui-kit/styles';
 ```
 
-The host supplies shadcn theme roles (`--background`, `--foreground`, `--primary`,
-`--primary-foreground`, `--secondary`, `--secondary-foreground`, `--muted`,
-`--muted-foreground`, `--accent`, `--accent-foreground`, `--destructive`,
-`--border`, `--input`, `--ring`, `--radius`) and a font. Use a class or
-`data-theme="dark"` for dark mode. No product preset, font or logo is installed.
+`@global-torque/ui-primitives/styles/theme` declares the shadcn theme variables
+with default values; a tenant brand overrides them (`--primary`,
+`--background`, …) after these imports. The host sets the font; no font or
+logo is installed. No dark theme ships; `dark:` styles apply only under a
+`.dark` ancestor.
 The starter includes a complete neutral example theme. Theme styles register
 package files as Tailwind sources; retain the imports during CSS compilation.
 

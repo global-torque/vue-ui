@@ -1,11 +1,41 @@
 # Changelog
 
-## Unreleased
+## 0.2.0 — shadcn-vue Vega candidate
 
-- Publish the shadcn contract value file as `styles/contract`. It binds every
-  contract name to a `--gt-*` design token and holds no brand literal, so a
-  host recolours the components by overriding the `--brand-*` seeds instead of
-  declaring the roles itself. Declaring them stays supported.
+- Breaking: every component is now the verbatim shadcn-vue `reka-vega` file
+  (commit `67c9a39`, see UPSTREAM.md); all local component edits are gone.
+  Classes, spacing, radii and popup animations follow Vega.
+- Breaking: `styles/contract` and the `@global-torque/design-tokens` dependency
+  are removed. `styles/theme` now declares every shadcn variable with a default
+  value, sets no font, and imports `shadcn-vue-tailwind.css` (upstream
+  `shadcn-vue/tailwind.css`: the `data-open:`, `data-closed:`, `data-active:`…
+  variants Vega uses, and `no-scrollbar`). A tenant brand overrides the shadcn
+  variables (`--primary`, `--background`, …); `--brand-*` seeds are not read.
+- Breaking: the size tokens are gone (`--spacing-control-*`, `--text-control*`,
+  `--radius-control`, `--font-weight-control`, `--spacing-table-cell`,
+  `--text-table*`, `--font-weight-table-head`, `--color-table-head-foreground`,
+  `--color-control-background`), so utilities such as `h-control-md`,
+  `rounded-control`, `text-control` and `bg-control-background` no longer
+  exist. `cn()` is the standard `twMerge(clsx(...))`.
+- Breaking: the radius scale follows shadcn (`--radius-sm` = 0.6 × `--radius`
+  up to `--radius-4xl`), and `dark:` styles apply only under a `.dark`
+  ancestor, no longer under `[data-theme='dark']`.
+- Breaking: portaled dialog, select, popover, menu, tooltip and combobox
+  surfaces use `z-50`; `--ui-dialog-z-index` and `--ui-select-popup-z-index`
+  are no longer read.
+- Breaking component APIs: `SelectTrigger` has sizes `sm` and `default` only
+  and no `icon` slot; `Tabs` has no `variant` prop and `TabsVariant` is gone
+  (set `variant="line"` on `TabsList`; the list no longer scrolls); Alert has
+  only the `default` and `destructive` variants; `SidebarProvider` has no
+  `persistState` or `keyboardShortcut` props, treats `max-width: 768px` as
+  mobile and reads the `sidebar_state` cookie once, when the module loads;
+  `Sidebar` no longer emits `openAutoFocus`; `./sonner` no longer re-exports
+  `toast` (import it from `vue-sonner`); Stepper parts and
+  `DialogScrollContent` set no `data-slot` attributes.
+- Added: `AlertAction`, `AvatarBadge`, `AvatarGroup`, `AvatarGroupCount`,
+  `PopoverHeader`, `PopoverTitle`, `PopoverDescription`, `tabsListVariants`
+  and `avatarVariants`; Badge `ghost` and `link` variants; Card and Avatar
+  sizes.
 
 ## 0.1.4 — shared portal layer candidate
 

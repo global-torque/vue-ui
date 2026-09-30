@@ -45,7 +45,6 @@ const open = ref(false);
 const focused = ref(false);
 const attrs = useAttrs();
 const fieldContext = useVFormFieldContext();
-const sizeClass = computed(() => ({ small: 'h-control-sm', medium: 'h-control-md', large: 'h-control-lg' }[props.size]));
 
 function stringToDate(value: string): DateValue | undefined {
   if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return undefined;
@@ -115,8 +114,7 @@ watch(() => props.modelValue, () => { /* sync external changes */ });
 <template>
   <Skeleton
     v-if="loading"
-    class="VFormDatePicker v-form-date-picker w-full rounded-control"
-    :class="sizeClass"
+    class="VFormDatePicker v-form-date-picker h-9 w-full"
   />
   <Popover
     v-else
@@ -138,8 +136,8 @@ watch(() => props.modelValue, () => { /* sync external changes */ });
         aria-haspopup="dialog"
         :aria-expanded="open"
         :aria-invalid="isError || undefined"
-        class="VFormDatePicker v-form-date-picker w-full justify-between rounded-control border-input bg-control-background px-3 text-control font-normal text-foreground shadow-none hover:bg-control-background hover:text-foreground"
-        :class="[attrs.class, sizeClass]"
+        class="VFormDatePicker v-form-date-picker w-full justify-between border-input px-3 font-normal text-foreground shadow-none hover:text-foreground"
+        :class="attrs.class"
         :style="attrs.style"
         :data-testid="dataTestid ?? attrs['data-testid']"
         @focus="onFocus"

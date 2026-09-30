@@ -43,6 +43,25 @@
   guaranteed to contrast with `--primary`. Reconciling the hook API is a
   separate step.
 
+## 0.2.0 — Vega primitives candidate
+
+- Breaking: requires `@global-torque/ui-primitives` 0.2.0, the verbatim
+  shadcn-vue Vega components and standard theme; its changes reach every
+  composed control.
+- Breaking: `VUrlSyncedTabs` has no `variant` prop; set `variant="line"` on the
+  `TabsList` inside it.
+- Breaking: `VFormSelect` has no `icon` slot; the standard chevron shows. Its
+  `large` and `medium` sizes render the `default` trigger, `small` the `sm`
+  trigger.
+- Breaking: `VFormInput`, `VFormSelect`, `VFormDatePicker`, `VFormCombobox` and
+  `VFormTextarea` no longer use the removed size tokens (`h-control-*`,
+  `rounded-control`, `text-control`, `bg-control-background`); the primitives'
+  standard heights and radii apply, and the `size` props of `VFormInput`,
+  `VFormDatePicker` and `VFormCombobox` no longer change the height.
+- VSelectContent and VComboboxContent use `z-50` instead of the
+  `--ui-dialog-z-index` and `--ui-select-popup-z-index` layer; caller `z-*`
+  classes still replace it through `cn`.
+
 ## 0.1.5 — shared portal layer candidate
 
 - VSelectContent and VComboboxContent now use the host-controlled shared portal

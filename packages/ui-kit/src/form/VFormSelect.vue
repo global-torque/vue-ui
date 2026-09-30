@@ -43,8 +43,7 @@ const props = withDefaults(defineProps<{
 const modelValue = defineModel<ObjectOptionValue>();
 const attrs = useAttrs();
 const fieldContext = useVFormFieldContext();
-const sizeClass = computed(() => ({ large: 'h-control-lg', medium: 'h-control-md', small: 'h-control-sm' }[props.size]));
-const triggerSize = computed(() => ({ large: 'lg', medium: 'default', small: 'sm' } as const)[props.size]);
+const triggerSize = computed(() => ({ large: 'default', medium: 'default', small: 'sm' } as const)[props.size]);
 
 function isObjectOption(option: SelectOption): option is ObjectOption {
   return typeof option === 'object' && option !== null;
@@ -102,8 +101,8 @@ const triggerAttrs = computed(() => ({
 <template>
   <Skeleton
     v-if="loading"
-    class="v-select-trigger w-full rounded-control"
-    :class="sizeClass"
+    class="v-select-trigger w-full"
+    :class="size === 'small' ? 'h-8' : 'h-9'"
   />
   <!-- eslint-disable-next-line vuejs-accessibility/form-control-has-label -->
   <Select
@@ -121,12 +120,6 @@ const triggerAttrs = computed(() => ({
       :class="[props.class, { 'bg-muted disabled:cursor-default disabled:opacity-100': readonly && !disabled }]"
     >
       <SelectValue :placeholder="placeholder" />
-      <template
-        v-if="$slots.icon"
-        #icon
-      >
-        <slot name="icon" />
-      </template>
     </SelectTrigger>
     <SelectContent :position="contentPosition">
       <SelectGroup>

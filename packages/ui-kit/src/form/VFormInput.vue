@@ -96,7 +96,6 @@ const localValue = ref('');
 const focused = ref(false);
 const attrs = useAttrs();
 const fieldContext = useVFormFieldContext();
-const sizeClass = computed(() => ({ small: 'h-control-sm', medium: 'h-control-md', large: 'h-control-lg' }[props.size]));
 
 const mask = computed(() => new Mask({
   mask: props.mask,
@@ -209,13 +208,12 @@ watch([() => props.mask, () => props.maskTokens], () => onInput(localValue.value
 <template>
   <Skeleton
     v-if="loading"
-    class="VFormInput v-form-input w-full rounded-control"
-    :class="sizeClass"
+    class="VFormInput v-form-input h-9 w-full"
   />
   <InputGroup
     v-else
     class="VFormInput v-form-input"
-    :class="[attrs.class, sizeClass, { 'pointer-events-none opacity-50': disabled }]"
+    :class="[attrs.class, { 'pointer-events-none opacity-50': disabled }]"
     :style="attrs.style"
     :data-disabled="disabled || undefined"
   >

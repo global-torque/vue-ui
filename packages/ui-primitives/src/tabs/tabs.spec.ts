@@ -25,21 +25,4 @@ describe('Tabs', () => {
     expect(triggers[0].attributes('aria-selected')).toBe('false');
     expect(wrapper.get('[role="tabpanel"][data-state="active"]').attributes('aria-labelledby')).toBe(triggers[1].attributes('id'));
   });
-
-  it('passes the line variant to the list, triggers and panels', () => {
-    const wrapper = mount(Tabs, {
-      props: { defaultValue: 'a', variant: 'line' },
-      slots: {
-        default: () => [
-          h(TabsList, () => [h(TabsTrigger, { value: 'a' }, () => 'A')]),
-          h(TabsContent, { value: 'a' }, () => 'Panel A'),
-        ],
-      },
-    });
-    expect(wrapper.get('[data-slot="tabs-list"]').attributes('data-variant')).toBe('line');
-    expect(wrapper.get('[data-slot="tabs-list"]').classes()).toContain('shadow-[inset_0_-2px_0_0_var(--input)]');
-    expect(wrapper.get('[role="tab"]').attributes('data-variant')).toBe('line');
-    expect(wrapper.get('[role="tab"]').classes()).toContain('border-b-2');
-    expect(wrapper.get('[role="tabpanel"]').classes()).toContain('pt-10');
-  });
 });

@@ -24,20 +24,20 @@
     "@global-torque/ui-primitives": "0.1.3",
     "@global-torque/ui-kit": "0.1.3",
     "@global-torque/invest-widgets": "0.1.3",
-    "reka-ui": "2.10.1",
-    "vue": "3.5.39"
+    "reka-ui": "2.10.5",
+    "vue": "3.5.43"
   },
   "devDependencies": {
     "@tailwindcss/vite": "4.3.3",
-    "@types/node": "25.5.0",
-    "@vitejs/plugin-vue": "6.0.8",
-    "sass": "1.101.0",
+    "@types/node": "26.6.3",
+    "@vitejs/plugin-vue": "6.0.9",
+    "sass": "1.105.1",
     "tailwindcss": "4.3.3",
     "typescript": "6.0.3",
-    "vite": "8.1.3",
-    "vue-tsc": "3.3.6",
-    "@playwright/test": "1.61.1",
-    "@axe-core/playwright": "4.12.1"
+    "vite": "8.3.1",
+    "vue-tsc": "3.3.11",
+    "@playwright/test": "1.63.0",
+    "@axe-core/playwright": "4.13.0"
   },
   "packageManager": "pnpm@10.34.5"
 }

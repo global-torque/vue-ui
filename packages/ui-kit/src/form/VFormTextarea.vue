@@ -42,7 +42,7 @@ const textareaAttrs = computed(() => ({
 <template>
   <Skeleton
     v-if="loading"
-    class="h-[50px] w-full rounded-control"
+    class="h-[50px] w-full"
   />
   <!-- eslint-disable-next-line vuejs-accessibility/form-control-has-label -->
   <Textarea

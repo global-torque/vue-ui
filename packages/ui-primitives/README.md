@@ -2,7 +2,7 @@
 
 Accessible Vue primitives with host-owned Tailwind themes.
 
-Prepared `0.1.4` source-SFC candidate. This version is not advertised as an npm
+Prepared `0.2.0` source-SFC candidate. This version is not advertised as an npm
 release until its release report records publication. Install the reviewed
 `.tgz` during candidate verification, with Vue 3.5 and Reka UI 2.10.
 
@@ -15,20 +15,17 @@ Components ship as editable TypeScript and Vue source. A raw Node import of a
 
 ```css
 @import 'tailwindcss';
-@import '@global-torque/design-tokens/css';
 @import '@global-torque/ui-primitives/styles/theme';
-@import '@global-torque/ui-primitives/styles/contract';
 ```
 
-`styles/contract` binds every shadcn theme role (`--background`, `--foreground`,
-`--primary`, `--primary-foreground`, `--secondary`, `--secondary-foreground`,
-`--muted`, `--muted-foreground`, `--accent`, `--accent-foreground`,
-`--destructive`, `--border`, `--input`, `--ring`, `--radius`, the five chart
-roles and the sidebar roles) to a design token, and the font to
-`--gt-primitive-font-family-sans`. A host recolours all of them by overriding
-the `--brand-*` seeds the tokens derive from; it may instead declare the roles
-itself and skip this import. Use a class or `data-theme="dark"` for dark mode.
-No product preset, font or logo is installed.
+`styles/theme` is the standard shadcn theme: it declares the shadcn variables
+with default values and maps them to Tailwind. A tenant brand overrides the
+shadcn variables (`--primary`, `--primary-foreground`, `--secondary`,
+`--secondary-foreground`, `--background`, `--foreground`, `--radius`, …) after
+this import; muted, accent, border, input, ring and sidebar colours derive from
+them unless the tenant sets those too. The host sets the font; no font or logo
+is installed. No dark theme ships; the components' `dark:` styles apply only
+under a `.dark` ancestor.
 The starter includes a complete neutral example theme. Theme styles register
 package files as Tailwind sources; retain the imports during CSS compilation.
 
@@ -69,7 +66,6 @@ package files as Tailwind sources; retain the imports during CSS compilation.
 - `@global-torque/ui-primitives/sonner`
 - `@global-torque/ui-primitives/spinner`
 - `@global-torque/ui-primitives/stepper`
-- `@global-torque/ui-primitives/styles/contract`
 - `@global-torque/ui-primitives/styles/theme`
 - `@global-torque/ui-primitives/switch`
 - `@global-torque/ui-primitives/table`
@@ -86,9 +82,11 @@ import { Button } from '@global-torque/ui-primitives/button';
 <template><Button type="button" @click="$emit('save')">Save changes</Button></template>
 ```
 
-Components retain the shadcn-vue/Reka props, slots and accessible keyboard
-contracts recorded in UPSTREAM.md. Supply accessible names for controls and
-Dialog titles/descriptions; keep focus management enabled. Calendar's date
+Components keep the upstream shadcn-vue (Vega) and Reka props, slots and
+accessible keyboard contracts; UPSTREAM.md records the source. `./sonner`
+exports only `Toaster`: import `toast` from `vue-sonner`. Supply accessible
+names for controls and Dialog titles/descriptions; keep focus management
+enabled. Calendar's date
 runtime is declared. Charts are excluded from this initial public API: the current Unovis dependency
 requires a MapLibre release with an unresolved critical advisory (GHSA-jrc7-96c5-q579).
 They remain an internal feature until a supported patched dependency path is verified.

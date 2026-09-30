@@ -117,8 +117,7 @@ const inputAttrs = computed(() => ({
 <template>
   <Skeleton
     v-if="loading"
-    class="v-combobox-anchor w-full rounded-control"
-    :class="size === 'large' ? 'h-control-lg' : 'h-control-md'"
+    class="v-combobox-anchor w-full"
   />
   <VCombobox
     v-else
