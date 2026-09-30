@@ -36,7 +36,7 @@ importers:
   packages/ui-kit:
     dependencies:
       '@global-torque/ui-primitives':
-        specifier: 0.1.4
+        specifier: 0.2.0
         version: link:../ui-primitives
       '@internationalized/date':
         specifier: ^3.12.3
@@ -102,9 +102,6 @@ importers:
 
   packages/ui-primitives:
     dependencies:
-      '@global-torque/design-tokens':
-        specifier: 0.2.0
-        version: 0.2.0
       '@internationalized/date':
         specifier: ^3.12.3
         version: 3.12.4
@@ -321,10 +318,6 @@ packages:
 
   '@floating-ui/vue@1.1.11':
     resolution: {integrity: sha512-HzHKCNVxnGS35r9fCHBc3+uCnjw9IWIlCPL683cGgM9Kgj2BiAl8x1mS7vtvP6F9S/e/q4O6MApwSHj8hNLGfw==}
-
-  '@global-torque/design-tokens@0.2.0':
-    resolution: {integrity: sha512-x9SwKmA8pRoFrAqgo8vOqRZmOFbKAzMDbsaUCLqBHrYUXVHuPrZDDLYQK3dpkO3wl9zU2Hf2wFrFB8aWCPXxSQ==}
-    engines: {node: '>=22'}
 
   '@humanfs/core@0.19.2':
     resolution: {integrity: sha512-UhXNm+CFMWcbChXywFwkmhqjs3PRCmcSa/hfBgLIb7oQ5HNb1wS0icWsGtSAUNgefHeI+eBrA8I1fxmbHsGdvA==}
@@ -2548,8 +2541,6 @@ snapshots:
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
-
-  '@global-torque/design-tokens@0.2.0': {}
 
   '@humanfs/core@0.19.2':
     dependencies:

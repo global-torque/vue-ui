@@ -40,7 +40,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
   <SelectPortal>
     <SelectContent
       v-bind="{ ...forwarded, ...$attrs }"
-      :class="cn('VSelectContent v-select-content z-[var(--ui-select-popup-z-index,var(--ui-dialog-z-index,1100))]', props.class)"
+      :class="cn('VSelectContent v-select-content z-50', props.class)"
     >
       <SelectViewport class="v-select-viewport">
         <slot />

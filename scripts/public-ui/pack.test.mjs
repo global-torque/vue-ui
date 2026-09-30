@@ -78,9 +78,9 @@ test('selected pack emits only UI Kit and its receipt', () => {
   const { directory, output } = temporaryOutput('vue-ui-pack-selected-');
   try {
     execFileSync(process.execPath, [packer, output, '--package', 'ui-kit', '--allow-dirty'], { cwd: root, stdio: 'pipe' });
-    assert(fs.existsSync(path.join(output, 'global-torque-ui-kit-0.1.5.tgz')));
+    assert(fs.existsSync(path.join(output, 'global-torque-ui-kit-0.2.0.tgz')));
     assert(fs.existsSync(path.join(output, 'selected-release.json')));
-    assert(!fs.existsSync(path.join(output, 'global-torque-ui-primitives-0.1.4.tgz')));
+    assert(!fs.existsSync(path.join(output, 'global-torque-ui-primitives-0.2.0.tgz')));
   } finally {
     fs.rmSync(directory, { recursive: true, force: true });
   }
@@ -90,7 +90,7 @@ test('default pack includes only active UI packages', () => {
   const { directory, output } = temporaryOutput('vue-ui-pack-legacy-');
   try {
     execFileSync(process.execPath, [packer, output, '--allow-dirty'], { cwd: root, stdio: 'pipe' });
-    for (const name of ['ui-primitives-0.1.4', 'ui-kit-0.1.5']) {
+    for (const name of ['ui-primitives-0.2.0', 'ui-kit-0.2.0']) {
       assert(fs.existsSync(path.join(output, `global-torque-${name}.tgz`)));
     }
     assert(!fs.existsSync(path.join(output, 'global-torque-invest-widgets-0.1.3.tgz')));

@@ -1,7 +1,7 @@
 {
   "manifest": {
     "name": "@global-torque/ui-primitives",
-    "version": "0.1.4",
+    "version": "0.2.0",
     "description": "Accessible Vue primitives with host-owned Tailwind themes.",
     "type": "module",
     "license": "MIT",
@@ -55,7 +55,6 @@
       "./sonner": "./src/sonner/index.ts",
       "./spinner": "./src/spinner/index.ts",
       "./stepper": "./src/stepper/index.ts",
-      "./styles/contract": "./src/styles/contract.css",
       "./styles/theme": "./src/styles/theme.css",
       "./switch": "./src/switch/index.ts",
       "./table": "./src/table/index.ts",
@@ -71,7 +70,6 @@
       "**/*.scss"
     ],
     "dependencies": {
-      "@global-torque/design-tokens": "0.2.0",
       "@lucide/vue": "^1.23.0",
       "@vueuse/core": "^14.3.0",
       "class-variance-authority": "^0.7.1",
@@ -137,7 +135,7 @@
     "./src/sonner",
     "./src/spinner",
     "./src/stepper",
-    "./src/styles/contract.css",
+    "./src/styles/shadcn-vue-tailwind.css",
     "./src/styles/theme.css",
     "./src/switch",
     "./src/table",

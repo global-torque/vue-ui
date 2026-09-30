@@ -36,7 +36,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
   <ComboboxPortal>
     <ComboboxContent
       v-bind="{ ...forwarded, ...$attrs }"
-      :class="cn('VComboboxContent v-combobox-content z-[var(--ui-dialog-z-index,1100)]', props.class)"
+      :class="cn('VComboboxContent v-combobox-content z-50', props.class)"
     >
       <ComboboxViewport class="v-combobox-viewport">
         <slot />
