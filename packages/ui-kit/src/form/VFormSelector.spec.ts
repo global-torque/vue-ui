@@ -83,20 +83,26 @@ describe('form selector artwork', () => {
     }
   });
 
-  it('forwards combobox artwork without changing the input label or displayed model', async () => {
+  it('forwards combobox artwork and attributes to the trigger and shows the selected label', async () => {
     const wrapper = mount(VFormCombobox, {
-      props: { options: ['California', 'Colorado'], modelValue: 'California' },
+      props: {
+        options: [{ name: 'California', value: 'CA' }, { name: 'Colorado', value: 'CO' }],
+        itemLabel: 'name',
+        modelValue: 'CA',
+      },
       attrs: { 'aria-label': 'State' },
       slots: { icon: '<svg data-combobox-artwork aria-hidden="true" />' },
     });
     try {
-      const input = wrapper.get('input');
-      expect(input.attributes('aria-label')).toBe('State');
-      expect(input.element.value).toBe('California');
-      expect(wrapper.find('[data-combobox-artwork]').exists()).toBe(true);
-      expect(wrapper.find('.lucide-chevron-down').exists()).toBe(false);
-      await wrapper.setProps({ modelValue: 'Colorado' });
-      expect(input.element.value).toBe('Colorado');
+      const trigger = wrapper.get('button');
+      expect(trigger.attributes('role')).toBe('combobox');
+      expect(trigger.attributes('aria-label')).toBe('State');
+      expect(trigger.attributes('type')).toBe('button');
+      expect(trigger.text()).toBe('California');
+      expect(trigger.find('[data-combobox-artwork]').exists()).toBe(true);
+      expect(trigger.find('.lucide-chevrons-up-down').exists()).toBe(false);
+      await wrapper.setProps({ modelValue: 'CO' });
+      expect(trigger.text()).toBe('Colorado');
     } finally {
       wrapper.unmount();
     }

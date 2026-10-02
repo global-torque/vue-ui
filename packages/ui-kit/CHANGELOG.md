@@ -5,7 +5,9 @@
 - Breaking: `VForm` is removed from `@global-torque/ui-kit/form`; render a
   native `<form novalidate>` instead.
 - Breaking: components no longer read the `--ui-*` hook variables and always
-  render the value each hook fell back to. Only the four
+  render the value each hook fell back to. The one exception is the
+  `VTimelineCard` divider, which uses the `--border` token instead of its
+  literal `rgb(51 51 51 / 10%)` fallback. Only the four
   `--ui-password-strength-*` colours of `VFormInputPassword` remain.
   `VFormSelect`, `VFormDatePicker` and `VFormTextarea` lose their hook-only
   layout, readonly and disabled rules, and the date picker trigger renders the
@@ -24,16 +26,29 @@
 - Breaking: `./styles/mixins` keeps `$breakpoints`, `get-breakpoint`,
   `media-lt`, `media-lte`, `media-gt` and `media-gte`; `media-between`,
   `media`, `mt`, `font`, `sizeInRem` and `isImportant` are removed.
-- Breaking: every component style block is scoped. Template class names are
-  unchanged, but ui-kit rules no longer reach elements outside their component
-  and carry an extra attribute selector, so a host override needs at least the
-  same specificity. `VFilter` drops its `.v-form-checkbox .is--checked` rule.
-- Breaking: the `VFormCombobox` field matches the standard fields: 36px high,
-  `--radius-md` corners, transparent background, `--input` border, 14px text
-  on a 20px line and 10px horizontal padding. Its loading skeleton is `h-9`.
+- Breaking: every component style block is scoped. Template class names of the
+  remaining components are unchanged, but ui-kit rules no longer reach elements
+  outside their component and carry an extra attribute selector, so a host
+  override needs at least the same specificity. `VFilter` reads
+  `--v-filter-dropdown-min-width` with a 150px fallback inside the dropdown
+  rule, so a host override on the component root still applies, and drops its
+  `.v-form-checkbox .is--checked` rule and its redundant
+  `.v-filter__button-icon` rule. `VTimelineCard` keeps highlight paragraph
+  colours with `:deep(p)`.
+- Breaking: `VFormCombobox` is now built from the ui-primitives (shadcn-vue
+  Vega) Combobox. The field is a `role="combobox"` outline button with the
+  `--input` border; it shows the selected label or the placeholder and is named
+  by the field label. The list opens with a search field on top, an empty state
+  ("No items found.") and a check on the selected item; filtering is reka's
+  built-in text filter. `name` goes to the Combobox root, which renders a
+  hidden input in native forms, as in `VFormSelect`. Other attributes (`id`,
+  ARIA, `data-testid`, `class`) land on the trigger button. Props and the
+  `icon` slot are unchanged, and the loading skeleton is `h-9`.
 - Removed the source files no export reached: the internal `form/VSelect`,
-  `form/VRadioGroup`, `VCheckbox` and `VInputOtp` parts (`VFormInputOtp`
-  stays), `form/arrow.svg` and `form/fieldContext/types.ts`.
+  `form/VRadioGroup`, `form/VCombobox`, `VCheckbox` and `VInputOtp` parts
+  (`VFormInputOtp` stays), `form/arrow.svg` and `form/fieldContext/types.ts`.
+- `VFormRadio` with `row` lays the options out in a row again. This regressed
+  in 0.2.0: the Vega `RadioGroup` is a grid, so the row classes had no effect.
 
 ## 0.2.0 — Vega primitives candidate
 
