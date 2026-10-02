@@ -33,23 +33,23 @@ const delegatedProps = computed(() => {
   </ComboboxAnchor>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .v-combobox-anchor {
   color: var(--foreground);
   caret-color: var(--foreground);
-  background-color: var(--ui-color-canvas, var(--muted));
-  font-size: 16px;
-  line-height: 26px;
+  background-color: transparent;
+  font-size: 14px;
+  line-height: 20px;
   font-weight: 400;
   font-family: var(--font-sans);
-  padding: 0 12px;
+  padding: 0 10px;
   margin: 0;
   appearance: none;
   width: 100%;
   position: relative;
-  border: solid 1px var(--ui-color-border, var(--color-border-strong, var(--input)));
-  border-radius: 2px;
-  height: 40px;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-md);
+  height: 36px;
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
@@ -60,19 +60,11 @@ const delegatedProps = computed(() => {
   }
 
   &.is--error {
-    border-color: var(--ui-color-negative, var(--destructive));
-  }
-
-  &.is--size-large {
-    height: 48px;
-    font-size: 16px;
-    line-height: 26px;
+    border-color: var(--destructive);
   }
 
   &.is--size-small {
     height: 32px;
-    font-size: 16px;
-    line-height: 26px;
   }
 
   &.is--readonly {

@@ -11,14 +11,8 @@ const forwarded = useForwardPropsEmits(props, emits);
 <template>
   <ComboboxRoot
     v-bind="forwarded"
-    class="VCombobox v-combobox"
+    class="VCombobox v-combobox relative"
   >
     <slot />
   </ComboboxRoot>
 </template>
-
-<style lang="scss">
-.v-combobox {
-  position: relative;
-}
-</style>

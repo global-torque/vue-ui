@@ -22,7 +22,7 @@ const forwardedProps = useForwardProps(delegatedProps);
   />
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .v-combobox-input {
   padding: 0;
     border: none;

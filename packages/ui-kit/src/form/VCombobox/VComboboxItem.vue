@@ -28,7 +28,7 @@ const forwardedProps = useForwardProps(delegatedProps);
   </ComboboxItem>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .v-combobox-item {
   font-family: var(--font-sans);
     color: var(--foreground);

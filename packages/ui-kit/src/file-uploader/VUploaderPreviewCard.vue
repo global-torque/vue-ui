@@ -173,7 +173,7 @@ onUnmounted(() => {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .v-uploader {
   $root: &;
 
@@ -212,7 +212,7 @@ onUnmounted(() => {
     display: flex;
     align-items: center;
     gap: 12px;
-    color: var(--color-text-strong, var(--muted-foreground));
+    color: var(--muted-foreground);
   }
 
   /* Remove button */

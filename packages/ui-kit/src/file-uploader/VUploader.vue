@@ -334,7 +334,7 @@ const unifiedItems = computed(() => {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .v-uploader{
   $root: &;
 
@@ -346,7 +346,7 @@ const unifiedItems = computed(() => {
     align-items: center;
     align-self: stretch;
     border-radius: 2px;
-    border: 1px dashed var(--color-border-strong, var(--input));
+    border: 1px dashed var(--input);
     background: var(--muted);
 
     &:focus-visible{
@@ -420,7 +420,7 @@ const unifiedItems = computed(() => {
   }
 
   &__comment{
-    color: var(--color-text-meta, var(--muted-foreground));
+    color: var(--muted-foreground);
     margin-top: 4px;
   }
 

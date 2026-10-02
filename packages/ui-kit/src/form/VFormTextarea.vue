@@ -54,13 +54,3 @@ const textareaAttrs = computed(() => ({
     :disabled="disabled"
   />
 </template>
-
-<style>
-.v-form-textarea {
-  display: var(--ui-form-textarea-display, revert-layer);
-  field-sizing: var(--ui-form-textarea-sizing, revert-layer);
-  min-height: var(--ui-form-textarea-min-height, revert-layer);
-  padding: var(--ui-form-textarea-padding, revert-layer);
-  line-height: var(--ui-form-textarea-line-height, revert-layer);
-}
-</style>

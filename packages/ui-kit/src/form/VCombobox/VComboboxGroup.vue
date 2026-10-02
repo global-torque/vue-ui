@@ -22,7 +22,7 @@ const delegatedProps = computed(() => {
   </ComboboxGroup>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .v-combobox-group {
   width: 100%;
 }

@@ -30,7 +30,7 @@ const btnClasses = computed(() => {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .v-timeline-circle{
   $root: &;
 

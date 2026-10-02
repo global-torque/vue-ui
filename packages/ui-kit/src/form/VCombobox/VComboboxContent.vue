@@ -45,13 +45,14 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
   </ComboboxPortal>
 </template>
 
-<style lang="scss">
-.v-combobox-content {
+<style lang="scss" scoped>
+// The scope attribute lands on reka's popper wrapper; the class is on the content inside it.
+:deep(.v-combobox-content) {
   padding-left: 0;
     list-style-type: none;
     background-color: var(--muted);
     border: solid 1px var(--border);
-    box-shadow: var(--shadow-dialog, 0 4px 5px -2px color-mix(in srgb, var(--foreground) 5%, transparent), 0 6px 25px 2px color-mix(in srgb, var(--foreground) 6%, transparent));
+    box-shadow: 0 4px 5px -2px color-mix(in srgb, var(--foreground) 5%, transparent), 0 6px 25px 2px color-mix(in srgb, var(--foreground) 6%, transparent);
     border-radius: 2px;
     max-height: 222px;
     overflow: auto;

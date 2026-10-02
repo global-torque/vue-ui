@@ -222,7 +222,7 @@ watch(appliedItems, (items) => {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .v-filter{
   --v-filter-dropdown-min-width: 150px;
   --v-form-checkbox-group-item--padding: 12px;
@@ -243,9 +243,9 @@ watch(appliedItems, (items) => {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    background-color: var(--ui-color-canvas, var(--muted));
-    border: 1px solid var(--ui-color-border-subtle, var(--border));
-    box-shadow: var(--ui-shadow-dialog, var(--shadow-dialog, 0 4px 5px -2px color-mix(in srgb, var(--foreground) 5%, transparent), 0 6px 25px 2px color-mix(in srgb, var(--foreground) 6%, transparent)));
+    background-color: var(--muted);
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 5px -2px color-mix(in srgb, var(--foreground) 5%, transparent), 0 6px 25px 2px color-mix(in srgb, var(--foreground) 6%, transparent);
     z-index: 2;
   }
 
@@ -259,7 +259,7 @@ watch(appliedItems, (items) => {
   }
 
   &__title{
-    color: var(--ui-color-text-muted, var(--color-text-meta, var(--muted-foreground)));
+    color: var(--muted-foreground);
     padding: 12px 12px 2px;
     text-transform: capitalize;
   }
@@ -270,13 +270,6 @@ watch(appliedItems, (items) => {
 
   &__checkbox-group{
     width: 100%;
-
-    .v-form-checkbox{
-      .is--checked{
-        color: var(--primary);
-        font-weight: 600;
-      }
-    }
   }
 }
 </style>

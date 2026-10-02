@@ -13,7 +13,7 @@ const props = defineProps<ComboboxEmptyProps>();
   </ComboboxEmpty>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .v-combobox-empty {
   font-family: var(--font-sans);
     color: var(--foreground);

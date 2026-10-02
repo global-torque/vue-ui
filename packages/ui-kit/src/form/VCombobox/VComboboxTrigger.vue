@@ -35,14 +35,14 @@ const forwardedProps = useForwardProps(delegatedProps);
   </ComboboxTrigger>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .v-combobox-trigger {
   display: flex;
   align-items: center;
 
   &__icon {
     width: 14px;
-    color: var(--ui-color-text-muted, var(--color-text-meta, var(--muted-foreground)));
+    color: var(--muted-foreground);
     transition: all 0.3s;
     transform-origin: center;
     transform: rotate(0);

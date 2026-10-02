@@ -117,7 +117,7 @@ const inputAttrs = computed(() => ({
 <template>
   <Skeleton
     v-if="loading"
-    class="v-combobox-anchor w-full"
+    class="v-combobox-anchor h-9 w-full"
   />
   <VCombobox
     v-else
@@ -126,7 +126,7 @@ const inputAttrs = computed(() => ({
     :display-value="displayValue"
     :filter-function="filterFunction"
     :disabled="disabled || readonly"
-    class="VFormCombobox v-form-combobox"
+    class="VFormCombobox v-form-combobox w-full"
   >
     <VComboboxAnchor
       :is-error="isError"
@@ -165,13 +165,3 @@ const inputAttrs = computed(() => ({
     </VComboboxContent>
   </VCombobox>
 </template>
-
-<style lang="scss">
-@use '../styles/mixins.scss' as *;
-
-.v-form-combobox{
-  $root: &;
-
-  width: 100%;
-}
-</style>

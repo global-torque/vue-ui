@@ -1,6 +1,60 @@
 # Changelog
 
-## Unreleased
+## 0.3.0 — scoped shadcn styles candidate
+
+- Breaking: `VForm` is removed from `@global-torque/ui-kit/form`; render a
+  native `<form novalidate>` instead.
+- Breaking: components no longer read the `--ui-*` hook variables and always
+  render the value each hook fell back to. Only the four
+  `--ui-password-strength-*` colours of `VFormInputPassword` remain.
+  `VFormSelect`, `VFormDatePicker` and `VFormTextarea` lose their hook-only
+  layout, readonly and disabled rules, and the date picker trigger renders the
+  standard `data-slot="popover-trigger"` instead of `input`.
+- Breaking: the skin colour roles `--color-text-meta`, `--color-text-strong`,
+  `--color-accent-strong`, `--color-border-strong`, `--color-control-border`,
+  `--shadow-dialog` and `--shadow-control` are no longer read; their shadcn
+  fallbacks apply. `badge-tone` still reads `--color-status-*` and
+  `--color-badge-foreground`.
+- Breaking: `./styles` (`src/public-theme.css`) only registers the package
+  files as Tailwind sources. Its nine `--ui-*` values and its timeline
+  `.is--h6__title` and uploader `.is--small` font rules are gone, so a host
+  that imports it now gets the component fallbacks: a `--muted` filter
+  dropdown with the `--foreground`-mixed shadow and `--primary-foreground`
+  text on filled timeline cards.
+- Breaking: `./styles/mixins` keeps `$breakpoints`, `get-breakpoint`,
+  `media-lt`, `media-lte`, `media-gt` and `media-gte`; `media-between`,
+  `media`, `mt`, `font`, `sizeInRem` and `isImportant` are removed.
+- Breaking: every component style block is scoped. Template class names are
+  unchanged, but ui-kit rules no longer reach elements outside their component
+  and carry an extra attribute selector, so a host override needs at least the
+  same specificity. `VFilter` drops its `.v-form-checkbox .is--checked` rule.
+- Breaking: the `VFormCombobox` field matches the standard fields: 36px high,
+  `--radius-md` corners, transparent background, `--input` border, 14px text
+  on a 20px line and 10px horizontal padding. Its loading skeleton is `h-9`.
+- Removed the source files no export reached: the internal `form/VSelect`,
+  `form/VRadioGroup`, `VCheckbox` and `VInputOtp` parts (`VFormInputOtp`
+  stays), `form/arrow.svg` and `form/fieldContext/types.ts`.
+
+## 0.2.0 — Vega primitives candidate
+
+- Breaking: requires `@global-torque/ui-primitives` 0.2.0, the verbatim
+  shadcn-vue Vega components and standard theme; its changes reach every
+  composed control.
+- Breaking: `VUrlSyncedTabs` has no `variant` prop; set `variant="line"` on the
+  `TabsList` inside it.
+- Breaking: `VFormSelect` has no `icon` slot; the standard chevron shows. Its
+  `large` and `medium` sizes render the `default` trigger, `small` the `sm`
+  trigger.
+- Breaking: `VFormInput`, `VFormSelect`, `VFormDatePicker`, `VFormCombobox` and
+  `VFormTextarea` no longer use the removed size tokens (`h-control-*`,
+  `rounded-control`, `text-control`, `bg-control-background`); the primitives'
+  standard heights and radii apply, and the `size` props of `VFormInput`,
+  `VFormDatePicker` and `VFormCombobox` no longer change the height.
+- VSelectContent and VComboboxContent use `z-50` instead of the
+  `--ui-dialog-z-index` and `--ui-select-popup-z-index` layer; caller `z-*`
+  classes still replace it through `cn`.
+
+## 0.1.5 — shared portal layer candidate
 
 - Component styles no longer carry fixed colour or shadow literals. Every value
   now reads the shadcn variable contract a host already themes — `--input`,
@@ -42,28 +96,6 @@
   paints the filled timeline card's labels with the canvas colour, which is not
   guaranteed to contrast with `--primary`. Reconciling the hook API is a
   separate step.
-
-## 0.2.0 — Vega primitives candidate
-
-- Breaking: requires `@global-torque/ui-primitives` 0.2.0, the verbatim
-  shadcn-vue Vega components and standard theme; its changes reach every
-  composed control.
-- Breaking: `VUrlSyncedTabs` has no `variant` prop; set `variant="line"` on the
-  `TabsList` inside it.
-- Breaking: `VFormSelect` has no `icon` slot; the standard chevron shows. Its
-  `large` and `medium` sizes render the `default` trigger, `small` the `sm`
-  trigger.
-- Breaking: `VFormInput`, `VFormSelect`, `VFormDatePicker`, `VFormCombobox` and
-  `VFormTextarea` no longer use the removed size tokens (`h-control-*`,
-  `rounded-control`, `text-control`, `bg-control-background`); the primitives'
-  standard heights and radii apply, and the `size` props of `VFormInput`,
-  `VFormDatePicker` and `VFormCombobox` no longer change the height.
-- VSelectContent and VComboboxContent use `z-50` instead of the
-  `--ui-dialog-z-index` and `--ui-select-popup-z-index` layer; caller `z-*`
-  classes still replace it through `cn`.
-
-## 0.1.5 — shared portal layer candidate
-
 - VSelectContent and VComboboxContent now use the host-controlled shared portal
   layer, defaulting to `--ui-dialog-z-index: 1100`; select supports the more
   specific `--ui-select-popup-z-index` override.
