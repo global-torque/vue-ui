@@ -44,14 +44,14 @@ watch(() => props.modelValue, () => {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .v-form-checkbox-group {
   $root: &;
 
   width: 100%;
 
   --v-form-checkbox-group-item--padding-default: var(--v-form-checkbox-group-item--padding, 15px 12px);
-  --v-form-checkbox-group-item--background-color: var(--ui-color-border-subtle, var(--border));
+  --v-form-checkbox-group-item--background-color: var(--border);
 
   display: flex;
   flex-direction: column;

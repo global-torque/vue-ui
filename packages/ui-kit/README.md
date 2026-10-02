@@ -2,7 +2,7 @@
 
 Generic Vue forms, images, URL state and composed controls.
 
-Prepared `0.2.0` source-SFC candidate. This version is not advertised as an npm
+Prepared `0.3.0` source-SFC candidate. This version is not advertised as an npm
 release until its release report records publication. Install the exact version with Vue
 3.5 and Reka UI 2.10. The release selection is owned by this UI Kit package;
 the historical curated `@global-torque/invest-widgets@0.1.3` registry release
@@ -27,8 +27,10 @@ with default values; a tenant brand overrides them (`--primary`,
 `--background`, …) after these imports. The host sets the font; no font or
 logo is installed. No dark theme ships; `dark:` styles apply only under a
 `.dark` ancestor.
-The starter includes a complete neutral example theme. Theme styles register
-package files as Tailwind sources; retain the imports during CSS compilation.
+The starter includes a complete neutral example theme.
+`@global-torque/ui-kit/styles` only registers the UI Kit files as Tailwind
+sources; it declares no variables or rules. Retain both imports during CSS
+compilation.
 
 ## Supported imports
 

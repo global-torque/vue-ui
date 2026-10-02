@@ -140,37 +140,3 @@ const triggerAttrs = computed(() => ({
     </SelectContent>
   </Select>
 </template>
-
-<style>
-.v-form-select {
-  display: var(--ui-form-select-display, revert-layer);
-  position: var(--ui-form-select-position, revert-layer);
-  padding-block: var(--ui-form-select-padding-block, revert-layer);
-  overflow: var(--ui-form-select-overflow, revert-layer);
-}
-
-.v-form-select:not(:focus-visible, [data-state='open'], [aria-invalid='true']) {
-  border-color: var(--ui-form-select-border, var(--color-control-border, var(--input)));
-}
-
-.v-form-select [data-slot='select-value'] {
-  flex: var(--ui-form-select-value-flex, revert-layer);
-  min-width: var(--ui-form-select-value-min-width, revert-layer);
-  text-align: var(--ui-form-select-value-align, revert-layer);
-}
-
-.v-form-select[data-readonly] {
-  border-width: var(--ui-form-readonly-border-width, revert-layer);
-  border-radius: var(--ui-form-readonly-radius, revert-layer);
-  background-color: var(--ui-form-readonly-background, revert-layer);
-  pointer-events: var(--ui-form-readonly-pointer-events, revert-layer);
-}
-
-.v-form-select[data-readonly] > svg {
-  display: var(--ui-form-readonly-icon-display, revert-layer);
-}
-
-.v-form-select[data-disabled] {
-  opacity: var(--ui-form-disabled-opacity, revert-layer);
-}
-</style>
