@@ -224,21 +224,15 @@ watch(appliedItems, (items) => {
 
 <style lang="scss" scoped>
 .v-filter{
-  --v-filter-dropdown-min-width: 150px;
   --v-form-checkbox-group-item--padding: 12px;
 
   position: relative;
-
-  &__button-icon{
-    color: inherit;
-    width: 16px;
-  }
 
   &__dropdown{
     position: absolute;
     top: 100%;
     left: 0;
-    min-width: var(--v-filter-dropdown-min-width);
+    min-width: var(--v-filter-dropdown-min-width, 150px);
     width: fit-content;
     display: flex;
     flex-direction: column;

@@ -157,7 +157,7 @@ const btnClasses = computed(() => {
       color: var(--primary-foreground);
     }
 
-    :slotted(p){
+    :deep(p){
       color: var(--primary-foreground);
     }
 
@@ -187,7 +187,7 @@ const btnClasses = computed(() => {
       color: var(--muted);
     }
 
-    :slotted(p){
+    :deep(p){
       color: var(--primary-foreground);
     }
 
