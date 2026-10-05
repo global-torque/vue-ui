@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- `VFormInputOtp` centres the code in the field and, from the `sm` breakpoint
+  (640px), renders 44px slots with `text-lg` digits. Below `sm` the slots keep
+  the shadcn `size-9` (36px) and `text-sm`.
+
 ## 0.3.0 — scoped shadcn styles candidate
 
 - Breaking: `VForm` is removed from `@global-torque/ui-kit/form`; render a
@@ -49,9 +55,6 @@
   (`VFormInputOtp` stays), `form/arrow.svg` and `form/fieldContext/types.ts`.
 - `VFormRadio` with `row` lays the options out in a row again. This regressed
   in 0.2.0: the Vega `RadioGroup` is a grid, so the row classes had no effect.
-- `VFormInputOtp` centres the code in the field and, from the `sm` breakpoint
-  (640px), renders 44px slots with `text-lg` digits. Below `sm` the slots keep
-  the shadcn `size-9` (36px) and `text-sm`.
 
 ## 0.2.0 — Vega primitives candidate
 
