@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- `styles/theme` declares and maps the status colours `--success` (`#3ddc97`),
+  `--warning` (`#f1af32`) and `--info` (`#6f3dfd`), each with a `-foreground`
+  (`--foreground`, `--foreground`, `#ffffff`), so `bg-success`,
+  `text-success-foreground`, `bg-warning/10` and the like are available.
+
 ## 0.2.0 — shadcn-vue Vega candidate
 
 - Breaking: every component is now the verbatim shadcn-vue `reka-vega` file

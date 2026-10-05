@@ -23,9 +23,12 @@ with default values and maps them to Tailwind. A tenant brand overrides the
 shadcn variables (`--primary`, `--primary-foreground`, `--secondary`,
 `--secondary-foreground`, `--background`, `--foreground`, `--radius`, …) after
 this import; muted, accent, border, input, ring and sidebar colours derive from
-them unless the tenant sets those too. The host sets the font; no font or logo
-is installed. No dark theme ships; the components' `dark:` styles apply only
-under a `.dark` ancestor.
+them unless the tenant sets those too. The status pairs `--success`,
+`--warning` and `--info`, each with a `-foreground` for text on it, default to
+fixed mint, gold and grape fills that do not follow the brand; a host
+overrides them the same way. The host sets the font; no font or logo is
+installed. No dark theme ships; the components' `dark:` styles apply only under
+a `.dark` ancestor.
 The starter includes a complete neutral example theme. Theme styles register
 package files as Tailwind sources; retain the imports during CSS compilation.
 

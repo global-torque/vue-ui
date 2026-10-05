@@ -27,6 +27,12 @@
   --ring: var(--primary);
   --destructive: #ff7070;
   --destructive-foreground: #ffffff;
+  --success: #3ddc97;
+  --success-foreground: var(--foreground);
+  --warning: #f1af32;
+  --warning-foreground: var(--foreground);
+  --info: #6f3dfd;
+  --info-foreground: #ffffff;
   --chart-1: var(--primary);
   --chart-2: var(--secondary);
   --chart-3: #f1af32;
@@ -59,6 +65,12 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
