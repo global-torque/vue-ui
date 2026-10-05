@@ -83,10 +83,10 @@ const passwordScore = computed(() => {
 const strengthColor = computed(() => {
   const score = passwordScore.value;
   switch (score) {
-    case 1: return 'var(--ui-password-strength-weak, #ff5252)';
-    case 2: return 'var(--ui-password-strength-fair, #eec32d)';
-    case 3: return 'var(--ui-password-strength-good, #a6cd0c)';
-    case 4: return 'var(--ui-password-strength-strong, #00d395)';
+    case 1: return 'var(--destructive)';
+    case 2: return 'var(--warning)';
+    case 3: return 'color-mix(in srgb, var(--success) 50%, var(--warning))';
+    case 4: return 'var(--success)';
     default: return 'transparent';
   }
 });

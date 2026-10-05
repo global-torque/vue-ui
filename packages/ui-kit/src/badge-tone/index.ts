@@ -1,9 +1,11 @@
 // Tone classes for a status badge rendered with `@global-torque/ui-primitives/badge`
-// (`variant="outline"` + these classes). Solid tones paint the brand colour,
-// soft tones a light tint of it under the muted badge text. The hues come from
-// the brand tokens (`--color-status-*` with the chart colours as fallback), so
-// the legacy colour names the investment formatters still emit map onto them
-// here and call sites stay one-liners.
+// (`variant="outline"` + these classes). Solid tones paint a colour under its
+// `-foreground` text; soft tones paint a light tint of it, and `neutral` the
+// input grey, under `text-foreground`. The colours are the shadcn variables
+// (`--success`, `--warning`, `--info`, `--destructive`, …) that
+// `@global-torque/ui-primitives/styles/theme` declares. The legacy colour names
+// the investment formatters still emit map onto the tones here, so call sites
+// stay one-liners.
 export type BadgeTone =
   | 'neutral'
   | 'primary'
@@ -19,17 +21,17 @@ export type BadgeTone =
 
 // Literal class strings on purpose: Tailwind only emits what it can read.
 const toneClasses: Record<BadgeTone, string> = {
-  'neutral': 'border-transparent bg-input text-(color:--color-badge-foreground,var(--muted-foreground))',
+  'neutral': 'border-transparent bg-input text-foreground',
   'primary': 'border-transparent bg-primary text-primary-foreground',
-  'primary-soft': 'border-transparent bg-accent text-(color:--color-badge-foreground,var(--muted-foreground))',
-  'success': 'border-transparent bg-[var(--color-status-success,var(--chart-2))] text-(color:--color-badge-foreground,var(--muted-foreground))',
-  'success-soft': 'border-transparent bg-[color-mix(in_srgb,var(--color-status-success,var(--chart-2))_20%,var(--background))] text-(color:--color-badge-foreground,var(--muted-foreground))',
-  'warning': 'border-transparent bg-[var(--color-status-warning,var(--chart-3))] text-foreground',
-  'warning-soft': 'border-transparent bg-[color-mix(in_srgb,var(--color-status-warning,var(--chart-3))_10%,var(--background))] text-(color:--color-badge-foreground,var(--muted-foreground))',
-  'danger': 'border-transparent bg-destructive text-white',
-  'danger-soft': 'border-transparent bg-[color-mix(in_srgb,var(--destructive)_10%,var(--background))] text-(color:--color-badge-foreground,var(--muted-foreground))',
-  'info': 'border-transparent bg-[var(--color-status-info,var(--chart-4))] text-white',
-  'info-soft': 'border-transparent bg-[color-mix(in_srgb,var(--color-status-info,var(--chart-4))_5%,var(--background))] text-(color:--color-badge-foreground,var(--muted-foreground))',
+  'primary-soft': 'border-transparent bg-accent text-foreground',
+  'success': 'border-transparent bg-success text-success-foreground',
+  'success-soft': 'border-transparent bg-success/20 text-foreground',
+  'warning': 'border-transparent bg-warning text-warning-foreground',
+  'warning-soft': 'border-transparent bg-warning/10 text-foreground',
+  'danger': 'border-transparent bg-destructive text-destructive-foreground',
+  'danger-soft': 'border-transparent bg-destructive/10 text-foreground',
+  'info': 'border-transparent bg-info text-info-foreground',
+  'info-soft': 'border-transparent bg-info/5 text-foreground',
 };
 
 const legacyColours: Record<string, BadgeTone> = {

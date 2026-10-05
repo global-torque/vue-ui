@@ -2,6 +2,21 @@
 
 ## Unreleased
 
+- Breaking: `badge-tone` uses the status variables of
+  `@global-torque/ui-primitives/styles/theme` (`--success`, `--warning`,
+  `--info`, `--destructive`) and no longer reads `--color-status-*` (or its
+  `--chart-2` to `--chart-4` fallbacks) or `--color-badge-foreground`, so a host
+  that coloured badges through those gets the fixed status colours. Solid tones
+  get the matching `-foreground` text (`text-success-foreground`, …); soft
+  tones keep the same tint (`bg-success/20`, `bg-warning/10`, `bg-info/5`,
+  `bg-destructive/10`) under `text-foreground` instead of the muted text.
+  `neutral` and `primary-soft` also move from the muted text to
+  `text-foreground` on the same backgrounds. Tone names are unchanged.
+- Breaking: the `VFormInputPassword` strength meter uses `--destructive`,
+  `--warning`, a 50% `--success`/`--warning` mix and `--success` for scores
+  1–4. The hooks `--ui-password-strength-weak`, `-fair`, `-good` and `-strong`
+  are removed, so a host that sets them no longer changes the meter; UI Kit now
+  reads no `--ui-*` variable.
 - `VFormInputOtp` centres the code in the field and, from the `sm` breakpoint
   (640px), renders 44px slots with `text-lg` digits. Below `sm` the slots keep
   the shadcn `size-9` (36px) and `text-sm`.
