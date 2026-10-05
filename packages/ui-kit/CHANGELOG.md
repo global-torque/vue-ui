@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- `VFormInputOtp` centres the code in the field and, from the `sm` breakpoint
+  (640px), renders 44px slots with `text-lg` digits. Below `sm` the slots keep
+  the shadcn `size-9` (36px) and `text-sm`.
+
 ## 0.3.0 — scoped shadcn styles candidate
 
 - Breaking: `VForm` is removed from `@global-torque/ui-kit/form`; render a
