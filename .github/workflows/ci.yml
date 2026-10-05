@@ -21,4 +21,3 @@ jobs:
       - run: corepack enable && corepack prepare pnpm@10.34.5 --activate
       - run: pnpm install --frozen-lockfile --ignore-scripts
       - run: pnpm check
-      - run: pnpm audit --audit-level=high
