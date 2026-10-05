@@ -21,7 +21,7 @@ const classes = computed(() => ({
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @use '../styles/mixins.scss' as *;
 
 .form-col {

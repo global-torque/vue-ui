@@ -62,7 +62,7 @@ const btnClasses = computed(() => {
   </li>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @use '../styles/mixins.scss' as *;
 
 .v-timeline-item {

@@ -36,7 +36,7 @@ const showFilterNoResultsMessage = computed(() => (
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .filter-pagination {
   flex-shrink: 0;
 

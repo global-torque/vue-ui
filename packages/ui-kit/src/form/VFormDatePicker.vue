@@ -129,7 +129,6 @@ watch(() => props.modelValue, () => { /* sync external changes */ });
         v-bind="triggerAttrs"
         variant="outline"
         type="button"
-        data-slot="input"
         :disabled="disabled || readonly"
         :data-readonly="readonly || undefined"
         :data-disabled="disabled || undefined"
@@ -173,32 +172,3 @@ watch(() => props.modelValue, () => { /* sync external changes */ });
     </PopoverContent>
   </Popover>
 </template>
-
-<style>
-.v-form-date-picker[data-slot='input'] {
-  display: var(--ui-form-date-display, revert-layer);
-  position: var(--ui-form-date-position, revert-layer);
-  padding-block: var(--ui-form-date-padding-block, revert-layer);
-  gap: var(--ui-form-date-gap, revert-layer);
-}
-
-.v-form-date-picker__value {
-  flex: var(--ui-form-date-value-flex, revert-layer);
-  min-width: var(--ui-form-date-value-min-width, revert-layer);
-  text-align: var(--ui-form-date-value-align, revert-layer);
-}
-
-.v-form-date-picker[data-readonly] {
-  border-width: var(--ui-form-readonly-border-width, revert-layer);
-  border-radius: var(--ui-form-readonly-radius, revert-layer);
-  pointer-events: var(--ui-form-readonly-pointer-events, revert-layer);
-}
-
-.v-form-date-picker[data-readonly]:not([data-disabled]) {
-  opacity: var(--ui-form-readonly-opacity, revert-layer);
-}
-
-.v-form-date-picker[data-disabled] {
-  opacity: var(--ui-form-disabled-opacity, revert-layer);
-}
-</style>

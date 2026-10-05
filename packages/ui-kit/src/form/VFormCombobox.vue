@@ -1,12 +1,15 @@
 <script lang="ts" setup>
-import { computed, ref, useAttrs } from 'vue';
+import { computed, useAttrs } from 'vue';
+import { CheckIcon, ChevronsUpDownIcon } from '@lucide/vue';
+import { Button } from '@global-torque/ui-primitives/button';
 import {
-  VCombobox, VComboboxAnchor, VComboboxTrigger, VComboboxInput,
-  VComboboxContent, VComboboxEmpty, VComboboxGroup, VComboboxItem,
-} from './VCombobox';
+  Combobox, ComboboxAnchor, ComboboxEmpty, ComboboxInput, ComboboxItem,
+  ComboboxItemIndicator, ComboboxList, ComboboxTrigger, ComboboxViewport,
+} from '@global-torque/ui-primitives/combobox';
 import { Skeleton } from '@global-torque/ui-primitives/skeleton';
 import {
   getFormControlA11yAttrs,
+  hasExplicitAttr,
   omitAttrs,
   useVFormFieldContext,
 } from './formFieldContext';
@@ -37,8 +40,6 @@ const props = withDefaults(defineProps<{
 });
 
 const modelValue = defineModel<ObjectOptionValue>();
-const focus = ref(false);
-const searchTerm = ref('');
 const attrs = useAttrs();
 const fieldContext = useVFormFieldContext();
 
@@ -64,49 +65,24 @@ const findValueInOption = (value: ObjectOptionValue) => {
   ));
 };
 
-// Computed display value function
-const displayValue = (value: ObjectOptionValue): string | number => {
-  if (props.options.some(isObjectOption)) {
-    const found = findValueInOption(value);
-    return found ? getOptionLabel(found) : value;
-  }
-  return value;
-};
-
-// watch(() => [props.options.length, modelValue.value], () => {
-//   if (props.options.length > 0 && (modelValue.value?.length < 3)) {
-//     modelValue.value = displayValue(modelValue.value);
-//   }
-// });
-
-// Filtered options computed property
-const filteredOptions = computed(() => {
-  if (!searchTerm.value) return props.options;
-
-  if (Array.isArray(props.options)) {
-    const normalizedSearch = searchTerm.value.toLowerCase();
-
-    return props.options.filter((option) => (
-      String(getOptionLabel(option)).toLowerCase().includes(normalizedSearch)
-        || String(getOptionValue(option)).toLowerCase().includes(normalizedSearch)
-    ));
-  }
-  return props.options;
+const selectedLabel = computed(() => {
+  if (modelValue.value === undefined || modelValue.value === '') return '';
+  const found = findValueInOption(modelValue.value);
+  return found ? getOptionLabel(found) : String(modelValue.value);
 });
 
-const onBlur = () => {
-  focus.value = false;
-};
-const onFocus = () => {
-  focus.value = true;
-};
-// do not change, otherwise not working search
-// have to wirk with filteredOptions
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const filterFunction = <T,>(list: T[], _term: string) => list;
+const comboboxRootAttrs = computed(() => {
+  const rootAttrs: Record<string, unknown> = {};
+  if (hasExplicitAttr(attrs, 'name')) rootAttrs.name = attrs.name;
+  return rootAttrs;
+});
 
-const inputAttrs = computed(() => ({
-  ...omitAttrs(attrs, ['class', 'style']),
+const triggerAttrs = computed(() => ({
+  ...omitAttrs(attrs, ['class', 'style', 'name']),
+  // A select-like trigger, as in VFormSelect; ComboboxTrigger adds aria-expanded and aria-controls.
+  role: 'combobox',
+  // Removes reka's "Show popup" label, so that only the field label names the combobox.
+  'aria-label': attrs['aria-label'],
   ...getFormControlA11yAttrs(attrs, fieldContext, {
     invalid: props.isError,
     labelledBy: true,
@@ -117,61 +93,55 @@ const inputAttrs = computed(() => ({
 <template>
   <Skeleton
     v-if="loading"
-    class="v-combobox-anchor w-full"
+    class="h-9 w-full"
   />
-  <VCombobox
+  <Combobox
     v-else
+    v-bind="comboboxRootAttrs"
     v-model="modelValue"
-    v-model:search-term="searchTerm"
-    :display-value="displayValue"
-    :filter-function="filterFunction"
     :disabled="disabled || readonly"
-    class="VFormCombobox v-form-combobox"
+    class="VFormCombobox v-form-combobox w-full"
   >
-    <VComboboxAnchor
-      :is-error="isError"
-      :readonly="readonly"
-      :disabled="disabled"
-      :focused="focus"
-      :class="attrs.class"
-      :style="attrs.style"
-    >
-      <VComboboxInput
-        v-bind="inputAttrs"
-        :placeholder="placeholder"
-        @focus="onFocus"
-        @blur="onBlur"
-      />
-      <VComboboxTrigger>
-        <template
-          v-if="$slots.icon"
-          #icon
+    <ComboboxAnchor as-child>
+      <ComboboxTrigger as-child>
+        <Button
+          v-bind="triggerAttrs"
+          variant="outline"
+          :data-readonly="readonly || undefined"
+          class="w-full justify-between border-input font-normal"
+          :class="[attrs.class, {
+            'text-muted-foreground': !selectedLabel,
+            'bg-muted disabled:cursor-default disabled:opacity-100': readonly && !disabled,
+          }]"
+          :style="attrs.style"
         >
-          <slot name="icon" />
-        </template>
-      </VComboboxTrigger>
-    </VComboboxAnchor>
-    <VComboboxContent>
-      <VComboboxEmpty />
-      <VComboboxGroup>
-        <VComboboxItem
-          v-for="item in filteredOptions"
+          <span class="truncate">{{ selectedLabel || placeholder }}</span>
+          <slot name="icon">
+            <ChevronsUpDownIcon class="opacity-50" />
+          </slot>
+        </Button>
+      </ComboboxTrigger>
+    </ComboboxAnchor>
+    <ComboboxList>
+      <!-- The search field opens empty instead of showing the selected value. -->
+      <ComboboxInput
+        :display-value="() => ''"
+        placeholder="Search"
+        aria-label="Search"
+      />
+      <ComboboxViewport>
+        <ComboboxEmpty>No items found.</ComboboxEmpty>
+        <ComboboxItem
+          v-for="item in options"
           :key="String(getOptionValue(item))"
           :value="getOptionValue(item)"
         >
           {{ getOptionLabel(item) }}
-        </VComboboxItem>
-      </VComboboxGroup>
-    </VComboboxContent>
-  </VCombobox>
+          <ComboboxItemIndicator>
+            <CheckIcon />
+          </ComboboxItemIndicator>
+        </ComboboxItem>
+      </ComboboxViewport>
+    </ComboboxList>
+  </Combobox>
 </template>
-
-<style lang="scss">
-@use '../styles/mixins.scss' as *;
-
-.v-form-combobox{
-  $root: &;
-
-  width: 100%;
-}
-</style>
