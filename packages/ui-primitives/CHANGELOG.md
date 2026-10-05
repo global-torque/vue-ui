@@ -2,10 +2,10 @@
 
 ## Unreleased
 
-- `styles/theme` declares and maps the status colours `--success` (`#3ddc97`),
-  `--warning` (`#f1af32`) and `--info` (`#6f3dfd`), each with a `-foreground`
-  (`--foreground`, `--foreground`, `#ffffff`), so `bg-success`,
-  `text-success-foreground`, `bg-warning/10` and the like are available.
+- Breaking: `styles/theme` no longer declares values. It maps the shadcn
+  variables and the `--success`, `--warning` and `--info` pairs (each with
+  `-foreground`) for Tailwind; the host provides the values, normally through
+  `@global-torque/design-tokens/css`, so import order no longer matters.
 
 ## 0.2.0 — shadcn-vue Vega candidate
 
