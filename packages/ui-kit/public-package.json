@@ -1,7 +1,7 @@
 {
   "manifest": {
     "name": "@global-torque/ui-kit",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "description": "Generic Vue forms, images, URL state and composed controls.",
     "type": "module",
     "license": "MIT",
