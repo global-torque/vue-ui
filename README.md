@@ -26,3 +26,18 @@ Maintainers: Global Torque frontend team. MIT; see notices in each package.
 Contribution checks: `pnpm install --frozen-lockfile` then `pnpm check`.
 Packages are source-SFC distributions compiled by the consuming Vue toolchain.
 Release archives are built once from clean source by the release workflow.
+
+## UI Kit releases
+
+Future UI Kit releases use an exact `vX.Y.Z` tag matching the version in
+`packages/ui-kit/public-package.json`. Pushing that tag publishes a public,
+attested GitHub release for UI Kit only; UI Primitives keeps its independent
+version, and npm publication is a separate maintainer operation. The first tag
+under this convention is `v0.3.1`; existing `v0.1.3` and `ui-kit-v*` records
+remain historical and must not be moved or rebuilt.
+
+Before tagging, merge the version, changelog, documentation and coupled test
+updates and run `pnpm check` plus a clean selected-package pack. Confirm that
+immutable releases are enabled, then tag that exact verified commit. Recover
+from a failed release by preparing and verifying a new patch version; never
+move a published tag or replace its assets.
