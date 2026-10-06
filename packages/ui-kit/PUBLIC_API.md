@@ -2,9 +2,10 @@
 
 Generic Vue forms, images, URL state and composed controls.
 
-Prepared `0.3.0` source-SFC candidate. This version is not advertised as an npm
-release until its release report records publication. Install the exact version with Vue
-3.5 and Reka UI 2.10. The release selection is owned by this UI Kit package;
+Prepared `0.3.1` source-SFC release. Pushing its exact `v0.3.1` tag publishes an
+attested GitHub release but does not publish the package to npm. Install the
+exact npm version only after its release report records registry publication,
+with Vue 3.5 and Reka UI 2.10. The release selection is owned by this UI Kit package;
 the historical curated `@global-torque/invest-widgets@0.1.3` registry release
 is retained for existing consumers and is now owned by `torque-packages`.
 

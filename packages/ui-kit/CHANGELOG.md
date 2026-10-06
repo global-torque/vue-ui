@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.3.1 — OTP presentation and plain-tag GitHub release
 
 - Breaking: `badge-tone` uses the status variables (`--success`, `--warning`,
   `--info`, `--destructive`) that `@global-torque/ui-primitives/styles/theme`
@@ -24,6 +24,8 @@
 - `VFormInputOtp` centres the code in the field and, from the `sm` breakpoint
   (640px), renders 44px slots with `text-lg` digits. Below `sm` the slots keep
   the shadcn `size-9` (36px) and `text-sm`.
+- Plain `vX.Y.Z` tags now select UI Kit and publish its attested GitHub release;
+  npm publication remains a separate maintainer operation.
 
 ## 0.3.0 — scoped shadcn styles candidate
 
