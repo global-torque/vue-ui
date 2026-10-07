@@ -19,7 +19,7 @@
     "check:ui": "node scripts/bootstrap-ui.mjs && node scripts/verify-ui.mjs"
   },
   "dependencies": {
-    "@global-torque/sdk": "0.2.0",
+    "@global-torque/sdk": "0.4.0",
     "@global-torque/design-tokens": "0.2.1",
     "@global-torque/ui-primitives": "0.1.3",
     "@global-torque/ui-kit": "0.1.3",
