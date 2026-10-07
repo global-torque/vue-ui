@@ -91,8 +91,8 @@ importers:
         specifier: ^3.12.3
         version: 3.12.4
       '@lucide/vue':
-        specifier: ^1.23.0
-        version: 1.43.0(vue@3.5.39(typescript@6.0.3))
+        specifier: ^1.51.0
+        version: 1.51.0(vue@3.5.39(typescript@6.0.3))
       '@vueuse/core':
         specifier: ^14.2.1
         version: 14.4.0(vue@3.5.39(typescript@6.0.3))
@@ -152,8 +152,8 @@ importers:
         specifier: ^3.12.3
         version: 3.12.4
       '@lucide/vue':
-        specifier: ^1.23.0
-        version: 1.43.0(vue@3.5.39(typescript@6.0.3))
+        specifier: ^1.51.0
+        version: 1.51.0(vue@3.5.39(typescript@6.0.3))
       '@vueuse/core':
         specifier: ^14.3.0
         version: 14.4.0(vue@3.5.39(typescript@6.0.3))
@@ -409,8 +409,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@lucide/vue@1.43.0':
-    resolution: {integrity: sha512-Asq2HozXp4s7JxQVTVVeMo6WINVsJr477uNOafM3Qft1K1aDbbgkVuCP3X37UZXcVB4rEGXaIM//04Ndi2GJfQ==}
+  '@lucide/vue@1.51.0':
+    resolution: {integrity: sha512-zMkTAMP8OsPESz/GDedsZfr3VUF2IiHlj25mBZG6Pc8A8J8BdygkE8k1HhRFXEUNzytp5DqxiBQNm3RG/U2bVg==}
     peerDependencies:
       vue: '>=3.0.1'
 
@@ -2619,7 +2619,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.6.0
 
-  '@lucide/vue@1.43.0(vue@3.5.39(typescript@6.0.3))':
+  '@lucide/vue@1.51.0(vue@3.5.39(typescript@6.0.3))':
     dependencies:
       vue: 3.5.39(typescript@6.0.3)
 
