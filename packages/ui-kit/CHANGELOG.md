@@ -1,5 +1,27 @@
 # Changelog
 
+## Unreleased
+
+- Breaking: `badge-tone` uses the status variables (`--success`, `--warning`,
+  `--info`, `--destructive`) that `@global-torque/ui-primitives/styles/theme`
+  maps and the host provides (normally `@global-torque/design-tokens/css`), and
+  no longer reads `--color-status-*` (or its
+  `--chart-2` to `--chart-4` fallbacks) or `--color-badge-foreground`, so a host
+  that coloured badges through those gets the fixed status colours. Solid tones
+  get the matching `-foreground` text (`text-success-foreground`, …); soft
+  tones keep the same opaque tint, their status colour mixed with
+  `--background` at 20% (`success-soft`), 10% (`warning-soft`,
+  `danger-soft`) or 5% (`info-soft`), under `text-foreground` instead of the
+  muted text. `neutral` and `primary-soft` also move from the muted text to
+  `text-foreground` on the same backgrounds. Tone names are unchanged.
+- Breaking: the `VFormInputPassword` strength meter paints scores 1–4 with
+  `--destructive`, `--warning`, a 50% mix of `--success` and `--warning`, and
+  `--success`. On the default palette that is `#ff7070`, `#f1af32`, `#97c665`
+  and `#3ddc97`, replacing `#ff5252`, `#eec32d`, `#a6cd0c` and `#00d395`. The
+  hooks `--ui-password-strength-weak`, `-fair`, `-good` and `-strong` are
+  removed, so a host that sets them no longer changes the meter; UI Kit now
+  reads no `--ui-*` variable.
+
 ## 0.3.1 — OTP presentation and plain-tag GitHub release
 
 - `VFormInputOtp` centres the code in the field and, from the `sm` breakpoint

@@ -23,7 +23,7 @@ this package from source, where `@/` means the app's own folder:
 There are no other local changes. The shadcn marker classes (`cn-menu-target`,
 `cn-menu-translucent`, `cn-rtl-flip`, `cn-font-heading`) stay as upstream has
 them; nothing styles them here. Our own files are `src/styles/theme.css` (our
-colours in the standard shadcn theme layout) and the `*.spec.ts` tests.
+Tailwind mapping of the shadcn variables; no values) and the `*.spec.ts` tests.
 
 ## Updating
 

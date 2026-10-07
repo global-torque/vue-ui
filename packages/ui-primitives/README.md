@@ -15,19 +15,20 @@ Components ship as editable TypeScript and Vue source. A raw Node import of a
 
 ```css
 @import 'tailwindcss';
+@import '@global-torque/design-tokens/css';
 @import '@global-torque/ui-primitives/styles/theme';
 ```
 
-`styles/theme` is the standard shadcn theme: it declares the shadcn variables
-with default values and maps them to Tailwind. A tenant brand overrides the
-shadcn variables (`--primary`, `--primary-foreground`, `--secondary`,
-`--secondary-foreground`, `--background`, `--foreground`, `--radius`, …) after
-this import; muted, accent, border, input, ring and sidebar colours derive from
-them unless the tenant sets those too. The host sets the font; no font or logo
-is installed. No dark theme ships; the components' `dark:` styles apply only
-under a `.dark` ancestor.
-The starter includes a complete neutral example theme. Theme styles register
-package files as Tailwind sources; retain the imports during CSS compilation.
+`styles/theme` maps the shadcn variables and the `--success`, `--warning` and
+`--info` pairs (each with a `-foreground` for text on it) for Tailwind; it
+declares no values. The host provides the values, normally by importing
+`@global-torque/design-tokens/css` (before or after the theme import), or by
+declaring the variables itself. The host sets the font; no font or logo is
+installed. No dark theme ships; the components' `dark:` styles apply only under
+a `.dark` ancestor.
+The starter example pins the 0.1.3 packages and ships its own theme. Theme
+styles register package files as Tailwind sources; retain the imports during
+CSS compilation.
 
 ## Supported imports
 

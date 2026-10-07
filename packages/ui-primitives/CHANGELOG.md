@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Breaking: `styles/theme` no longer declares values. It maps the shadcn
+  variables and the `--success`, `--warning` and `--info` pairs (each with
+  `-foreground`) for Tailwind; the host provides the values, normally through
+  `@global-torque/design-tokens/css`, so import order no longer matters.
+
 ## 0.2.0 — shadcn-vue Vega candidate
 
 - Breaking: every component is now the verbatim shadcn-vue `reka-vega` file
