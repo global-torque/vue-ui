@@ -2,7 +2,8 @@
 
 Generic Vue forms, images, URL state and composed controls.
 
-Prepared `0.3.1` source-SFC release. Pushing its exact `v0.3.1` tag publishes an
+The next release ships compiled JavaScript and declarations in `dist/`. Pushing
+an exact version tag publishes an
 attested GitHub release but does not publish the package to npm. Install the
 exact npm version only after its release report records registry publication,
 with Vue 3.5 and Reka UI 2.10. The release selection is owned by this UI Kit package;
@@ -92,7 +93,7 @@ the explicit hooks.
 
 The validation helper is SSR-safe and clears both validation state and field
 errors on reset or schema replacement. A Vue-aware Vite SSR build is required
-for source-SFC consumers.
+for consumers of the compiled package.
 
 ## Maintenance
 

@@ -8,7 +8,7 @@
     "node": ">=22.12.0"
   },
   "files": [
-    "src",
+    "dist",
     "README.md",
     "LICENSE",
     "NOTICE.md",
@@ -17,20 +17,56 @@
     "SUPPORT.md"
   ],
   "exports": {
-    "./badge-tone": "./src/badge-tone/index.ts",
-    "./breakpoints": "./src/breakpoints/index.ts",
-    "./file-uploader": "./src/file-uploader/index.ts",
-    "./filter": "./src/filter/index.ts",
-    "./form": "./src/form/index.ts",
-    "./form-validation": "./src/form-validation/index.ts",
-    "./image": "./src/image/index.ts",
-    "./pagination": "./src/pagination/index.ts",
-    "./query-dialog": "./src/query-dialog/index.ts",
-    "./styles/mixins": "./src/styles/mixins.scss",
-    "./timeline": "./src/timeline/index.ts",
-    "./url-sync": "./src/url-sync/index.ts",
-    "./url-synced-tabs": "./src/url-synced-tabs/index.ts",
-    "./styles": "./src/public-theme.css"
+    "./badge-tone": {
+      "types": "./dist/badge-tone/index.d.ts",
+      "import": "./dist/badge-tone/index.js"
+    },
+    "./breakpoints": {
+      "types": "./dist/breakpoints/index.d.ts",
+      "import": "./dist/breakpoints/index.js"
+    },
+    "./file-uploader": {
+      "types": "./dist/file-uploader/index.d.ts",
+      "import": "./dist/file-uploader/index.js"
+    },
+    "./filter": {
+      "types": "./dist/filter/index.d.ts",
+      "import": "./dist/filter/index.js"
+    },
+    "./form": {
+      "types": "./dist/form/index.d.ts",
+      "import": "./dist/form/index.js"
+    },
+    "./form-validation": {
+      "types": "./dist/form-validation/index.d.ts",
+      "import": "./dist/form-validation/index.js"
+    },
+    "./image": {
+      "types": "./dist/image/index.d.ts",
+      "import": "./dist/image/index.js"
+    },
+    "./pagination": {
+      "types": "./dist/pagination/index.d.ts",
+      "import": "./dist/pagination/index.js"
+    },
+    "./query-dialog": {
+      "types": "./dist/query-dialog/index.d.ts",
+      "import": "./dist/query-dialog/index.js"
+    },
+    "./styles/mixins": "./dist/styles/mixins.scss",
+    "./timeline": {
+      "types": "./dist/timeline/index.d.ts",
+      "import": "./dist/timeline/index.js"
+    },
+    "./url-sync": {
+      "types": "./dist/url-sync/index.d.ts",
+      "import": "./dist/url-sync/index.js"
+    },
+    "./url-synced-tabs": {
+      "types": "./dist/url-synced-tabs/index.d.ts",
+      "import": "./dist/url-synced-tabs/index.js"
+    },
+    "./styles": "./dist/ui-kit.css"
   },
   "sideEffects": [
     "**/*.vue",
@@ -67,10 +103,11 @@
   },
   "scripts": {
     "typecheck": "vue-tsc --noEmit -p tsconfig.json",
-    "build": "pnpm run typecheck",
+    "build": "pnpm run typecheck && vite build --config vitest.config.ts && vue-tsc -p tsconfig.build.json && cp -R src/styles dist/ && cp src/image/image-unavailable.svg dist/image/",
     "lint": "eslint --max-warnings=0 src",
     "test:run": "vitest run",
-    "check": "pnpm run lint && pnpm run typecheck && pnpm run test:run"
+    "check": "pnpm run lint && pnpm run typecheck && pnpm run test:run",
+    "prepack": "pnpm --filter @global-torque/ui-primitives run build && pnpm run build"
   },
   "devDependencies": {
     "@types/node": "26.6.4",

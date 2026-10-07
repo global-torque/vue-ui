@@ -1,6 +1,6 @@
 # Global Torque Vue UI
 
-Two active source-SFC packages for independent Vue products: UI Primitives and
+Two active compiled Vue packages for independent Vue products: UI Primitives and
 generic UI Kit compositions. Both use ordinary semantic versions and host-owned
 themes/state. No private backend or platform checkout is needed for the
 demonstrated fixture flow.
@@ -24,17 +24,19 @@ a separately provisioned sandbox; fixture evidence is not live-service proof.
 
 Maintainers: Global Torque frontend team. MIT; see notices in each package.
 Contribution checks: `pnpm install --frozen-lockfile` then `pnpm check`.
-Packages are source-SFC distributions compiled by the consuming Vue toolchain.
-Release archives are built once from clean source by the release workflow.
+Packages ship compiled JavaScript, declarations and styles in `dist/`.
+`pnpm check` builds both packages before validating release archives. Release
+archives are built once from clean source by the release workflow.
 
 ## UI Kit releases
 
-Future UI Kit releases use an exact `vX.Y.Z` tag matching the version in
-`packages/ui-kit/public-package.json`. Pushing that tag publishes a public,
-attested GitHub release for UI Kit only; UI Primitives keeps its independent
-version, and npm publication is a separate maintainer operation. The first tag
-under this convention is `v0.3.1`; existing `v0.1.3` and `ui-kit-v*` records
-remain historical and must not be moved or rebuilt.
+UI Kit releases use an exact `vX.Y.Z` tag matching the version in
+`packages/ui-kit/public-package.json`; UI Primitives uses
+`ui-primitives-vX.Y.Z` matching its own version. Each tag releases only the
+selected package's compiled archive. npm publication is a separate maintainer
+operation: publish Primitives before installing a Kit version that depends on
+its new version. Existing `v0.1.3` and `ui-kit-v*` records must not be moved
+or rebuilt.
 
 Before tagging, merge the version, changelog, documentation and coupled test
 updates and run `pnpm check` plus a clean selected-package pack. Confirm that

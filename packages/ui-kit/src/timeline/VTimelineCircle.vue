@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import check from './assets/check.svg?url';
 
-interface Props {
+export interface Props {
   type?: 'active' | 'inner' | 'not-complete' | 'complete' | 'highlight' | 'inner-highlight';
 }
 

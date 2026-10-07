@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import VTimelineCircle from './VTimelineCircle.vue';
 
-interface Props {
+export interface Props {
   type?: 'active' | 'complete' | 'not-complete' | 'inner' | 'inner-highlight';
   variant?: 'primary' | 'inner' | 'highlight' | 'inner-highlight';
   title?: string;

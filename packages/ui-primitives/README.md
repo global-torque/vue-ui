@@ -2,7 +2,7 @@
 
 Accessible Vue primitives with host-owned Tailwind themes.
 
-Prepared `0.2.0` source-SFC candidate. This version is not advertised as an npm
+The next release ships compiled JavaScript and declarations in `dist/`. This version is not advertised as an npm
 release until its release report records publication. Install the reviewed
 `.tgz` during candidate verification, with Vue 3.5 and Reka UI 2.10.
 
