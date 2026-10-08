@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.4.0 — Status colours
 
 - Breaking: `badge-tone` uses the status variables (`--success`, `--warning`,
   `--info`, `--destructive`) that `@global-torque/ui-primitives/styles/theme`

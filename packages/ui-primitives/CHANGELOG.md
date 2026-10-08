@@ -1,23 +1,18 @@
 # Changelog
 
-## Unreleased
-
-- Breaking: `styles/theme` no longer declares values. It maps the shadcn
-  variables and the `--success`, `--warning` and `--info` pairs (each with
-  `-foreground`) for Tailwind; the host provides the values, normally through
-  `@global-torque/design-tokens/css`, so import order no longer matters.
-
-## 0.2.0 — shadcn-vue Vega candidate
+## 0.2.0 — shadcn-vue Vega
 
 - Breaking: every component is now the verbatim shadcn-vue `reka-vega` file
   (commit `67c9a39`, see UPSTREAM.md); all local component edits are gone.
   Classes, spacing, radii and popup animations follow Vega.
 - Breaking: `styles/contract` and the `@global-torque/design-tokens` dependency
-  are removed. `styles/theme` now declares every shadcn variable with a default
-  value, sets no font, and imports `shadcn-vue-tailwind.css` (upstream
+  are removed. `styles/theme` declares no values: it maps the shadcn variables
+  and the `--success`, `--warning` and `--info` pairs (each with `-foreground`)
+  for Tailwind, and the host provides the values, normally through
+  `@global-torque/design-tokens/css`, so import order does not matter. It sets
+  no font and imports `shadcn-vue-tailwind.css` (upstream
   `shadcn-vue/tailwind.css`: the `data-open:`, `data-closed:`, `data-active:`…
-  variants Vega uses, and `no-scrollbar`). A tenant brand overrides the shadcn
-  variables (`--primary`, `--background`, …); `--brand-*` seeds are not read.
+  variants Vega uses, and `no-scrollbar`). `--brand-*` seeds are not read.
 - Breaking: the size tokens are gone (`--spacing-control-*`, `--text-control*`,
   `--radius-control`, `--font-weight-control`, `--spacing-table-cell`,
   `--text-table*`, `--font-weight-table-head`, `--color-table-head-foreground`,
