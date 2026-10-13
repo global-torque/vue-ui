@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.1 — Dependency and toolchain refresh
+
+- Verified the dependency and build/test toolchain refresh since 0.4.0 and the
+  exact `@global-torque/ui-primitives` 0.2.1 requirement. No component
+  behavior or public API changes are included.
+
 ## 0.4.0 — Status colours
 
 - Breaking: `badge-tone` uses the status variables (`--success`, `--warning`,

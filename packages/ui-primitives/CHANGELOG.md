@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.1 — Dependency and toolchain refresh
+
+- Verified the dependency and build/test toolchain refresh since 0.2.0. No
+  component source or public API changes are included.
+
 ## 0.2.0 — shadcn-vue Vega
 
 - Breaking: every component is now the verbatim shadcn-vue `reka-vega` file
