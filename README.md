@@ -2,25 +2,22 @@
 
 Two active compiled Vue packages for independent Vue products: UI Primitives and
 generic UI Kit compositions. Both use ordinary semantic versions and host-owned
-themes/state. No private backend or platform checkout is needed for the
-demonstrated fixture flow.
+themes/state. No private backend or platform checkout is needed for package
+consumption.
 
-The curated `@global-torque/invest-widgets@0.1.3` release is an immutable
-historical registry dependency used by the developer starter. Its source and
-release descriptor are retired from this repository; new investment widgets
-are owned and released by `torque-packages` under the framework contract.
+The curated `@global-torque/invest-widgets@0.1.3` release remains an immutable
+historical registry dependency for existing consumers. Its source and release
+descriptor are retired from this repository; new investment widgets are owned
+and released by `torque-packages` under the framework contract.
 
 The [0.1.3 GitHub release](https://github.com/global-torque/vue-ui/releases/tag/v0.1.3)
 contains immutable, attested archives for the historical three-package set.
-Start with the developer starter on `master`, which installs the published npm
-versions with an integrity lockfile. The active UI packages remain available on
-npm, while the curated widget pin is retained for legacy consumers. See the
-[release verification](docs/releases/0.1.3.md).
+The active UI packages remain available on npm, while the curated widget pin is
+retained for legacy consumers. See the [release verification](docs/releases/0.1.3.md).
 
-See the [package catalog](docs/packages.md), packages/*/README.md for API and styling contracts, and
-[the developer starter](examples/developer-starter/README.md) for setup, a
-framework-free SDK example and the Vue offer explorer. Live verification needs
-a separately provisioned sandbox; fixture evidence is not live-service proof.
+See the [package catalog](docs/packages.md) and packages/*/README.md for API
+and styling contracts. Live verification needs a separately provisioned
+sandbox; package tests are not live-service proof.
 
 Maintainers: Global Torque frontend team. MIT; see notices in each package.
 Contribution checks: `pnpm install --frozen-lockfile` then `pnpm check`.

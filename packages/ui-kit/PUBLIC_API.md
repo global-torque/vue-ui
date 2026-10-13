@@ -5,7 +5,7 @@ Generic Vue forms, images, URL state and composed controls.
 Prepared `0.4.0` source-SFC release. Pushing its exact `v0.4.0` tag publishes an
 attested GitHub release but does not publish the package to npm. Install the
 exact npm version only after its release report records registry publication,
-with Vue 3.5 and Reka UI 2.10. The release selection is owned by this UI Kit package;
+with Vue 3.5 and Reka UI 2.11. The release selection is owned by this UI Kit package;
 the historical curated `@global-torque/invest-widgets@0.1.3` registry release
 is retained for existing consumers and is now owned by `torque-packages`.
 
@@ -29,7 +29,6 @@ status pairs for Tailwind and declares no values. The values come from
 `@global-torque/design-tokens/css` (in any import order), or the host declares
 the variables itself. The host sets the font; no font or logo is installed.
 No dark theme ships; `dark:` styles apply only under a `.dark` ancestor.
-The starter example pins the 0.1.3 packages and ships its own theme.
 `@global-torque/ui-kit/styles` only registers the UI Kit files as Tailwind
 sources; it declares no variables or rules. Retain both imports during CSS
 compilation.

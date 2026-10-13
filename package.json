@@ -2,7 +2,7 @@
   "name": "global-torque-vue-ui",
   "private": true,
   "type": "module",
-  "packageManager": "pnpm@10.34.5",
+  "packageManager": "pnpm@10.34.7",
   "scripts": {
     "check": "pnpm -r --workspace-concurrency=1 run build && pnpm test:public-ui && pnpm -r --workspace-concurrency=1 run check",
     "test:public-ui": "node --test scripts/public-ui/pack.test.mjs",
@@ -10,12 +10,13 @@
   },
   "devDependencies": {
     "@stylistic/eslint-plugin": "^5.10.0",
-    "@typescript-eslint/eslint-plugin": "^8.71.0",
-    "@typescript-eslint/parser": "^8.71.0",
+    "@typescript-eslint/eslint-plugin": "^8.71.2",
+    "@typescript-eslint/parser": "^8.71.2",
     "@vue/eslint-config-typescript": "^14.9.0",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-vue": "~10.11.1",
-    "eslint-plugin-vuejs-accessibility": "^2.6.0",
-    "globals": "^17.13.0"
+    "eslint-plugin-vuejs-accessibility": "^2.6.2",
+    "globals": "^17.13.0",
+    "typescript": "6.0.3"
   }
 }

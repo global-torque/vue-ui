@@ -18,11 +18,10 @@ deployment remain owned by the consuming product.
 
 ## Start a product
 
-Follow the [developer starter](../examples/developer-starter/README.md) for a
-framework-free SDK example and a Vue offer explorer. `npm ci` installs exact
-registry versions; the explicit fixture demo runs without private source.
-Provision supported backend access before switching to live mode. Secrets stay
-on the server, while browser state and themes belong to the host application.
+Install only the package versions your product needs and follow each package's
+README for its public imports, peer requirements and host-owned theme setup.
+Provision supported backend access in the consuming product. Secrets stay on
+the server, while browser state and themes belong to the host application.
 
 For a documentation site, start with the wiki-link package and add content or
 VitePress helpers only where needed. The host owns content schemas, URLs and
@@ -37,13 +36,14 @@ version and commit your lockfile; update through a PR that runs the consuming
 product's types, build, behavior and applicable browser/SSR checks.
 
 These are ordinary semantic versions, with no alpha/beta suffix. They remain
-pre-1.0 APIs; review changelogs before minor updates. Fixture tests cover the example; verify live backend capabilities separately.
+pre-1.0 APIs; review changelogs before minor updates. Package tests cover
+declared behavior; verify live backend capabilities separately.
 Broader private investment runtime/features and compatibility UI remain outside
 this catalog.
 
 ## Historical widget release
 
 The curated `@global-torque/invest-widgets@0.1.3` package remains an immutable
-npm release for existing consumers and the developer starter. Its source tree
-and public descriptor are retired from `vue-ui`; future investment widget
-releases are owned by `torque-packages` and use that framework's API contract.
+npm release for existing consumers. Its source tree and public descriptor are
+retired from `vue-ui`; future investment widget releases are owned by
+`torque-packages` and use that framework's API contract.
