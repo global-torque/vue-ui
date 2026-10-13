@@ -2,7 +2,7 @@
   "name": "global-torque-vue-ui",
   "private": true,
   "type": "module",
-  "packageManager": "pnpm@10.34.5",
+  "packageManager": "pnpm@10.34.7",
   "scripts": {
     "check": "pnpm -r --workspace-concurrency=1 run build && pnpm test:public-ui && pnpm -r --workspace-concurrency=1 run check",
     "test:public-ui": "node --test scripts/public-ui/pack.test.mjs",
