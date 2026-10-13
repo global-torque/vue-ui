@@ -19,7 +19,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
         with:
-          node-version: '24.14.0'
+          node-version: '24.18.0'
       - run: corepack enable && corepack prepare pnpm@10.34.5 --activate
       - run: pnpm install --frozen-lockfile --ignore-scripts
       - run: pnpm check
@@ -48,5 +48,5 @@ jobs:
         run: |
           release_args=("${GITHUB_REF_NAME}" release/*.tgz release/*.json release/*.sha512 \
             --verify-tag --title "Public Vue UI ${GITHUB_REF_NAME}" \
-            --notes "Attested compiled Vue package release. This workflow publishes GitHub assets only and does not publish to npm. Publish UI Primitives to the registry before installing a UI Kit version that depends on it. Fixture checks do not prove live sandbox integration.")
+            --notes "Attested compiled Vue package release. This workflow publishes GitHub assets only and does not publish to npm. Publish UI Primitives to the registry before installing a UI Kit version that depends on it. Package checks do not prove live sandbox integration.")
           gh release create "${release_args[@]}"

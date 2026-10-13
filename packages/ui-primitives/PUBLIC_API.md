@@ -4,7 +4,7 @@ Accessible Vue primitives with host-owned Tailwind themes.
 
 Prepared `0.2.0` source-SFC candidate. This version is not advertised as an npm
 release until its release report records publication. Install the reviewed
-`.tgz` during candidate verification, with Vue 3.5 and Reka UI 2.10.
+`.tgz` during candidate verification, with Vue 3.5 and Reka UI 2.11.
 
 ## Consumer setup
 
@@ -26,9 +26,8 @@ declares no values. The host provides the values, normally by importing
 declaring the variables itself. The host sets the font; no font or logo is
 installed. No dark theme ships; the components' `dark:` styles apply only under
 a `.dark` ancestor.
-The starter example pins the 0.1.3 packages and ships its own theme. Theme
-styles register package files as Tailwind sources; retain the imports during
-CSS compilation.
+Theme styles register
+package files as Tailwind sources; retain the imports during CSS compilation.
 
 ## Supported imports
 
