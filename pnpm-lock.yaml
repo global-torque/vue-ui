@@ -97,8 +97,8 @@ importers:
         specifier: ^14.2.1
         version: 14.4.0(vue@3.5.39(typescript@6.0.3))
       maska:
-        specifier: ^3.2.0
-        version: 3.2.1
+        specifier: ^3.2.2
+        version: 3.2.2
       vue-input-otp:
         specifier: ^0.3.2
         version: 0.3.2(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3))
@@ -1756,8 +1756,8 @@ packages:
     resolution: {integrity: sha512-hXdUTZYIVOt1Ex//jAQi+wTZZpUpwBj/0QsOzqegb3rGMMeJiSEu5xLHnYfBrRV4RH2+OCSOO95Is/7x1WJ4bw==}
     engines: {node: '>=10'}
 
-  maska@3.2.1:
-    resolution: {integrity: sha512-YXMSyY6QPhf+knXWpHEWMswFQMGzYv5rjIOSPgjLibKkA8AlfBf2HT7XHJoTL6Pm1obXQ+tsM1AnyC/AkcVGnQ==}
+  maska@3.2.2:
+    resolution: {integrity: sha512-qhhoeKXYLsDOxfB70nybuGJmB+XsNb/xhKBBQGMMnT5Hw4+lhdeQmgwlkHYoMIUcppcnLHW6LppPPpGewrv9WQ==}
 
   math-intrinsics@1.1.0:
     resolution: {integrity: sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==}
@@ -4092,7 +4092,7 @@ snapshots:
     dependencies:
       semver: 7.8.5
 
-  maska@3.2.1: {}
+  maska@3.2.2: {}
 
   math-intrinsics@1.1.0: {}
 

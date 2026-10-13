@@ -41,7 +41,7 @@
     "@internationalized/date": "^3.12.3",
     "@lucide/vue": "^1.23.0",
     "@vueuse/core": "^14.2.1",
-    "maska": "^3.2.0",
+    "maska": "^3.2.2",
     "vue-input-otp": "^0.3.2"
   },
   "peerDependencies": {
