@@ -31,7 +31,7 @@ defineProps({
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .v-timeline{
   $root: &;
 

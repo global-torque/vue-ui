@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import VTimelineCircle from './VTimelineCircle.vue';
 
-interface Props {
+export interface Props {
   type?: 'active' | 'complete' | 'not-complete' | 'inner' | 'inner-highlight';
   variant?: 'primary' | 'inner' | 'highlight' | 'inner-highlight';
   title?: string;
@@ -56,14 +56,14 @@ const btnClasses = computed(() => {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .v-timeline-card{
   $root: &;
 
   flex-direction: column;
   padding: 40px !important;
   position: relative;
-  color: var(--ui-color-text-secondary, #343A40);
+  color: var(--muted-foreground);
 
   &__duration-title{
     color: var(--foreground);
@@ -90,7 +90,7 @@ const btnClasses = computed(() => {
     align-items: center;
     margin-bottom: 10px;
     padding-bottom: 15px;
-    border-bottom: 1px dashed var(--ui-timeline-border, rgb(51 51 51 / 10%));
+    border-bottom: 1px dashed var(--border);
 
     @media screen and (width <= 767px){
       flex-direction: column;
@@ -110,7 +110,7 @@ const btnClasses = computed(() => {
 
   &.is--variant-inner{
     margin-bottom: 32px;
-    color: var(--ui-color-text-secondary, #343A40);
+    color: var(--muted-foreground);
 
     &::before {// inner lines between cards
       content: "";
@@ -136,7 +136,7 @@ const btnClasses = computed(() => {
   }
 
   &.is--variant-inner-highlight{
-    background-color: #0042D4;
+    background-color: var(--primary);
     color: var(--muted);
 
     &::before {// inner lines between cards
@@ -154,16 +154,16 @@ const btnClasses = computed(() => {
     }
 
     #{$root}__title{
-      color: var(--ui-color-text-inverse, #fff);
+      color: var(--primary-foreground);
     }
 
-    p{
-      color: var(--ui-color-text-inverse, #fff);
+    :deep(p){
+      color: var(--primary-foreground);
     }
 
     #{$root}__duration-title,
     #{$root}__duration-text{
-      color: var(--ui-color-text-inverse, #fff);
+      color: var(--primary-foreground);
     }
 
     #{$root}__header{
@@ -180,20 +180,20 @@ const btnClasses = computed(() => {
   }
 
   &.is--variant-highlight{
-    background-color: #0042D4;
+    background-color: var(--primary);
     color: var(--muted);
 
     #{$root}__title{
       color: var(--muted);
     }
 
-    p{
-      color: var(--ui-color-text-inverse, #fff);
+    :deep(p){
+      color: var(--primary-foreground);
     }
 
     #{$root}__duration-title,
     #{$root}__duration-text{
-      color: var(--ui-color-text-inverse, #fff);
+      color: var(--primary-foreground);
     }
 
     #{$root}__header{
@@ -209,7 +209,7 @@ const btnClasses = computed(() => {
   &.is--type-complete{
     background-color: var(--muted);
     border: 1px solid var(--border);
-    box-shadow: 0 2px 5px 1px rgb(18 22 31 / 3%), 0 2px 3px -2px rgb(18 22 31 / 15%);
+    box-shadow: 0 2px 5px 1px color-mix(in srgb, var(--foreground) 3%, transparent), 0 2px 3px -2px color-mix(in srgb, var(--foreground) 15%, transparent);
   }
 }
 </style>

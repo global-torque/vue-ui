@@ -43,7 +43,7 @@ const otpAttrs = computed(() => ({
 <template>
   <InputOTP
     v-model="modelValue"
-    class="VInputOtp"
+    class="VInputOtp justify-center"
     v-bind="{ ...props, ...otpAttrs }"
     @complete="emit('complete', $event)"
   >
@@ -53,6 +53,7 @@ const otpAttrs = computed(() => ({
           v-for="(slot, i) in slots.slice(0, half)"
           :key="i"
           :index="i"
+          class="sm:size-11 sm:text-lg"
         />
       </InputOTPGroup>
       <InputOTPSeparator />
@@ -61,6 +62,7 @@ const otpAttrs = computed(() => ({
           v-for="(slot, i) in slots.slice(half)"
           :key="i + half"
           :index="i + half"
+          class="sm:size-11 sm:text-lg"
         />
       </InputOTPGroup>
     </template>

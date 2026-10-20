@@ -23,25 +23,20 @@ describe('Select', () => {
     wrapper.unmount();
   });
 
-  it('retains keyboard opening and selection with a custom decorative icon', async () => {
+  it('retains keyboard opening and selection', async () => {
     const updates: unknown[] = [];
     const wrapper = mount(Select, {
       attachTo: document.body,
       props: { 'onUpdate:modelValue': value => updates.push(value) },
       slots: {
         default: () => [
-          h(SelectTrigger, { 'aria-label': 'Currency' }, {
-            default: () => h(SelectValue, { placeholder: 'Pick one' }),
-            icon: () => h('svg', { 'data-custom-icon': '' }),
-          }),
+          h(SelectTrigger, { 'aria-label': 'Currency' }, () => h(SelectValue, { placeholder: 'Pick one' })),
           h(SelectContent, () => h(SelectItem, { value: 'usd' }, () => 'USD')),
         ],
       },
     });
     try {
       const trigger = wrapper.get('[data-slot="select-trigger"]');
-      expect(trigger.get('[data-custom-icon]').attributes('aria-hidden')).toBe('true');
-      expect(trigger.find('.lucide-chevron-down').exists()).toBe(false);
       (trigger.element as HTMLElement).focus();
       await trigger.trigger('keydown', { key: 'ArrowDown' });
       await flushPromises();

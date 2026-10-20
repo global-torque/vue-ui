@@ -45,7 +45,6 @@ const open = ref(false);
 const focused = ref(false);
 const attrs = useAttrs();
 const fieldContext = useVFormFieldContext();
-const sizeClass = computed(() => ({ small: 'h-control-sm', medium: 'h-control-md', large: 'h-control-lg' }[props.size]));
 
 function stringToDate(value: string): DateValue | undefined {
   if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return undefined;
@@ -115,8 +114,7 @@ watch(() => props.modelValue, () => { /* sync external changes */ });
 <template>
   <Skeleton
     v-if="loading"
-    class="VFormDatePicker v-form-date-picker w-full rounded-control"
-    :class="sizeClass"
+    class="VFormDatePicker v-form-date-picker h-9 w-full"
   />
   <Popover
     v-else
@@ -131,15 +129,14 @@ watch(() => props.modelValue, () => { /* sync external changes */ });
         v-bind="triggerAttrs"
         variant="outline"
         type="button"
-        data-slot="input"
         :disabled="disabled || readonly"
         :data-readonly="readonly || undefined"
         :data-disabled="disabled || undefined"
         aria-haspopup="dialog"
         :aria-expanded="open"
         :aria-invalid="isError || undefined"
-        class="VFormDatePicker v-form-date-picker w-full justify-between rounded-control border-input bg-control-background px-3 text-control font-normal text-foreground shadow-none hover:bg-control-background hover:text-foreground"
-        :class="[attrs.class, sizeClass]"
+        class="VFormDatePicker v-form-date-picker w-full justify-between border-input px-3 font-normal text-foreground shadow-none hover:text-foreground"
+        :class="attrs.class"
         :style="attrs.style"
         :data-testid="dataTestid ?? attrs['data-testid']"
         @focus="onFocus"
@@ -175,32 +172,3 @@ watch(() => props.modelValue, () => { /* sync external changes */ });
     </PopoverContent>
   </Popover>
 </template>
-
-<style>
-.v-form-date-picker[data-slot='input'] {
-  display: var(--ui-form-date-display, revert-layer);
-  position: var(--ui-form-date-position, revert-layer);
-  padding-block: var(--ui-form-date-padding-block, revert-layer);
-  gap: var(--ui-form-date-gap, revert-layer);
-}
-
-.v-form-date-picker__value {
-  flex: var(--ui-form-date-value-flex, revert-layer);
-  min-width: var(--ui-form-date-value-min-width, revert-layer);
-  text-align: var(--ui-form-date-value-align, revert-layer);
-}
-
-.v-form-date-picker[data-readonly] {
-  border-width: var(--ui-form-readonly-border-width, revert-layer);
-  border-radius: var(--ui-form-readonly-radius, revert-layer);
-  pointer-events: var(--ui-form-readonly-pointer-events, revert-layer);
-}
-
-.v-form-date-picker[data-readonly]:not([data-disabled]) {
-  opacity: var(--ui-form-readonly-opacity, revert-layer);
-}
-
-.v-form-date-picker[data-disabled] {
-  opacity: var(--ui-form-disabled-opacity, revert-layer);
-}
-</style>

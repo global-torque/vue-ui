@@ -7,14 +7,13 @@ import {
   watch,
 } from 'vue';
 import { useSyncWithUrl } from '../url-sync/useSyncWithUrl';
-import { Tabs, type TabsVariant } from '@global-torque/ui-primitives/tabs';
+import { Tabs } from '@global-torque/ui-primitives/tabs';
 
 const props = defineProps<{
   class?: HTMLAttributes['class'];
   queryKey?: string;
   modelValue?: string;
   defaultValue?: string;
-  variant?: TabsVariant;
 } & /* @vue-ignore */ TabsRootProps>();
 const emits = defineEmits</* @vue-ignore */ TabsRootEmits>();
 

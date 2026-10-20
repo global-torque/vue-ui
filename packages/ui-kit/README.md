@@ -2,9 +2,13 @@
 
 Generic Vue forms, images, URL state and composed controls.
 
-Prepared `0.1.3` source-SFC candidate. This version is not advertised as an npm
-release until its release report records publication. Install the reviewed
-`.tgz` during candidate verification, with Vue 3.5 and Reka UI 2.10.
+The next release ships compiled JavaScript and declarations in `dist/`. Pushing
+an exact version tag publishes an
+attested GitHub release but does not publish the package to npm. Install the
+exact npm version only after its release report records registry publication,
+with Vue 3.5 and Reka UI 2.11. The release selection is owned by this UI Kit package;
+the historical curated `@global-torque/invest-widgets@0.1.3` registry release
+is retained for existing consumers and is now owned by `torque-packages`.
 
 ## Consumer setup
 
@@ -21,13 +25,14 @@ Components ship as editable TypeScript and Vue source. A raw Node import of a
 @import '@global-torque/ui-kit/styles';
 ```
 
-The host supplies shadcn theme roles (`--background`, `--foreground`, `--primary`,
-`--primary-foreground`, `--secondary`, `--secondary-foreground`, `--muted`,
-`--muted-foreground`, `--accent`, `--accent-foreground`, `--destructive`,
-`--border`, `--input`, `--ring`, `--radius`) and a font. Use a class or
-`data-theme="dark"` for dark mode. No product preset, font or logo is installed.
-The starter includes a complete neutral example theme. Theme styles register
-package files as Tailwind sources; retain the imports during CSS compilation.
+`@global-torque/ui-primitives/styles/theme` maps the shadcn variables and the
+status pairs for Tailwind and declares no values. The values come from
+`@global-torque/design-tokens/css` (in any import order), or the host declares
+the variables itself. The host sets the font; no font or logo is installed.
+No dark theme ships; `dark:` styles apply only under a `.dark` ancestor.
+`@global-torque/ui-kit/styles` only registers the UI Kit files as Tailwind
+sources; it declares no variables or rules. Retain both imports during CSS
+compilation.
 
 ## Supported imports
 
@@ -36,6 +41,7 @@ package files as Tailwind sources; retain the imports during CSS compilation.
 - `@global-torque/ui-kit/file-uploader`
 - `@global-torque/ui-kit/filter`
 - `@global-torque/ui-kit/form`
+- `@global-torque/ui-kit/form-validation`
 - `@global-torque/ui-kit/image`
 - `@global-torque/ui-kit/pagination`
 - `@global-torque/ui-kit/query-dialog`
@@ -72,6 +78,21 @@ Private compliance validation rules, schema reference defaults, branding helpers
 and wildcard/deep imports are intentionally absent. Define product validation
 and eligibility in the consuming application. This release is not a migration
 facade for every historical internal UI export.
+
+### Neutral form validation
+
+`@global-torque/ui-kit/form-validation` exports `useFormValidation`, `useForm`,
+`useFormErrors` and `scrollToError`. The composable uses a new standard AJV
+instance per form and accepts optional `FormValidationOptions` hooks for a host
+validator, schema composition and model preparation. Frontend schema values take
+precedence over backend values during the default clone-and-compose operation;
+both inputs remain unchanged. Product keywords, eligibility rules and reference
+resolution belong in the consuming domain package and can be supplied through
+the explicit hooks.
+
+The validation helper is SSR-safe and clears both validation state and field
+errors on reset or schema replacement. A Vue-aware Vite SSR build is required
+for consumers of the compiled package.
 
 ## Maintenance
 

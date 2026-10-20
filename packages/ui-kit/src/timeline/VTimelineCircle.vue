@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import check from './assets/check.svg?url';
 
-interface Props {
+export interface Props {
   type?: 'active' | 'inner' | 'not-complete' | 'complete' | 'highlight' | 'inner-highlight';
 }
 
@@ -30,7 +30,7 @@ const btnClasses = computed(() => {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .v-timeline-circle{
   $root: &;
 

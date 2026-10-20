@@ -4,17 +4,36 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 
-// Source-SFC packages: assembly preserves source bytes and changes only manifest metadata.
+// Assembly preserves compiled dist bytes and changes only manifest metadata.
 const root = process.cwd();
-const output = path.resolve(process.argv[2] ?? 'artifacts/public-ui');
+const argumentsList = process.argv.slice(2);
+// Only these packages have an active source owner in vue-ui. The curated
+// invest-widgets package remains available as an immutable 0.1.3 registry
+// dependency for legacy consumers, but its source and descriptor are retired
+// from this repository and must never enter a new release selection.
+const packageNames = ['ui-primitives', 'ui-kit'];
+const selectedIndex = argumentsList.findIndex((argument) => argument === '--package' || argument.startsWith('--package='));
+const hasSelection = selectedIndex !== -1;
+const selectedPackage = selectedIndex === -1
+  ? undefined
+  : argumentsList[selectedIndex] === '--package'
+    ? argumentsList[selectedIndex + 1]
+    : argumentsList[selectedIndex].slice('--package='.length);
+assert(!hasSelection || packageNames.includes(selectedPackage), `Unknown package selection: ${selectedPackage}`);
+const outputArgument = argumentsList.find((argument, index) => (
+  !argument.startsWith('-')
+  && !(selectedIndex !== -1 && index === selectedIndex + 1 && argumentsList[selectedIndex] === '--package')
+));
+const output = path.resolve(outputArgument ?? 'artifacts/public-ui');
 assert(!fs.existsSync(output), 'Use a new output directory; reviewed artifacts cannot be replaced.');
 const sourceCommit = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim();
 const sourceDirty = Boolean(execFileSync('git', ['status', '--porcelain'], { cwd: root, encoding: 'utf8' }).trim());
 assert(!sourceDirty || process.argv.includes('--allow-dirty'), 'Freeze clean source before release assembly.');
 fs.mkdirSync(output, { recursive: true });
 const hash = (bytes) => crypto.createHash('sha512').update(bytes).digest('hex');
-const ignored = /(^|\/)(__tests__|node_modules|dist|coverage)(\/|$)|\.(test|spec)\.[cm]?[jt]s$/;
-for (const name of ['ui-primitives', 'ui-kit', 'invest-widgets']) {
+const ignored = /(^|\/)(__tests__|node_modules|coverage)(\/|$)|\.(test|spec)\.[cm]?[jt]s$/;
+const names = selectedPackage ? [selectedPackage] : packageNames;
+for (const name of names) {
   const source = path.join(root, 'packages', name);
   const config = JSON.parse(fs.readFileSync(path.join(source, 'public-package.json'), 'utf8'));
   const { manifest } = config;
@@ -62,17 +81,45 @@ for (const name of ['ui-primitives', 'ui-kit', 'invest-widgets']) {
     }
   }
   inspect(stage);
-  for (const target of Object.values(manifest.exports)) {
-    assert.equal(typeof target, 'string');
-    assert(!target.includes('*') && fs.existsSync(path.join(stage, target)), `Unresolved export ${target}`);
+  for (const value of Object.values(manifest.exports)) {
+    const targets = typeof value === 'string' ? [value] : Object.values(value);
+    for (const target of targets) {
+      assert.equal(typeof target, 'string');
+      assert(!target.includes('*') && fs.existsSync(path.join(stage, target)), `Unresolved export ${target}`);
+    }
   }
-  const packed = JSON.parse(execFileSync('npm', ['pack', '--json', '--ignore-scripts', '--pack-destination', output], { cwd: stage, encoding: 'utf8' }));
-  const [result] = Object.values(packed);
+  const result = JSON.parse(execFileSync('pnpm', ['pack', '--json', '--pack-destination', output], { cwd: stage, encoding: 'utf8' }));
+  result.filename = path.basename(result.filename);
   const archive = path.join(output, result.filename);
   const bytes = fs.readFileSync(archive);
-  assert.deepEqual(result.files.map((f) => f.path).sort(), Object.keys(files).sort(), 'npm file allowlist differs');
+  assert.deepEqual(result.files.map((f) => f.path).sort(), Object.keys(files).sort(), 'pnpm file allowlist differs');
   const proof = { schemaVersion: 1, package: manifest.name, version: manifest.version, sourceCommit, sourceDirty, artifact: result.filename, sha512: hash(bytes), integrity: `sha512-${crypto.createHash('sha512').update(bytes).digest('base64')}`, files };
   fs.writeFileSync(`${archive}.manifest.json`, `${JSON.stringify(proof, null, 2)}\n`);
   fs.writeFileSync(`${archive}.sha512`, `${proof.sha512}  ${result.filename}\n`);
   console.log(`${manifest.name}@${manifest.version}: ${Object.keys(files).length} files; sourceDirty=${sourceDirty}`);
+}
+
+if (selectedPackage) {
+  const descriptor = JSON.parse(fs.readFileSync(path.join(root, 'packages', selectedPackage, 'public-package.json'), 'utf8'));
+  const proof = JSON.parse(fs.readFileSync(
+    path.join(output, `global-torque-${selectedPackage}-${descriptor.manifest.version}.tgz.manifest.json`),
+    'utf8',
+  ));
+  const receipt = {
+    schemaVersion: 1,
+    selection: 'single-package',
+    package: descriptor.manifest.name,
+    version: descriptor.manifest.version,
+    sourceCommit,
+    sourceDirty,
+    artifact: proof.artifact,
+    sha512: proof.sha512,
+    integrity: proof.integrity,
+    unchangedPackages: packageNames.filter((name) => name !== selectedPackage).map((name) => {
+      const unchanged = JSON.parse(fs.readFileSync(path.join(root, 'packages', name, 'public-package.json'), 'utf8'));
+      return { name: unchanged.manifest.name, version: unchanged.manifest.version, source: 'registry' };
+    }),
+  };
+  fs.writeFileSync(path.join(output, 'selected-release.json'), `${JSON.stringify(receipt, null, 2)}\n`);
+  console.log(`selected release: ${descriptor.manifest.name}@${descriptor.manifest.version}`);
 }

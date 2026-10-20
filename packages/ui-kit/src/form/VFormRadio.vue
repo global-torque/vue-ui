@@ -121,7 +121,7 @@ function onSelect(value: unknown) {
     :name="attrs.name ? String(attrs.name) : groupId"
     :disabled="disabled"
     class="VFormRadio v-form-radio"
-    :class="[attrs.class, row ? 'flex-row flex-wrap items-center gap-x-6 gap-y-2' : 'flex-col gap-3']"
+    :class="[attrs.class, row ? 'flex flex-row flex-wrap items-center gap-x-6 gap-y-2' : 'flex-col gap-3']"
     :style="attrs.style"
     @update:model-value="onSelect"
   >

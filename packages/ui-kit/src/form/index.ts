@@ -1,4 +1,3 @@
-export { default as VForm } from './VForm.vue';
 export { default as VFormCheckbox } from './VFormCheckbox.vue';
 export { default as VFormCheckboxGroup } from './VFormCheckboxGroup.vue';
 export { default as VFormCombobox } from './VFormCombobox.vue';

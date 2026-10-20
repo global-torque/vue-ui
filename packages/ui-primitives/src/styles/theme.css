@@ -1,18 +1,12 @@
-/* Tailwind mapping for the shadcn-vue variable contract.
-   Host theme variables supply colours. Import after Tailwind and design tokens,
-   then provide a complete host theme. Workspace brand presets are not public. */
-@import 'tw-animate-css';
-@import 'vue-sonner/style.css';
+@import "tw-animate-css";
+@import "vue-sonner/style.css";
+@import "./shadcn-vue-tailwind.css";
 
 @source "../";
 
-@custom-variant dark (&:where(.dark, .dark *, [data-theme='dark'], [data-theme='dark'] *));
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -29,6 +23,12 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -37,6 +37,13 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -47,36 +54,11 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
-/* Geometry contract. The values are the shadcn defaults; a surface may set
-   the emitted :root variables (e.g. `--spacing-control-md`) to its own
-   metrics without touching the components. Consumed as `h-control-md`,
-   `rounded-control`, `font-control`, `text-control-lg`, `text-control`,
-   `p-table-cell`, `text-table`, `text-table-head`, `font-table-head`,
-   `text-table-head-foreground`, `bg-control-background`. */
-@theme {
-  --spacing-control-sm: 2rem;
-  --spacing-control-md: 2.25rem;
-  --spacing-control-lg: 2.5rem;
-  --radius-control: var(--radius-md);
-  --font-weight-control: 500;
-  --text-control-sm: 0.875rem;
-  --text-control-sm--line-height: 1.25rem;
-  --text-control-lg: 0.875rem;
-  --text-control-lg--line-height: 1.25rem;
-  --text-control: 0.875rem;
-  --text-control--line-height: 1.25rem;
-  --spacing-table-cell: 0.5rem;
-  --text-table: 0.875rem;
-  --text-table--line-height: 1.25rem;
-  --text-table-head: 0.875rem;
-  --text-table-head--line-height: 1.25rem;
-  --font-weight-table-head: 500;
-  --color-table-head-foreground: var(--foreground);
-  --color-control-background: transparent;
-}
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }

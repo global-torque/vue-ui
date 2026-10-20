@@ -4,4 +4,3 @@ dist/
 release/
 .ui-verification/
 .env
-examples/developer-starter/vendor/*.tgz

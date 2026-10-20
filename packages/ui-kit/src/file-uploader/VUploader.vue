@@ -334,7 +334,7 @@ const unifiedItems = computed(() => {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .v-uploader{
   $root: &;
 
@@ -346,7 +346,7 @@ const unifiedItems = computed(() => {
     align-items: center;
     align-self: stretch;
     border-radius: 2px;
-    border: 1px dashed #CED4DA;
+    border: 1px dashed var(--input);
     background: var(--muted);
 
     &:focus-visible{
@@ -358,7 +358,7 @@ const unifiedItems = computed(() => {
     }
 
     &.is--error{
-      border-color: #FF7070;
+      border-color: var(--destructive);
     }
 
     &.is--files:not(.is--can-upload){
@@ -420,13 +420,13 @@ const unifiedItems = computed(() => {
   }
 
   &__comment{
-    color: #495057;
+    color: var(--muted-foreground);
     margin-top: 4px;
   }
 
   &__error{
     margin-top: 4px;
-    color: #FF7070;
+    color: var(--destructive);
   }
 
   &__file-icon{
