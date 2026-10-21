@@ -78,7 +78,7 @@
     "@internationalized/date": "^3.12.4",
     "ajv": "^8.20.0",
     "ajv-formats": "^3.0.1",
-    "@lucide/vue": "^1.56.0",
+    "@lucide/vue": "^1.59.0",
     "@vueuse/core": "^15.0.0",
     "maska": "^3.2.2",
     "vue-input-otp": "^0.4.0"
