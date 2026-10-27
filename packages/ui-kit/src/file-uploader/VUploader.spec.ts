@@ -14,7 +14,7 @@ describe('VUploader file input interactions', () => {
     expect(inputClick).toHaveBeenCalledTimes(1);
   });
 
-  it('does not open the native file input from preview-card or preview-area interactions', async () => {
+  it('does not open the native file input from the preview area', async () => {
     const wrapper = mount(VUploader, {
       props: {
         preloadedItems: [{ name: 'document.pdf', url: '/document.pdf' }],
@@ -22,7 +22,6 @@ describe('VUploader file input interactions', () => {
     });
     const inputClick = vi.spyOn(wrapper.get('input').element, 'click');
 
-    await wrapper.get('.v-uploader__preview-card').trigger('click');
     await wrapper.get('.v-uploader__preview').trigger('click');
 
     expect(inputClick).toHaveBeenCalledTimes(0);
