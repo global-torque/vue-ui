@@ -50,7 +50,8 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
           {{ formatter.custom(toDate(date), { month: 'short' }) }}
         </div>
         <NativeSelect
-          class="text-xs h-8 pr-6 pl-2 text-transparent relative"
+          size="sm"
+          class="[&_select]:pr-6 [&_select]:pl-2 [&_select]:text-xs [&_select]:text-transparent"
           @change="(e: Event) => {
             placeholder = placeholder.set({
               month: Number((e?.target as any)?.value),
@@ -72,7 +73,8 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
           {{ formatter.custom(toDate(date), { year: 'numeric' }) }}
         </div>
         <NativeSelect
-          class="text-xs h-8 pr-6 pl-2 text-transparent relative"
+          size="sm"
+          class="[&_select]:pr-6 [&_select]:pl-2 [&_select]:text-xs [&_select]:text-transparent"
           @change="(e: Event) => {
             placeholder = placeholder.set({
               year: Number((e?.target as any)?.value),
@@ -141,7 +143,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
           </CalendarGridRow>
         </CalendarGridHead>
         <CalendarGridBody>
-          <CalendarGridRow v-for="(weekDates, index) in month.rows" :key="`weekDate-${index}`" class="mt-2 w-full">
+          <CalendarGridRow v-for="(weekDates, index) in month.rows" :key="`weekDate-${index}`" class="mt-0.5 w-full">
             <CalendarCell
               v-for="weekDate in weekDates"
               :key="weekDate.toString()"

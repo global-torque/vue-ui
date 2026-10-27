@@ -10,6 +10,7 @@ const forwardedProps = useForwardProps(props)
 <template>
   <DropdownMenuTrigger
     data-slot="dropdown-menu-trigger"
+    class="[&:enabled:not([aria-disabled=true]):not([data-disabled]):not([data-unavailable])]:cursor-pointer"
     v-bind="forwardedProps"
   >
     <slot />

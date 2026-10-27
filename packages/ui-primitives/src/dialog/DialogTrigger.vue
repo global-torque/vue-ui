@@ -8,6 +8,7 @@ const props = defineProps<DialogTriggerProps>()
 <template>
   <DialogTrigger
     data-slot="dialog-trigger"
+    class="[&:enabled:not([aria-disabled=true]):not([data-disabled]):not([data-unavailable])]:cursor-pointer"
     v-bind="props"
   >
     <slot />

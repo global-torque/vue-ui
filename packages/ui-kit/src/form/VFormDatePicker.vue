@@ -168,6 +168,7 @@ watch(() => props.modelValue, () => { /* sync external changes */ });
         v-model="selectedDate"
         :placeholder="placeholderDate"
         :layout="calendarLayout === 'default' ? undefined : calendarLayout"
+        class="min-w-70"
       />
     </PopoverContent>
   </Popover>

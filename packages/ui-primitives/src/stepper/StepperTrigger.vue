@@ -15,7 +15,7 @@ const forwarded = useForwardProps(delegatedProps)
 <template>
   <StepperTrigger
     v-bind="forwarded"
-    :class="cn('p-1 flex flex-col items-center text-center gap-1 rounded-md', props.class)"
+    :class="cn('p-1 flex flex-col items-center text-center gap-1 rounded-md [&:enabled:not([aria-disabled=true]):not([data-disabled]):not([data-unavailable])]:cursor-pointer', props.class)"
   >
     <slot />
   </StepperTrigger>
