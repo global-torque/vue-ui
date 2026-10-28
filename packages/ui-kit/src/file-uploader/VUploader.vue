@@ -239,7 +239,7 @@ const unifiedItems = computed(() => {
     class="VUploader v-uploader"
     :class="customClass"
   >
-    <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -- drag-and-drop is a pointer-only extra; the file label and the Upload button are the controls -->
+    <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions, vuejs-accessibility/click-events-have-key-events -- drag-and-drop and dropzone click are pointer-only extras; the file label and the Upload button are the controls -->
     <div
       class="v-uploader__dropzone"
       :class="{
@@ -250,6 +250,7 @@ const unifiedItems = computed(() => {
         'is--files': unifiedItems?.length > 0,
         'is--can-upload': canUpload,
       }"
+      @click.self="triggerFileInput"
       @dragover.prevent="handleDragEvent($event, true)"
       @dragleave.prevent="handleDragEvent($event, false)"
       @drop.prevent="drop"

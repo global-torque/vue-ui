@@ -20,6 +20,19 @@ this package from source, where `@/` means the app's own folder:
 - `'@/styles/reka-vega/ui/` → `'../`, including deep imports such as
   `'@/styles/reka-vega/ui/sheet/SheetTitle.vue'`.
 
+The calendar intentionally keeps its month and year sizing utilities on the
+nested `select`, not the `NativeSelect` wrapper. Vega applies those utilities
+to the wrapper, which places the chevron outside the select border and gives
+the two elements different heights. Calendar week rows use a compact two-pixel
+gap. Reapply and review both changes after every upstream component refresh.
+
+The package also intentionally diverges from Vega's cursor classes. Enabled
+native controls use a selector that excludes native, ARIA, data-disabled, and
+unavailable states. Actionable Reka role items use a data-disabled-aware pointer
+selector, and rendered select scroll controls use a pointer. This keeps disabled
+and polymorphic non-action output from receiving an action cursor. Reapply and
+review this cursor policy after every upstream component refresh.
+
 There are no other local changes. The shadcn marker classes (`cn-menu-target`,
 `cn-menu-translucent`, `cn-rtl-flip`, `cn-font-heading`) stay as upstream has
 them; nothing styles them here. Our own files are `src/styles/theme.css` (our

@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+- Fixed calendar month and year controls so their labels, borders, focus rings
+  and chevrons share one compact select box. Calendar week spacing is restored
+  to the compact two-pixel rhythm.
+- Fixed the Vega cursor policy so enabled native controls and actionable menu
+  items show a pointer while disabled, unavailable, and polymorphic non-actions
+  do not.
+
 ## 0.2.1 — Dependency and toolchain refresh
 
 - Verified the dependency and build/test toolchain refresh since 0.2.0. No

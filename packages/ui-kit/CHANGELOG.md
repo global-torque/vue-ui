@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Date-picker calendars keep the historical 280px minimum width while using
+  the compact ui-primitives calendar layout.
+
 ## 0.4.1 — Dependency and toolchain refresh
 
 - Verified the dependency and build/test toolchain refresh since 0.4.0 and the
