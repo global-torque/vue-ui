@@ -64,7 +64,7 @@ for (const name of names) {
   }
   for (const entry of [...config.sourceFiles, ...config.documentationFiles]) copy(entry);
   fs.copyFileSync(path.join(source, config.readme), path.join(stage, 'README.md'));
-  fs.writeFileSync(path.join(stage, 'package.json'), `${JSON.stringify(manifest, null, 2)}\n`);
+  fs.writeFileSync(path.join(stage, 'package.json'), JSON.stringify(manifest, null, 2));
   const files = {};
   function inspect(directory) {
     for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
