@@ -1,6 +1,6 @@
 {
   "name": "@global-torque/ui-kit",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Generic Vue forms, images, URL state and composed controls.",
   "type": "module",
   "license": "MIT",
@@ -74,7 +74,7 @@
     "**/*.scss"
   ],
   "dependencies": {
-    "@global-torque/ui-primitives": "0.2.1",
+    "@global-torque/ui-primitives": "0.2.2",
     "@internationalized/date": "^3.12.4",
     "ajv": "^8.20.0",
     "ajv-formats": "^3.0.1",
