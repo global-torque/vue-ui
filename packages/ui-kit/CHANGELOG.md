@@ -2,8 +2,12 @@
 
 ## Unreleased
 
+## 0.4.2 — Date-picker and uploader interactions
+
 - Date-picker calendars keep the historical 280px minimum width while using
   the compact ui-primitives calendar layout.
+- `VUploader` opens the native file chooser from the enabled dropzone background;
+  preview clicks do not open it, and nested `Upload` opens it once.
 
 ## 0.4.1 — Dependency and toolchain refresh
 

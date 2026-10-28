@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.2.2 — Calendar and cursor fixes
+
 - Fixed calendar month and year controls so their labels, borders, focus rings
   and chevrons share one compact select box. Calendar week spacing is restored
   to the compact two-pixel rhythm.
