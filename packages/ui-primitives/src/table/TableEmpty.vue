@@ -26,7 +26,7 @@ const delegatedProps = reactiveOmit(props, 'class')
       "
       v-bind="delegatedProps"
     >
-      <div class="flex items-center justify-center py-10">
+      <div class="flex items-center justify-center py-4 sm:py-10">
         <slot />
       </div>
     </TableCell>

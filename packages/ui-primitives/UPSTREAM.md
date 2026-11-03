@@ -33,7 +33,13 @@ selector, and rendered select scroll controls use a pointer. This keeps disabled
 and polymorphic non-action output from receiving an action cursor. Reapply and
 review this cursor policy after every upstream component refresh.
 
-There are no other local changes. The shadcn marker classes (`cn-menu-target`,
+The table empty state uses `py-4 sm:py-10` instead of Vega's `py-10`, keeping
+mobile spacing compact while preserving the upstream spacing at `sm` and larger
+breakpoints. Reapply and review this change after every upstream component
+refresh.
+
+Other than the local component changes documented above, there are no other
+local changes to the upstream-copied component files. The shadcn marker classes (`cn-menu-target`,
 `cn-menu-translucent`, `cn-rtl-flip`, `cn-font-heading`) stay as upstream has
 them; nothing styles them here. Our own files are `src/styles/theme.css` (our
 Tailwind mapping of the shadcn variables; no values) and the `*.spec.ts` tests.
