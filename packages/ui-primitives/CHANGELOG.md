@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 0.2.3 — Mobile table empty spacing
+
+- Reduced the table empty-state vertical padding on mobile to `py-4`, while
+  preserving the upstream `py-10` spacing from the `sm` breakpoint upward.
+
 ## 0.2.2 — Calendar and cursor fixes
 
 - Fixed calendar month and year controls so their labels, borders, focus rings
