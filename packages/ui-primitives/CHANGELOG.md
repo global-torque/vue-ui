@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.2.4 — Dialog viewport scrolling
+
 - Constrained normal dialogs to the viewport and enabled scrolling for
   overflowing content, while preserving consumer max-height overrides.
 
