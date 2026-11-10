@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Constrained normal dialogs to the viewport and enabled scrolling for
+  overflowing content, while preserving consumer max-height overrides.
+
 ## 0.2.3 — Mobile table empty spacing
 
 - Reduced the table empty-state vertical padding on mobile to `py-4`, while
