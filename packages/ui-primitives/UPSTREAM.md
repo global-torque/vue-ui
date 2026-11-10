@@ -38,6 +38,11 @@ mobile spacing compact while preserving the upstream spacing at `sm` and larger
 breakpoints. Reapply and review this change after every upstream component
 refresh.
 
+`DialogContent` bounds normal dialogs to the viewport with a two-rem vertical
+margin and scrolls overflow. Consumers can override the max height, such as
+with `max-h-none` for a fullscreen dialog. Reapply and review this change after
+every upstream component refresh.
+
 Other than the local component changes documented above, there are no other
 local changes to the upstream-copied component files. The shadcn marker classes (`cn-menu-target`,
 `cn-menu-translucent`, `cn-rtl-flip`, `cn-font-heading`) stay as upstream has
