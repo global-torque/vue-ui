@@ -1,7 +1,7 @@
 {
   "manifest": {
     "name": "@global-torque/ui-primitives",
-    "version": "0.2.4",
+    "version": "0.2.5",
     "description": "Accessible Vue primitives with host-owned Tailwind themes.",
     "type": "module",
     "license": "MIT",
@@ -39,6 +39,10 @@
       "./breadcrumb": {
         "types": "./dist/breadcrumb/index.d.ts",
         "import": "./dist/breadcrumb/index.js"
+      },
+      "./bubble": {
+        "types": "./dist/bubble/index.d.ts",
+        "import": "./dist/bubble/index.js"
       },
       "./button": {
         "types": "./dist/button/index.d.ts",
@@ -103,6 +107,14 @@
       "./label": {
         "types": "./dist/label/index.d.ts",
         "import": "./dist/label/index.js"
+      },
+      "./message": {
+        "types": "./dist/message/index.d.ts",
+        "import": "./dist/message/index.js"
+      },
+      "./message-scroller": {
+        "types": "./dist/message-scroller/index.d.ts",
+        "import": "./dist/message-scroller/index.js"
       },
       "./lib/utils": {
         "types": "./dist/lib/utils.d.ts",
