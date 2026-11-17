@@ -20,7 +20,7 @@ test('selected pack emits only UI Kit and its receipt', () => {
     execFileSync(process.execPath, [packer, output, '--package', 'ui-kit', '--allow-dirty'], { cwd: root, stdio: 'pipe' });
     assert(fs.existsSync(path.join(output, 'global-torque-ui-kit-0.4.2.tgz')));
     assert(fs.existsSync(path.join(output, 'selected-release.json')));
-    assert(!fs.existsSync(path.join(output, 'global-torque-ui-primitives-0.2.4.tgz')));
+    assert(!fs.existsSync(path.join(output, 'global-torque-ui-primitives-0.2.5.tgz')));
   } finally {
     fs.rmSync(directory, { recursive: true, force: true });
   }
@@ -30,10 +30,29 @@ test('default pack includes only active UI packages', () => {
   const { directory, output } = temporaryOutput('vue-ui-pack-legacy-');
   try {
     execFileSync(process.execPath, [packer, output, '--allow-dirty'], { cwd: root, stdio: 'pipe' });
-    for (const name of ['ui-primitives-0.2.4', 'ui-kit-0.4.2']) {
+    for (const name of ['ui-primitives-0.2.5', 'ui-kit-0.4.2']) {
       assert(fs.existsSync(path.join(output, `global-torque-${name}.tgz`)));
     }
     assert(!fs.existsSync(path.join(output, 'global-torque-invest-widgets-0.1.3.tgz')));
+  } finally {
+    fs.rmSync(directory, { recursive: true, force: true });
+  }
+});
+
+test('selected ui-primitives pack exposes the chat element subpaths', () => {
+  const { directory, output } = temporaryOutput('vue-ui-pack-primitives-');
+  try {
+    execFileSync(process.execPath, [packer, output, '--package', 'ui-primitives', '--allow-dirty'], { cwd: root, stdio: 'pipe' });
+    const archive = path.join(output, 'global-torque-ui-primitives-0.2.5.tgz');
+    const manifest = JSON.parse(execFileSync('tar', ['-xOf', archive, 'package/package.json'], { encoding: 'utf8' }));
+    const files = execFileSync('tar', ['-tzf', archive], { encoding: 'utf8' });
+    for (const name of ['bubble', 'message', 'message-scroller']) {
+      assert.deepEqual(manifest.exports[`./${name}`], {
+        types: `./dist/${name}/index.d.ts`,
+        import: `./dist/${name}/index.js`,
+      });
+      assert.match(files, new RegExp(`package/dist/${name}/index\\.(?:js|d\\.ts)`));
+    }
   } finally {
     fs.rmSync(directory, { recursive: true, force: true });
   }

@@ -2,16 +2,17 @@
 
 Accessible Vue primitives with host-owned Tailwind themes.
 
-Prepared `0.2.4` source-SFC candidate. This version is not advertised as an npm
+Prepared `0.2.5` candidate exports compiled ESM JavaScript and TypeScript declarations from `dist/`. This version is not advertised as an npm
 release until its release report records publication. Install the reviewed
 `.tgz` during candidate verification, with Vue 3.5 and Reka UI 2.11.
 
 ## Consumer setup
 
 Use Vite with `@vitejs/plugin-vue`, Tailwind CSS 4 and its Vite plugin.
-Components ship as editable TypeScript and Vue source. A raw Node import of a
-`.vue` entry is unsupported; use a Vue-aware SSR build with these packages in
-`ssr.noExternal`. No source aliases or private workspace checkout are needed.
+The package exports compiled ESM JavaScript and TypeScript declarations. Consumers
+do not compile package `.vue` files and do not need package-specific
+`ssr.noExternal` entries. Configure SSR for the host application as usual. No
+source aliases or private workspace checkout are needed.
 
 ```css
 @import 'tailwindcss';
@@ -26,8 +27,8 @@ declares no values. The host provides the values, normally by importing
 declaring the variables itself. The host sets the font; no font or logo is
 installed. No dark theme ships; the components' `dark:` styles apply only under
 a `.dark` ancestor.
-Theme styles register
-package files as Tailwind sources; retain the imports during CSS compilation.
+Theme styles register compiled package files as Tailwind sources; retain the
+imports during CSS compilation.
 
 ## Supported imports
 
@@ -36,6 +37,7 @@ package files as Tailwind sources; retain the imports during CSS compilation.
 - `@global-torque/ui-primitives/avatar`
 - `@global-torque/ui-primitives/badge`
 - `@global-torque/ui-primitives/breadcrumb`
+- `@global-torque/ui-primitives/bubble`
 - `@global-torque/ui-primitives/button`
 - `@global-torque/ui-primitives/calendar`
 - `@global-torque/ui-primitives/card`
@@ -52,6 +54,8 @@ package files as Tailwind sources; retain the imports during CSS compilation.
 - `@global-torque/ui-primitives/input-group`
 - `@global-torque/ui-primitives/input-otp`
 - `@global-torque/ui-primitives/label`
+- `@global-torque/ui-primitives/message`
+- `@global-torque/ui-primitives/message-scroller`
 - `@global-torque/ui-primitives/lib/utils`
 - `@global-torque/ui-primitives/native-select`
 - `@global-torque/ui-primitives/navigation-menu`

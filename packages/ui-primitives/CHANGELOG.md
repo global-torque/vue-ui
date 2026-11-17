@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+## 0.2.5 — Support chat primitives
+
+- Added the upstream Vega `Bubble`, `Message`, and `MessageScroller` component
+  families under their own public subpaths, including their props, slots,
+  composables, and exported types.
+- Adapted Bubble secondary, muted, and tinted hover fills to existing semantic
+  secondary, muted, and accent token classes.
+
 ## 0.2.4 — Dialog viewport scrolling
 
 - Constrained normal dialogs to the viewport and enabled scrolling for
