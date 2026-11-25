@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, useAttrs } from 'vue';
+import { computed, nextTick, ref, useAttrs, useId } from 'vue';
 import { CheckIcon, ChevronsUpDownIcon } from '@lucide/vue';
 import { Button } from '@global-torque/ui-primitives/button';
 import {
@@ -42,6 +42,26 @@ const props = withDefaults(defineProps<{
 const modelValue = defineModel<ObjectOptionValue>();
 const attrs = useAttrs();
 const fieldContext = useVFormFieldContext();
+const open = ref(false);
+const searchInputId = useId();
+
+async function onTriggerKeydown(event: KeyboardEvent) {
+  if (
+    open.value || props.disabled || props.readonly || event.defaultPrevented
+    || event.isComposing || event.altKey || event.ctrlKey || event.metaKey
+    || event.key === ' ' || [...event.key].length !== 1
+  ) return;
+
+  event.preventDefault();
+  const ownerDocument = (event.currentTarget as HTMLElement).ownerDocument;
+  open.value = true;
+  await nextTick();
+
+  const input = ownerDocument.getElementById(searchInputId) as HTMLInputElement | null;
+  if (!open.value || !input) return;
+  input.value = event.key;
+  input.dispatchEvent(new Event('input', { bubbles: true }));
+}
 
 function isObjectOption(option: ComboboxOption): option is ObjectOption {
   return typeof option === 'object' && option !== null;
@@ -99,6 +119,7 @@ const triggerAttrs = computed(() => ({
     v-else
     v-bind="comboboxRootAttrs"
     v-model="modelValue"
+    v-model:open="open"
     :disabled="disabled || readonly"
     class="VFormCombobox v-form-combobox w-full"
   >
@@ -114,6 +135,7 @@ const triggerAttrs = computed(() => ({
             'bg-muted disabled:cursor-default disabled:opacity-100': readonly && !disabled,
           }]"
           :style="attrs.style"
+          @keydown="onTriggerKeydown"
         >
           <span class="truncate">{{ selectedLabel || placeholder }}</span>
           <slot name="icon">
@@ -125,6 +147,7 @@ const triggerAttrs = computed(() => ({
     <ComboboxList>
       <!-- The search field opens empty instead of showing the selected value. -->
       <ComboboxInput
+        :id="searchInputId"
         :display-value="() => ''"
         placeholder="Search"
         aria-label="Search"

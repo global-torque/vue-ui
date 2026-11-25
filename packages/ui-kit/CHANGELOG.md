@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 0.4.3 — Combobox keyboard search
+
+- `VFormCombobox` opens and filters as soon as you type after tabbing to it.
+
 ## 0.4.2 — Date-picker and uploader interactions
 
 - Date-picker calendars keep the historical 280px minimum width while using
